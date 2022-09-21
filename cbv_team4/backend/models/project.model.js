@@ -11,7 +11,7 @@ const projectSchema = new Schema({
     trim: true,
     minlength: 1
   },  
-  analyst_initals: { type: String, required: true },
+  analyst_initials: { type: String, required: true },
   event_name: { type: String, required: true },
   event_date: { type: Date, required: true },
   can_id: { type: Number, required: true },
