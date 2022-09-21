@@ -1,4 +1,4 @@
-import './configuration-project.css';
+import '../configuration-project.css';
 
 function ConfigurationProject() { //Configure page 2
   return (

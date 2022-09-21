@@ -1,4 +1,4 @@
-import './create-project.css';
+import '../create-project.css';
 // import Devcom from './images/DevcomLogo.png';
 
 
@@ -6,7 +6,6 @@ function CreateProject() { //Rename to Home later
   return (
 
   <div className="configuration-project">
-      
         <form className="forms">
           <div className="name-div">
             <label className="configure-project-one-labels">Project Name:</label>
