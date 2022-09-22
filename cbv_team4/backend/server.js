@@ -21,10 +21,10 @@ connection.once('open', () => {
 })
 
 //import them basically
-const usersRouter = require('./routes/users');
+const projectsRouter = require('./routes/projects');
 
 //use those files ------- THIS IS DOING THE CRUD OPERATION
-app.use('/users', usersRouter);
+app.use('/projects', projectsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
