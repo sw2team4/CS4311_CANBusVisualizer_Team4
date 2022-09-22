@@ -9,34 +9,40 @@ This repository contains the final implementation of the CAN Bus Visualizer Syst
 
 ## How to start application
 1. Open Kali Linux
-2. Open a terminal in VS Code 
-3. Download the dependencies
+2. Open two seperate terminals in VS Code 
+4. Download the dependencies
 ```
 sudo apt-get install mongodb
 sudo apt install nodejs
 sudo apt install npm
 sudo npm install express cors mongoose dotenv
 sudo npm install -g nodemon
-npm install react-scripts
-npm install react-router-dom
-npm install axios
-npm install react-datepicker
+sudo npm install react-scripts
+sudo npm install react-router-dom
+sudo npm install axios
+sudo npm install react-datepicker
 ```
-4. Navigate to the "cbv_team4" directory
-5. In the terminal execute the below npm command
+5. One one terminal, navigate to "cbv_team4/backend" directory
+4. In the other terminal, navigate to the "cbv_team4/src" directory
+5. In the src directory terminal execute the below npm command
 ```
 npm start
+```
+6. In the backend directory terminal execute the below nodemon command
+
+```
+nodemon server
 ```
 
 ## Miscellaneous Dependencies
 The below commands are not needed however can be used if you are receiving dependency issues.
 ```
-npm install react-scripts --save
-npm install react-router-dom@6
+sudo npm install react-scripts --save
+sudo npm install react-router-dom@6
 ``` 
 
 ## Errors
 If you receiving errors after downloading all the above dependencies then run the below command .
 ```
-npm audit fix --force
+sudo npm audit fix --force
 ```
