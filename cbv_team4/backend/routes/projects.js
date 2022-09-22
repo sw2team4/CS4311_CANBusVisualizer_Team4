@@ -11,9 +11,9 @@ router.route('/').get((req, res) => {
 //handles http POST (adding to DB) requests
 router.route('/add').post((req, res) => {
   const name = req.body.name;
-  const analyst_initials = req.body.name;
+  const analyst_initials = req.body.analyst_initials;
   const event_name = req.body.event_name;
-  const event_date = req.body.event_date;
+  const event_date = Date.parse(req.body.event_date);
   const can_id = req.body.can_id;
   const vehicle_id = req.body.vehicle_id;
   const baud_rate = req.body.baud_rate;
