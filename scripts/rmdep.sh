@@ -1,5 +1,4 @@
 #!/bin/bash
-
 apt-get remove mongodb
 echo " "
 apt remove nodejs
