@@ -21,6 +21,7 @@ sudo npm install react-scripts
 sudo npm install react-router-dom
 sudo npm install axios
 sudo npm install react-datepicker
+sudo npm install react-bootstrap bootstrap
 ```
 5. One one terminal, navigate to "cbv_team4/backend" directory
 4. In the other terminal, navigate to the "cbv_team4/src" directory
