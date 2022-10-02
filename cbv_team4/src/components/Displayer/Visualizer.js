@@ -8,35 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 // import Modal from 'react-bootstrap/Modal';
+import Popups from './Popups';
 
-
-// function MyVerticallyCenteredModal(props) {
-//     return (
-//       <Modal
-//         {...props}
-//         size="lg"
-//         aria-labelledby="contained-modal-title-vcenter"
-//         centered
-//       >
-//         <Modal.Header closeButton>
-//           <Modal.Title id="contained-modal-title-vcenter">
-//             Modal heading
-//           </Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <h4>Centered Modal</h4>
-//           <p>
-//             Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-//             dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-//             consectetur ac, vestibulum at eros.
-//           </p>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button onClick={props.onHide}>Close</Button>
-//         </Modal.Footer>
-//       </Modal>
-//     );
-//}
 
 export default class Visualizer extends Component {
     render(){
@@ -81,7 +54,9 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                     {/* Packet */}
                                     <NavDropdown title="Packet" id="basic-nav-dropdown">
-                                    <NavDropdown.Item>Edit Packets</NavDropdown.Item>
+                                    <NavDropdown.Item>
+                                    <Popups></Popups>
+                                    </NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/">Replay Packets</NavDropdown.Item>
                                     <NavDropdown.Divider />
@@ -101,7 +76,7 @@ export default class Visualizer extends Component {
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
-                                    {Array.from({ length: 3 }).map((_, index) => (
+                                    {Array.from({ length: 4 }).map((_, index) => (
                                     <th key={index}>Table heading</th>
                                     ))}
                                 </tr>
@@ -109,145 +84,145 @@ export default class Visualizer extends Component {
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>7</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>8</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>9</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>11</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>12</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>13</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>14</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>15</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>16</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>17</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>18</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>19</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>20</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>21</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>22</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td>23</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                 ))}
                                 </tr>
                                 <tr>
                                     <td>24</td>
-                                    {Array.from({ length: 2 }).map((_, index) => (
+                                    {Array.from({ length: 3 }).map((_, index) => (
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
