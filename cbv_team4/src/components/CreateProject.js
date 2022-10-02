@@ -123,7 +123,7 @@ export default class CreateProject extends Component {
 
     const project = {
       
-      
+  
       name: this.state.name,
       analyst_initials: this.state.analyst_initials,
       event_name: this.state.event_name,
@@ -137,11 +137,9 @@ export default class CreateProject extends Component {
     }
 
 
-    console.log(project);
-
-    axios.post('http://localhost:5000/projects/add', project)
-      .then(res => console.log(res.data));
-
+      console.log(project);
+      axios.post('http://localhost:5000/projects/add', project)
+        .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
   }
 
   render() {
@@ -224,6 +222,7 @@ export default class CreateProject extends Component {
               <div className="col-sm-10">
                 <div>
                   <DatePicker
+                    required
                     selected={this.state.event_date}
                     onChange={this.onChangeEventDate}
                   />
@@ -309,7 +308,7 @@ export default class CreateProject extends Component {
               </div>
             </div>
             <div className='form-group'>
-              <input onClick={event => window.location.href='/can-bus-visualizer'} className="create-project-button" type="submit" value="Create Project"/>
+              <input className="create-project-button" type="submit" value="Create Project"/>
               <input onClick={event => window.location.href='/'} className='cancel-project-button' type="button" value="Cancel"/>
             </div>
         </form>
