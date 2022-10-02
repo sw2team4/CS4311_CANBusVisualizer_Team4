@@ -2,7 +2,7 @@ import React from 'react'
 
 function ErrorProject() {
   return (
-    <h1>IT BROKED IT</h1>
+    <h1>NOPE IS NOT BROKEN, ITS JUST UNDERMAINTANANCE</h1>
   )
 }
 

@@ -4,6 +4,7 @@ import '../Home.css';
 import Devcom from '../images/DevcomLogo.png';
 import {useNavigate} from "react-router-dom";
 
+
 function Home() {
     const navigate = useNavigate();
     return (
@@ -14,11 +15,10 @@ function Home() {
         <h1 className='project-name'>CAN Bus Visualizer</h1>
         <div className='button-group'>
             <ul>
-                <li><button onClick={() => navigate("/createproject")} className='firstButton' type='file'></button></li>
+                <li><button onClick={() => navigate("/create-project")} className='firstButton' type='button'></button></li>
                 <li>
                     <button className='secondButton' type='button'></button>
                     <input className='test' type="file"></input> {/* This is hidden with css. */}
-
                 </li>
                 <li><button onClick={() => navigate("/sync")} className='thirdButton' type='button'></button></li>
                 <li><button className='fourthButton' type='button'></button></li>
