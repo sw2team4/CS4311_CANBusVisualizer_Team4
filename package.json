@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/sw2team4/CAN-Bus-Visualizer#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
-    "mongoose": "^6.6.1"
+    "mongoose": "^6.6.1",
+    "react-bootstrap": "^2.5.0",
+    "react-datepicker": "^4.8.0",
+    "react-router-dom": "^6.4.1"
   }
 }
