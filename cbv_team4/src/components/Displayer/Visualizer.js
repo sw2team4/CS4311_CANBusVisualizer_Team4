@@ -7,11 +7,19 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-// import Modal from 'react-bootstrap/Modal';
 import Popups from './Popups';
+import raw from 'cbv_team4/src/J1939-Sample-Data-CL3000.txt'
 
 
 export default class Visualizer extends Component {
+
+
+
+
+    getCANFile(){
+        fetch(raw).then(r=> r.text()).then(text=> {console.log('text decoded:',text)});
+    }
+
     render(){
         return(
             <div className='visualizer'>
@@ -67,7 +75,7 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                 </Nav>
                                 </Navbar.Collapse>
-                                <input type='button' className='pauseButton' value='||'/>
+                                <input onClick={getCANFile()} type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
                             </Container>
                             </Navbar>

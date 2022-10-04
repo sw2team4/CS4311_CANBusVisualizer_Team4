@@ -6,10 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // /* eslint-disable jsx-a11y/alt-text */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
-
-
-
-
+import Visualizer from './Displayer/Visualizer';
 
 
 export default class CreateProject extends Component {
