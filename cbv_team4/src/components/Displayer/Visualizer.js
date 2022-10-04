@@ -29,7 +29,9 @@ export default class Visualizer extends Component {
 
     }
 
-    parseCANFile(){
+    parseCANFile(text){
+        console.log('Now parsing the string :)');
+        
 
     }
 
@@ -88,7 +90,11 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                 </Nav>
                                 </Navbar.Collapse>
-                                <input onClick={this.getCANFile} type='button' className='pauseButton' value='||'/>
+                                <input onClick={()=> {
+                                                    const text = this.getCANFile();
+                                                    this.parseCANFile(text);
+                                                }}
+                                    type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
                             </Container>
                             </Navbar>
