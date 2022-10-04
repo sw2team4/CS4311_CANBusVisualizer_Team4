@@ -8,16 +8,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Popups from './Popups';
-import raw from 'cbv_team4/src/J1939-Sample-Data-CL3000.txt'
+import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt'
+
 
 
 export default class Visualizer extends Component {
 
 
-
-
     getCANFile(){
-        fetch(raw).then(r=> r.text()).then(text=> {console.log('text decoded:',text)});
+        var text = '';
+         const file = fetch(raw).then(r=> r.text()).then(text=> {return text});
+         file.then(value=>{
+            
+         }).catch(err => {
+            console.log(err);
+         });
+         console.log(text);
+
+         return text;
+
+    }
+
+    parseCANFile(){
+
     }
 
     render(){
@@ -75,7 +88,7 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                 </Nav>
                                 </Navbar.Collapse>
-                                <input onClick={getCANFile()} type='button' className='pauseButton' value='||'/>
+                                <input onClick={this.getCANFile} type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
                             </Container>
                             </Navbar>
