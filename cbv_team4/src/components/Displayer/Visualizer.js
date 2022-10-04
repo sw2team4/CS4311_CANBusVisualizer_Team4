@@ -15,11 +15,11 @@ import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample
 export default class Visualizer extends Component {
 
 
-    getCANFile(){
+    async getCANFile(){
         var text = '';
          const file = fetch(raw).then(r=> r.text()).then(text=> {return text});
-         file.then(value=>{
-            
+         await file.then(value=>{
+            text = value;
          }).catch(err => {
             console.log(err);
          });
