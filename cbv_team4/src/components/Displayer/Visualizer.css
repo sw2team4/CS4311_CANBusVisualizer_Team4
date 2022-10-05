@@ -1,0 +1,111 @@
+/* Start of Main Displayer */
+.visualizer-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+/* End of Main Displayer */
+/* ----------------------------------------------- */
+
+/* Start of titlebar */
+.titlebar{
+    background-color: white;
+    width: 100vw;
+    height: 5%;
+    border: 2px black solid;
+    justify-content: space-between;
+    margin: 0 auto;
+    display: flex;
+}
+
+.trafficButton{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 50px;
+    width: 80px;
+}
+
+.mapButton{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 25px;
+    width: 80px;
+}
+
+.closeButton{
+    margin-top: 2px;
+    margin-bottom: 0px;
+    /* float: right; */
+}
+
+
+
+.displayerName{
+    margin-right: 7%;
+    margin-top: 2px;
+
+}
+
+.hihi{
+    left: auto;
+
+}
+
+
+
+/* End of titlebar */
+/* ----------------------------------------------- */
+.trafficDisplayer{
+    position: absolute;
+    width: 50vw;
+    height: 740px;
+    background: white;
+    top: 38px;
+    left: 0;
+    font-family: sans-serif;
+    border: 2px solid;
+    overflow: auto;
+    border: 2px black solid;
+    resize: both;
+
+
+}
+
+.mapDisplayer{
+    position: absolute;
+    width: 50vw;
+    height: 740px;
+    background: white;
+    top: 38px;
+    left: 50%;
+    font-family: sans-serif;
+    border: 2px black solid;
+    resize: both;
+    overflow: auto;
+
+}
+
+.pauseButton{
+    background: rgb(103, 103, 103);
+    margin-right: 20px;
+    border: none;
+}
+
+.color-nav{
+    background: rgb(103, 103, 103);
+}
+
+.color-item-nav{
+    color: red;
+}
+
+.itemTest{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background: orange;
+}
+
+.modal{
+    background: none;
+}
