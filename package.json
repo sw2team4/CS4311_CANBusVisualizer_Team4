@@ -27,10 +27,10 @@
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "^5.0.1",
     "socketcan": "^3.0.0"
   },
   "devDependencies": {
+    "react-scripts": "^5.0.1",
     "web-vitals": "^3.0.2"
   }
 }
