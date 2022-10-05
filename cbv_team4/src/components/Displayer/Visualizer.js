@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Popups from './Popups';
-// import {getPackets} from './SocketCAN.js'
-import {exec} from 'child_process';
+ import {displayPKT} from './SocketCAN.js'
+//import {exec} from 'child_process';
 
 
 
@@ -41,8 +41,9 @@ export default class Visualizer extends Component {
     //parse packet file into 4 data fields for the table
     async parseCANFile(text){
         
+        displayPKT();
 
-        const lines= await text;
+        /*const lines= await text;
         var packet;
         var packetTimestamp = '';
         var packetType = '';
@@ -61,14 +62,9 @@ export default class Visualizer extends Component {
             <td>${packetID}</td>
             <td>${packetData}</td> 
             </tr>`
-        } 
+        } */
     }
-    async executeShellCommands(){
-        const {exec} = require('child_process');
-    
-        exec('./home/kali/CS4311_CANBusVisualizer_4/scripts/socket.sh');
-    
-    }
+
 
 
     render(){
@@ -128,10 +124,10 @@ export default class Visualizer extends Component {
                                 </Navbar.Collapse>
                                 
                                 <input onClick={()=> {
-                                                    // const text = this.getCANFile();
-                                                    // this.parseCANFile(text);
-                                                    // const temp = getPackets();
-                                                    this.executeShellCommands();
+                                                     //const text = this.getCANFile();
+                                                     this.parseCANFile(text);
+                                                     //const temp = getPackets();
+                                                     //this.executeShellCommands();
                                                 }}
                                     type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
@@ -190,7 +186,9 @@ export default class Visualizer extends Component {
                     </Container>
                     </Navbar>
                     </div>
+                    <script src="SoketCAN.js"></script>   
                 </div>
+                
                 
         )
     }

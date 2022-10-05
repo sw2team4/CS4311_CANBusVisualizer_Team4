@@ -1,22 +1,20 @@
+var can = require('socketcan');
+
+var channel = can.createRawChannel("vcan0", true);
 
 
-export const executeShellComands = () =>{
-    var exec = require('child_process').exec;
+export const displayPKT = () => {
+    channel.addListener("onMessage", function(msg) { 
 
-    exec('sudo /home/kali/CS4311_CANBusVisualizer_4/scripts/can_setup.sh | /home/kali/CS4311_CANBusVisualizer_4/scripts/traffic.sh &' )
+        document.getElementById('pkt').innerHTML += `<tr>
+        <td>${msg.ts_sec}</td>
+        <td>${packetType}</td>
+        <td>${msg.id}</td>
+        <td>${msg.data}</td> 
+        </tr>`
 
+});
 }
-
-
-console.log('packets');
-
-    var packetType = 'N/A';
-
-    var can = require('socketcan');
-
-    var channel = can.createRawChannel("vcan0", true);
-
-   
     // Log any message 
     channel.addListener("onMessage", function(msg) { 
 
