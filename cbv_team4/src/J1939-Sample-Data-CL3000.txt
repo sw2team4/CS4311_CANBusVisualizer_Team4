@@ -1,20 +1,3 @@
-# Logger type: CANLogger3000
-# HW rev: 7.xx
-# FW rev: 5.40
-# Logger ID: id0001
-# Session No.: 92
-# Split No.: 1705
-# Time: 20171211T082554
-# Value separator: ";"
-# Time format: 4
-# Time separator: ""
-# Time separator ms: ""
-# Date separator: ""
-# Time and date separator: "T"
-# Bit-rate: 250000
-# Silent mode: false
-# Cyclic mode: true
-Timestamp;Type;ID;Data
 11T082554602;1;cf00203;cd402800043828ff
 11T082554603;1;c00000b;fcffff7dffffffff
 11T082554604;1;cf00400;f4dede3028fff0ff

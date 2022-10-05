@@ -8,37 +8,73 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Popups from './Popups';
-import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt'
+// import {getPackets} from './SocketCAN.js'
+import {exec} from 'child_process';
+
+
+
+
+//For Testing purposes
+import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
 
 
 
 export default class Visualizer extends Component {
 
 
+//For Testing purposes
+//fetch the local can file and create to a an array string, where each element represents a row from the packet tables (AKA a packet)
     async getCANFile(){
-        var text = '';
+        var text;
          const file = fetch(raw).then(r=> r.text()).then(text=> {return text});
          await file.then(value=>{
-            text = value;
+            text =  value.split('\n');
+
          }).catch(err => {
             console.log(err);
          });
-         console.log(text);
-
+         //console.log(text);
          return text;
 
     }
 
-    parseCANFile(text){
-        console.log('Now parsing the string :)');
+    //parse packet file into 4 data fields for the table
+    async parseCANFile(text){
         
 
+        const lines= await text;
+        var packet;
+        var packetTimestamp = '';
+        var packetType = '';
+        var packetID =  '';
+        var packetData = '';
+        for(var i = 0; i < 5; i++){
+            //refactor for socketCAN
+            packet = lines[i].split(';')
+            packetTimestamp = packet[0];
+            packetType = packet[1];
+            packetID = packet[2];
+            packetData = packet[3];
+            document.getElementById('pkt').innerHTML += `<tr>
+            <td>${packetTimestamp}</td>
+            <td>${packetType}</td>
+            <td>${packetID}</td>
+            <td>${packetData}</td> 
+            </tr>`
+        } 
     }
+    async executeShellCommands(){
+        const {exec} = require('child_process');
+    
+        exec('./home/kali/CS4311_CANBusVisualizer_4/scripts/socket.sh');
+    
+    }
+
 
     render(){
         return(
             <div className='visualizer'>
-                <div className='visualizer-container'>
+                
                     <div className='titlebar'>
                         <div className='hihi'>
                             <Button variant="secondary" size='sm'>Traffic</Button>
@@ -90,169 +126,29 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                 </Nav>
                                 </Navbar.Collapse>
+                                
                                 <input onClick={()=> {
-                                                    const text = this.getCANFile();
-                                                    this.parseCANFile(text);
+                                                    // const text = this.getCANFile();
+                                                    // this.parseCANFile(text);
+                                                    // const temp = getPackets();
+                                                    this.executeShellCommands();
                                                 }}
                                     type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
                             </Container>
                             </Navbar>
-                        </div>
+                        </div> 
                         <div className='table'>
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
-                                    {Array.from({ length: 4 }).map((_, index) => (
-                                    <th key={index}>Table heading</th>
-                                    ))}
+                                    <th>Timestamp</th>
+                                    <th>Type</th>
+                                    <th>ID</th>
+                                    <th>Data</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>21</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>22</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
-                                <tr>
-                                    <td>23</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                ))}
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <td key={index}>Packet Information {index}</td>
-                                    ))}
-                                </tr>
+                            <tbody id='pkt'>
                             </tbody>
                         </Table>
                         </div>
@@ -295,7 +191,7 @@ export default class Visualizer extends Component {
                     </Navbar>
                     </div>
                 </div>
-            </div>
+                
         )
     }
 }
