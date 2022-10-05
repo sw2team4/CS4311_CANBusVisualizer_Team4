@@ -27,7 +27,12 @@
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
     "react-router-dom": "^6.4.1",
+<<<<<<< HEAD
     "react-scripts": "^5.0.1"
+=======
+    "react-scripts": "^5.0.1",
+    "socketcan": "^3.0.0"
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
   },
   "devDependencies": {
     "web-vitals": "^3.0.2"

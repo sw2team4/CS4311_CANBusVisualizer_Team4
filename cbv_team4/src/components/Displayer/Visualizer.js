@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Popups from './Popups';
+<<<<<<< HEAD
 
 import file from './J1939-Sample-Data-CL3000.txt';
 
@@ -24,11 +25,79 @@ export default class Visualizer extends Component {
     // parse_file() {
         
     // }
+=======
+// import {getPackets} from './SocketCAN.js'
+import {exec} from 'child_process';
+
+
+
+
+//For Testing purposes
+import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
+
+
+
+export default class Visualizer extends Component {
+
+
+//For Testing purposes
+//fetch the local can file and create to a an array string, where each element represents a row from the packet tables (AKA a packet)
+    async getCANFile(){
+        var text;
+         const file = fetch(raw).then(r=> r.text()).then(text=> {return text});
+         await file.then(value=>{
+            text =  value.split('\n');
+
+         }).catch(err => {
+            console.log(err);
+         });
+         //console.log(text);
+         return text;
+
+    }
+
+    //parse packet file into 4 data fields for the table
+    async parseCANFile(text){
+        
+
+        const lines= await text;
+        var packet;
+        var packetTimestamp = '';
+        var packetType = '';
+        var packetID =  '';
+        var packetData = '';
+        for(var i = 0; i < 5; i++){
+            //refactor for socketCAN
+            packet = lines[i].split(';')
+            packetTimestamp = packet[0];
+            packetType = packet[1];
+            packetID = packet[2];
+            packetData = packet[3];
+            document.getElementById('pkt').innerHTML += `<tr>
+            <td>${packetTimestamp}</td>
+            <td>${packetType}</td>
+            <td>${packetID}</td>
+            <td>${packetData}</td> 
+            </tr>`
+        } 
+    }
+    async executeShellCommands(){
+        const {exec} = require('child_process');
+    
+        exec('./home/kali/CS4311_CANBusVisualizer_4/scripts/socket.sh');
+    
+    }
+
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
 
     render(){
         return(
             <div className='visualizer'>
+<<<<<<< HEAD
                 <div className='visualizer-container'>
+=======
+                
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
                     <div className='titlebar'>
                         <div className='hihi'>
                             <Button variant="secondary" size='sm'>Traffic</Button>
@@ -80,15 +149,31 @@ export default class Visualizer extends Component {
                                     </NavDropdown>
                                 </Nav>
                                 </Navbar.Collapse>
+<<<<<<< HEAD
                                 <input onClick={this.analyze_file} type='button' className='pauseButton' value='||'/>
                                 <label className=''>Traffic</label>
                             </Container>
                             </Navbar>
                         </div>
+=======
+                                
+                                <input onClick={()=> {
+                                                    // const text = this.getCANFile();
+                                                    // this.parseCANFile(text);
+                                                    // const temp = getPackets();
+                                                    this.executeShellCommands();
+                                                }}
+                                    type='button' className='pauseButton' value='||'/>
+                                <label className=''>Traffic</label>
+                            </Container>
+                            </Navbar>
+                        </div> 
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
                         <div className='table'>
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
+<<<<<<< HEAD
                                     {Array.from({ length: 4 }).map((_, index) => (
                                     <th key={index}>Table heading</th>
                                     ))}
@@ -239,6 +324,15 @@ export default class Visualizer extends Component {
                                     <td key={index}>Packet Information {index}</td>
                                     ))}
                                 </tr>
+=======
+                                    <th>Timestamp</th>
+                                    <th>Type</th>
+                                    <th>ID</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody id='pkt'>
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
                             </tbody>
                         </Table>
                         </div>
@@ -281,7 +375,11 @@ export default class Visualizer extends Component {
                     </Navbar>
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
+=======
+                
+>>>>>>> 5a59f3c721da56239e66bbad2174a99c638ddf17
         )
     }
 }
