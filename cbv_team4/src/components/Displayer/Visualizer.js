@@ -117,8 +117,6 @@ export default class Visualizer extends Component {
     }
 
 
-
-
     render() {
         return (
             <div className='visualizer'>
