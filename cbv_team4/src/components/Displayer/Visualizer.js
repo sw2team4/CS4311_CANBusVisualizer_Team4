@@ -16,8 +16,8 @@ import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample
 
 export default class Visualizer extends Component {
 
-    time = 10000
-    num_packets = 10
+    time = 1000
+    num_packets = 1
     current_index = 0
 
 
@@ -75,8 +75,8 @@ export default class Visualizer extends Component {
                 <td>${packetData}</td> 
                 </tr>`
 
-            var table = document.getElementById('pkt');
-            table.scrollTo(-1)
+            //var table = document.getElementById('pkt');
+            //table.scrollTo(-1)
 
             this.current_index++
             setTimeout(() => null, this.time / this.num_packets)
