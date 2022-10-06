@@ -26,6 +26,8 @@ export default class Visualizer extends Component {
     time = 1000
     num_packets = 1
     current_index = 0
+    pause_traffic = 1
+    interval_callback = null
 
 
     //For Testing purposes
@@ -44,51 +46,56 @@ export default class Visualizer extends Component {
 
     }
 
+    async ToggleTraffic() {
+        this.pause_traffic ^= 1
+        if (this.pause_traffic) {
+            this.PauseTraffic()
+        } else {
+            this.StartTraffic()
+        }
+    }
+
+    async PauseTraffic() {
+        clearInterval(this.interval_callback)
+
+        console.log("Live Traffic Paused")
+    }
+
     async StartTraffic() {
+        console.log("Live Traffic Started")
+
         var can_file = this.getCANFile()
 
-        setInterval(() => {
+        this.interval_callback = setInterval(async () => {
             this.parseCANFile(can_file)
-            this.displayPackets()
+
+            var wait_time = this.time / this.num_packets
+            var response = await axios.get("http://localhost:5000/packets/")
+
+            var target = this.current_index + this.num_packets
+            for (let i = this.current_index; i < target; i++) {
+                setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
+            }
         }, this.time)
     }
 
 
     //get packets from database and display from table
-    async displayPackets() {
-        var target = this.current_index + this.num_packets
-        for (let i = this.current_index; i < target; i++) {
-            //get from database
-            var response = await axios.get("http://localhost:5000/packets/?index=" + i);
+    async displayPackets(packet) {
+        var packetTimestamp = packet.timestamp
+        var packetType = packet.packet_type
+        var packetID = packet.packet_id
+        var packetData = packet.packet_data
 
-            var packet = response.data[i]
-
-            //delay the display of the packets
-            var packetTimestamp = packet.timestamp;
-            var packetType = packet.packet_type;
-            var packetID = packet.packet_id
-            var packetData = packet.packet_data;
-
-            // var cellIndex = 3;
-            // var table = document.getElementById('table1');
-            // var num_columns = table.rows[0].cells.length;
-            // var cell = table.rows[Math.floor(cellIndex/num_columns)].cells[cellIndex % num_columns];
-            // document.getElementById('table1').rows[rowIndex].cells[cellIndex];
-
-            document.getElementById('pkt').innerHTML += `<tr>
+        document.getElementById('pkt').innerHTML += `<tr>
                 <td>${packetTimestamp}</td>
                 <td>${packetType}</td>
                 <td>${packetID}</td>
                 <td>${packetData}</td> 
                 </tr>`
 
-            //var table = document.getElementById('pkt');
-            //table.scrollTo(-1)
+        this.current_index++
 
-            this.current_index++
-            setTimeout(() => null, this.time / this.num_packets)
-        }
-        
     }
 
     // async startTraffic() {
@@ -191,7 +198,7 @@ export default class Visualizer extends Component {
                                 </Navbar.Collapse>
 
                                 <input onClick={() => {
-                                    this.StartTraffic()
+                                    this.ToggleTraffic()
                                 }}
                                     type='button' className='pauseButton' value='||' />
                                 <label className=''>Traffic</label>
