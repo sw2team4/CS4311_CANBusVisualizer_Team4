@@ -56,7 +56,6 @@ export default class CreateProject extends Component {
       .catch((error) => {
         console.log(error);
       })
-
   }
 
   onChangeName(e) {

@@ -1,13 +1,4 @@
 
-
-export const executeShellComands = () =>{
-    var exec = require('child_process').exec;
-
-    exec('sudo /home/kali/CS4311_CANBusVisualizer_4/scripts/can_setup.sh | /home/kali/CS4311_CANBusVisualizer_4/scripts/traffic.sh &' )
-
-}
-
-
 console.log('packets');
 
     var packetType = 'N/A';
