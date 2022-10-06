@@ -7,8 +7,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import Popups from './Popups';
+import EditPopup from './Popups/EditPopup';
 import axios from 'axios';
+import RenamePopup from './Popups/RenamePopup';
+import VisibilityPopup from './Popups/VisibilityPopup';
+import ReplayPopup from './Popups/ReplayPopup';
+import SavePopup from './Popups/SavePopup';
+import SavePacketPopup from './Popups/SavePacketPopup';
+import AnnotatePopup from './Popups/AnnotatePopup';
+import RelationshipPopup from './Popups/RelationshipPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
@@ -140,7 +147,9 @@ export default class Visualizer extends Component {
                                     <Nav className="me-auto">
                                         {/* File */}
                                         <NavDropdown title="File" id="basic-nav-dropdown">
-                                            <NavDropdown.Item href="/">Save Project</NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <SavePopup></SavePopup>
+                                            </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Open Saved Project</NavDropdown.Item>
                                             <NavDropdown.Divider />
@@ -160,14 +169,20 @@ export default class Visualizer extends Component {
                                         {/* Packet */}
                                         <NavDropdown title="Packet" id="basic-nav-dropdown">
                                             <NavDropdown.Item>
-                                                <Popups></Popups>
+                                                <EditPopup></EditPopup>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Replay Packets</NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <ReplayPopup></ReplayPopup>
+                                            </NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Save Packets</NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <SavePacketPopup></SavePacketPopup>
+                                            </NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Annotate Packets</NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <AnnotatePopup></AnnotatePopup>
+                                            </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                         </NavDropdown>
                                     </Nav>
@@ -204,23 +219,31 @@ export default class Visualizer extends Component {
                                 <Nav className="me-auto">
                                     {/* File */}
                                     <NavDropdown title="File" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/">Save Project</NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <SavePopup></SavePopup>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     {/* Edit */}
                                     <NavDropdown title="Edit" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/">Rename Nodes</NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <RenamePopup></RenamePopup>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item href="/">Assign Icon</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Change Visibility</NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <VisibilityPopup></VisibilityPopup>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     {/* Nodes */}
                                     <NavDropdown title="Nodes" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Add Relationship</NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <RelationshipPopup></RelationshipPopup>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
