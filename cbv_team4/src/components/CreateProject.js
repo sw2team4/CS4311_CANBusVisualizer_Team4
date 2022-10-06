@@ -7,11 +7,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
 
-
-
-
-
-
 export default class CreateProject extends Component {
   constructor(props) {
     
@@ -60,7 +55,6 @@ export default class CreateProject extends Component {
       .catch((error) => {
         console.log(error);
       })
-
   }
 
   onChangeName(e) {
