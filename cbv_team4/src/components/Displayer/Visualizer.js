@@ -16,7 +16,7 @@ import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
 import AnnotatePopup from './Popups/AnnotatePopup';
 import RelationshipPopup from './Popups/RelationshipPopup';
-// import {getPackets} from './SocketCAN.js'
+
 
 //For Testing purposes
 import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
