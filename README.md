@@ -24,7 +24,7 @@ sudo npm install axios
 sudo npm install react-datepicker
 sudo npm install react-bootstrap bootstrap
 sudo npm install socketcan
-
+```
 4. On one terminal, cd to the scripts folder and type the following command:
 ```
 ./run.sh
