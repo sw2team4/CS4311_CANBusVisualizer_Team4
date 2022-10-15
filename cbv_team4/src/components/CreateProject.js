@@ -29,7 +29,7 @@ export default class CreateProject extends Component {
       analyst_initials: '',
       event_name: '',
       event_date: new Date(),
-      can_id: 0,
+      can_id: '',
       vehicle_id: 0,
       baud_rate: 0,
       dbc_file_name: '',
@@ -132,6 +132,9 @@ export default class CreateProject extends Component {
 
 
       console.log(project);
+      var proj_info = [project.name,project.can_id, project.baud_rate, project.dbc_file_name];
+      sessionStorage.setItem("proj_info", JSON.stringify(proj_info));
+
       axios.post('http://localhost:5000/projects/add', project)
         .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
   }

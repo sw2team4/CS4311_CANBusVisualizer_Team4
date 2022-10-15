@@ -19,7 +19,7 @@ import RelationshipPopup from './Popups/RelationshipPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
-import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
+import raw from './J1939-Sample-Data-CL3000.txt';
 
 export default class Visualizer extends Component {
 
@@ -28,6 +28,7 @@ export default class Visualizer extends Component {
     current_index = 0
     pause_traffic = 1
     interval_callback = null
+    proj_info = JSON.parse(sessionStorage.getItem("proj_info")); //get proj info from previous page
 
 
     //For Testing purposes
@@ -42,6 +43,8 @@ export default class Visualizer extends Component {
             console.log(err);
         });
         //console.log(text);
+        console.log("IN PAGE 2 and proj info is -->",this.proj_info);////////////FOR TESTING REMOVE L8R
+
         return text;
 
     }
@@ -73,6 +76,7 @@ export default class Visualizer extends Component {
             var response = await axios.get("http://localhost:5000/packets/")
 
             var target = this.current_index + this.num_packets
+            
             for (let i = this.current_index; i < target; i++) {
                 setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
             }

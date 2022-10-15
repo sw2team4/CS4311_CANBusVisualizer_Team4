@@ -14,7 +14,7 @@ const projectSchema = new Schema({
   analyst_initials: { type: String, required: false },
   event_name: { type: String, required: false },
   event_date: { type: Date, required: false },
-  can_id: { type: Number, required: false },
+  can_id: { type: String, required: false },
   vehicle_id: { type: String, required: false },
   baud_rate: { type: Number, required: false },
   dbc_file_name: { type: String, required: false },
