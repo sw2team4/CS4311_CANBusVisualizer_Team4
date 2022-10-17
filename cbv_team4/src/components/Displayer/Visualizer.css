@@ -64,26 +64,20 @@
     left: 0;
     font-family: sans-serif;
     border: 2px solid;
-    overflow: auto;
+    /* overflow: auto; */
     border: 2px black solid;
     resize: both;
-
-
 }
 
-.mapDisplayer{
-    position: absolute;
-    width: 50vw;
-    height: 740px;
-    background: white;
-    top: 38px;
-    left: 50%;
-    font-family: sans-serif;
-    border: 2px black solid;
-    resize: both;
+.traffic-table-container{
     overflow: auto;
-
+    height: 680px;
 }
+
+/* .traffic-table-container thead th{ 
+    position: sticky;
+    top: 0; 
+} */
 
 .pauseButton{
     background: rgb(103, 103, 103);
@@ -108,4 +102,49 @@
 
 .modal{
     background: none;
+    border: none;
+    box-shadow: none;
 }
+
+.visualizer{
+    position: fixed;
+}
+
+/* Start of Can-bus-map */
+
+.mapDisplayer{
+    position: absolute;
+    width: 50vw;
+    height: 740px;
+    background: white;
+    top: 38px;
+    left: 50%;
+    font-family: sans-serif;
+    border: 2px black solid;
+    resize: both;
+    /* overflow: auto; */
+    background-color: darkgray;
+}
+
+.can-map{
+    width: 50vw;
+    height: 680px;
+    left: 50%;
+    bottom: 10px;
+    position: absolute;
+    /* overflow: auto; */
+}
+
+.map-options{
+    z-index: 9;
+}
+
+/* .react-flow__attribution a {
+    color: red;
+}
+
+.react-flow__attribution{
+    background: red;
+} */
+
+/* End of Can-bus-map */

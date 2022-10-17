@@ -20,7 +20,7 @@ function MyVerticallyCenteredModal(props) {
           Rename Packets
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className='popup-container'>
         <p>
             Packet has been saved
         </p>

@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import './Visualizer.css'
+import Flow from './Map/Flow';
+
+// React stuff
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+// Popups
 import EditPopup from './Popups/EditPopup';
-import axios from 'axios';
 import RenamePopup from './Popups/RenamePopup';
 import VisibilityPopup from './Popups/VisibilityPopup';
 import ReplayPopup from './Popups/ReplayPopup';
@@ -19,7 +23,7 @@ import RelationshipPopup from './Popups/RelationshipPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
-import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
+import raw from './J1939-Sample-Data-CL3000.txt';
 
 export default class Visualizer extends Component {
 
@@ -139,8 +143,8 @@ export default class Visualizer extends Component {
 
                 <div className='titlebar'>
                     <div className='hihi'>
-                        <Button variant="secondary" size='sm'>Traffic</Button>
-                        <Button variant="secondary" size='sm'>CAN MAP</Button>
+                        <Button className='trafficButton' variant="secondary" size='sm'>Traffic</Button>
+                        <Button className='mapButton' variant="secondary" size='sm'>CAN MAP</Button>
                     </div>
                     <label className='displayerName'>CAN BUS VISUALIZER</label>
                     <Button onClick={event => window.location.href = '/'} className='closeButton' variant='danger' size='sm'>X</Button>
@@ -205,7 +209,7 @@ export default class Visualizer extends Component {
                             </Container>
                         </Navbar>
                     </div>
-                    <div className='table'>
+                    <div className='traffic-table-container'>
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
@@ -216,6 +220,151 @@ export default class Visualizer extends Component {
                                 </tr>
                             </thead>
                             <tbody id='pkt'>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                <tr>
+
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
                             </tbody>
                         </Table>
                     </div>
@@ -265,8 +414,10 @@ export default class Visualizer extends Component {
                         </Container>
                     </Navbar>
                 </div>
+                <div className='can-map'>
+                    <Flow/>
+                </div>
             </div>
-
         )
     }
 }
