@@ -9,7 +9,7 @@ const initialNodes = [
         position: {x: 0, y: 250}, //required
         // data: {label: 'Engine'},
         type: 'input',
-        style: { border: '1px solid red', width: '10%', height: 10, },
+        style: { border: '1px solid red', width: 1000, height: 1, },
         dragging: false,
     },
     {

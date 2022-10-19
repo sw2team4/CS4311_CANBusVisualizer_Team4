@@ -118,7 +118,7 @@
     height: 100vw;
     left: 50%;
     position: absolute;
-    bottom: 10px;
+    /* bottom: 10px; */
 }
 
 /* End of Can-bus-map */
