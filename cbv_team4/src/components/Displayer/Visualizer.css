@@ -20,6 +20,7 @@
 
 
 .trafficButton{
+<<<<<<< HEAD
     margin-left: 15px;
     font-size:small;
 }
@@ -33,6 +34,32 @@
     margin-bottom: 30px;
     height: 30px;
     margin-right: 4px;
+=======
+    /* margin-top: 1px; */
+    /* margin-bottom: 8px; */
+    margin-left: 15px;
+    font-size:small;
+    /* height:5%; */
+    /* width: 80px; */
+}
+
+.mapButton{
+    /* margin-top: 8px; */
+    /* margin-top: 1px; */
+    /* margin-bottom: 8px; */
+    margin-left: 15px;
+    font-size:small;
+    /* width: 80px; */
+}
+
+.closeButton{
+    margin-top: 2px;
+    margin-bottom: 30px;
+    height: 30px;
+    /* margin-bottom: 0px; */
+    margin-right: 4px;
+    /* float: right; */
+>>>>>>> 93e6ca224328a64f167aeed6d0878c9e43da48f6
 }
 
 
@@ -40,9 +67,17 @@
 .displayerName{
     margin-right: 8%;
     margin-top: 3px;
+<<<<<<< HEAD
 }
 
 .hihi{
+=======
+
+}
+
+.hihi{
+    left: auto;
+>>>>>>> 93e6ca224328a64f167aeed6d0878c9e43da48f6
     margin-top: 3px;
 }
 
@@ -117,6 +152,10 @@
     width: 50vw;
     height: 100vw;
     left: 50%;
+<<<<<<< HEAD
+=======
+    /* bottom: 10px; */
+>>>>>>> 93e6ca224328a64f167aeed6d0878c9e43da48f6
     position: absolute;
     bottom: 10px;
 }
