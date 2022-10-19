@@ -1,15 +1,16 @@
 import ReactFlow, {Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, MiniMap} from 'reactflow';
 import 'reactflow/dist/style.css'
 import {useState, useCallback} from 'react';
-//small change
 
 // Create nodes
 const initialNodes = [
     {
         id: '1', //required
-        position: {x: 0, y: 0}, //required
-        data: {label: 'Engine'},
+        position: {x: 0, y: 250}, //required
+        // data: {label: 'Engine'},
         type: 'input',
+        style: { border: '1px solid red', width: '10%', height: 10, },
+        dragging: false,
     },
     {
         id: '2', //required
@@ -71,34 +72,9 @@ function Flow() {
         width: 150,
     }; 
 
-    // const [elements, setElements] = useState(initialNodes);
-    // const [name, setName] = useState("");
-
-    // const addNode = () => {
-    //     setElements(e => e.concat({
-    //         id: (e.length+1).toString(),
-    //         data: {label: ''.concat(name)},
-    //         position: {x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight}
-    //     }));
-    // };
-
-
-    // const onAdd = useCallback(() => {
-    //     const newNode = {
-    //         id: addNode(),
-    //         data: { label: 'Added node' },
-    //         position: {
-    //             x: Math.random() * 500,
-    //             y: Math.random() * 500,
-    //         },
-    //     };
-    //     setNodes((nds) => nds.concat(newNode));
-    // }, [setNodes]);
-
-
   return (
-    <div style={{height: '680px', width: '50vw'}}>
-        <ReactFlow         
+    <div style={{height: '45%', width: '98%', marginTop: '4%', marginLeft: '1%'}}>
+        <ReactFlow
             // elements={elements}
             nodes={nodes} 
             onNodesChange={onNodesChange}

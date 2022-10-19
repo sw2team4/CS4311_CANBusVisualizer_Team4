@@ -12,43 +12,38 @@
     background-color: white;
     width: 100vw;
     height: 5%;
-    border: 2px black solid;
+    border: 4px black solid;
     justify-content: space-between;
     margin: 0 auto;
     display: flex;
 }
 
+
 .trafficButton{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 50px;
-    width: 80px;
+    margin-left: 15px;
+    font-size:small;
 }
 
 .mapButton{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 25px;
-    width: 80px;
+    margin-left: 15px;
+    font-size:small;
 }
 
 .closeButton{
-    margin-top: 2px;
-    margin-bottom: 0px;
-    /* float: right; */
+    margin-bottom: 30px;
+    height: 30px;
+    margin-right: 4px;
 }
 
 
 
 .displayerName{
-    margin-right: 7%;
-    margin-top: 2px;
-
+    margin-right: 8%;
+    margin-top: 3px;
 }
 
 .hihi{
-    left: auto;
-
+    margin-top: 3px;
 }
 
 
@@ -58,26 +53,20 @@
 .trafficDisplayer{
     position: absolute;
     width: 50vw;
-    height: 740px;
+    height: 100vw;
     background: white;
     top: 38px;
     left: 0;
     font-family: sans-serif;
     border: 2px solid;
-    /* overflow: auto; */
     border: 2px black solid;
     resize: both;
 }
 
 .traffic-table-container{
     overflow: auto;
-    height: 680px;
+    height: 100%;
 }
-
-/* .traffic-table-container thead th{ 
-    position: sticky;
-    top: 0; 
-} */
 
 .pauseButton{
     background: rgb(103, 103, 103);
@@ -115,36 +104,21 @@
 .mapDisplayer{
     position: absolute;
     width: 50vw;
-    height: 740px;
+    height: 100vw;
     background: white;
     top: 38px;
     left: 50%;
     font-family: sans-serif;
     border: 2px black solid;
-    resize: both;
-    /* overflow: auto; */
     background-color: darkgray;
 }
 
 .can-map{
     width: 50vw;
-    height: 680px;
+    height: 100vw;
     left: 50%;
-    bottom: 10px;
     position: absolute;
-    /* overflow: auto; */
+    bottom: 10px;
 }
-
-.map-options{
-    z-index: 9;
-}
-
-/* .react-flow__attribution a {
-    color: red;
-}
-
-.react-flow__attribution{
-    background: red;
-} */
 
 /* End of Can-bus-map */
