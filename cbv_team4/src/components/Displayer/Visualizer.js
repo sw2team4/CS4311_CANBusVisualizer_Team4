@@ -144,7 +144,7 @@ export default class Visualizer extends Component {
                 <div className='titlebar'>
                     <div className='hihi'>
                         <Button className='trafficButton' variant="secondary" size='sm'>Traffic</Button>
-                        <Button className='mapButton' variant="secondary" size='sm'>CAN MAP</Button>
+                        <Button className='mapButton' variant="secondary" size='sm'>CAN Map</Button>
                     </div>
                     <label className='displayerName'>CAN BUS VISUALIZER</label>
                     <Button onClick={event => window.location.href = '/'} className='closeButton' variant='danger' size='sm'>X</Button>
@@ -221,149 +221,149 @@ export default class Visualizer extends Component {
                             </thead>
                             <tbody id='pkt'>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
 
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
 
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                                 <tr>
 
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
-                                    <td>hi</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
+                                    <td>I wub</td>
                                 </tr>
                             </tbody>
                         </Table>
