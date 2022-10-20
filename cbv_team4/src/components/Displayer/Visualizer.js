@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import './Visualizer.css'
+import CustomNodeFlow from './Map/Flow';
+
+// React stuff
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+// Popups
 import EditPopup from './Popups/EditPopup';
-import axios from 'axios';
-import RenamePopup from './Popups/RenamePopup';
-import VisibilityPopup from './Popups/VisibilityPopup';
-import ReplayPopup from './Popups/ReplayPopup';
 import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
-import AnnotatePopup from './Popups/AnnotatePopup';
-import RelationshipPopup from './Popups/RelationshipPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
 import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
+
 
 export default class Visualizer extends Component {
 
@@ -139,8 +139,8 @@ export default class Visualizer extends Component {
 
                 <div className='titlebar'>
                     <div className='hihi'>
-                        <Button variant="secondary" size='sm'>Traffic</Button>
-                        <Button variant="secondary" size='sm'>CAN MAP</Button>
+                        <Button className='trafficButton' variant="secondary" size='sm'>Traffic</Button>
+                        <Button className='mapButton' variant="secondary" size='sm'>CAN Map</Button>
                     </div>
                     <label className='displayerName'>CAN BUS VISUALIZER</label>
                     <Button onClick={event => window.location.href = '/'} className='closeButton' variant='danger' size='sm'>X</Button>
@@ -178,19 +178,19 @@ export default class Visualizer extends Component {
                                         {/* Packet */}
                                         <NavDropdown title="Packet" id="basic-nav-dropdown">
                                             <NavDropdown.Item>
-                                                <EditPopup></EditPopup>
+                                                Edit Packet
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <ReplayPopup></ReplayPopup>
-                                            </NavDropdown.Item>
+                                                Replay Packet
+                                            </NavDropdown.Item>   
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
                                                 <SavePacketPopup></SavePacketPopup>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <AnnotatePopup></AnnotatePopup>
+                                                Annotate Packets
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                         </NavDropdown>
@@ -205,7 +205,7 @@ export default class Visualizer extends Component {
                             </Container>
                         </Navbar>
                     </div>
-                    <div className='table'>
+                    <div className='traffic-table-container'>
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
@@ -233,26 +233,11 @@ export default class Visualizer extends Component {
                                         </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
-                                    {/* Edit */}
-                                    <NavDropdown title="Edit" id="basic-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <RenamePopup></RenamePopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Assign Icon</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item>
-                                            <VisibilityPopup></VisibilityPopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
                                     {/* Nodes */}
                                     <NavDropdown title="Nodes" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
+                                        <EditPopup></EditPopup>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item>
-                                            <RelationshipPopup></RelationshipPopup>
-                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
@@ -265,8 +250,10 @@ export default class Visualizer extends Component {
                         </Container>
                     </Navbar>
                 </div>
+                <div className='can-map'>
+                    <CustomNodeFlow/>
+                </div>
             </div>
-
         )
     }
 }
