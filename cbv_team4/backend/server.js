@@ -23,10 +23,13 @@ connection.once('open', () => {
 //import them basically
 const projectsRouter = require('./routes/projects');
 const packetsRouter = require('./routes/packets');
+const livePacketsRouter = require('./routes/live_packets');
 
 //use those files ------- THIS IS DOING THE CRUD OPERATION
 app.use('/projects', projectsRouter);
 app.use('/packets', packetsRouter);
+app.use('/live_packets', livePacketsRouter);
+
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

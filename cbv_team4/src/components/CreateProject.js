@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 // /* eslint-disable jsx-a11y/alt-text */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
-import './Globals.js'
 
 export default class CreateProject extends Component {
   constructor(props) {
@@ -138,8 +137,6 @@ export default class CreateProject extends Component {
 
       axios.post('http://localhost:5000/projects/add', project)
         .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
-
-      project_created = true
   }
 
   render() {

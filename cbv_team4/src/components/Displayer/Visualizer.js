@@ -16,42 +16,38 @@ import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
 import AnnotatePopup from './Popups/AnnotatePopup';
 import RelationshipPopup from './Popups/RelationshipPopup';
-// import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
-import raw from './J1939-Sample-Data-CL3000.txt';
+//import raw from '../../J1939-Sample-Data-CL3000.txt';
 
 export default class Visualizer extends Component {
-
-    time = 1000
-    num_packets = 1
     current_index = 0
-    pause_traffic = 1
     interval_callback = null
     proj_info = JSON.parse(sessionStorage.getItem("proj_info")); //get proj info from previous page
-
+    
 
     //For Testing purposes
     //fetch the local can file and create to a an array string, where each element represents a row from the packet tables (AKA a packet)
-    async getCANFile() {
-        var text;
-        const file = fetch(raw).then(r => r.text()).then(text => { return text });
-        await file.then(value => {
-            text = value.split('\n');
+    // async getCANFile() {
+    //     var text;
+    //     const file = fetch(raw).then(r => r.text()).then(text => { return text });
+    //     await file.then(value => {
+    //         text = value.split('\n');
 
-        }).catch(err => {
-            console.log(err);
-        });
-        //console.log(text);
-        console.log("IN PAGE 2 and proj info is -->",this.proj_info);////////////FOR TESTING REMOVE L8R
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
+    //     //console.log(text);
+    //     console.log("IN PAGE 2 and proj info is -->",this.proj_info);////////////FOR TESTING REMOVE L8R
 
-        return text;
+    //     return text;
 
-    }
+    // }
 
     async ToggleTraffic() {
-        this.pause_traffic ^= 1
-        if (this.pause_traffic) {
+        process.env['PAUSE_TRAFFIC'] ^= 1
+ 
+        if (process.env['PAUSE_TRAFFIC']) {
             this.PauseTraffic()
         } else {
             this.StartTraffic()
@@ -67,20 +63,22 @@ export default class Visualizer extends Component {
     async StartTraffic() {
         console.log("Live Traffic Started")
 
-        var can_file = this.getCANFile()
+        // var can_file = this.getCANFile()
 
         this.interval_callback = setInterval(async () => {
-            this.parseCANFile(can_file)
+            // this.parseCANFile(can_file)
 
-            var wait_time = this.time / this.num_packets
-            var response = await axios.get("http://localhost:5000/packets/")
+            var wait_time = process.env['TIME'] / process.env['NUM_PACKETS']
+            var response = await axios.get("http://localhost:5000/live_packets/")
 
-            var target = this.current_index + this.num_packets
-            
-            for (let i = this.current_index; i < target; i++) {
-                setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
-            }
-        }, this.time)
+            var target = this.current_index + process.env['NUM_PACKETS']
+
+            console.log(response.data)
+
+            // for (let i = this.current_index; i < target; i++) {
+            //     await new Promise(r => setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time))
+            // }
+        }, process.env['TIME'])
     }
 
 
@@ -135,6 +133,10 @@ export default class Visualizer extends Component {
     }
 
 
+    componentDidMount() {
+        console.log(process.env['PROJECT_CREATED'])
+        process.env['PROJECT_CREATED'] = 1
+    }
 
 
     render() {

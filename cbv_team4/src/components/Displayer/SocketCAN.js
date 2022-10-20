@@ -1,37 +1,53 @@
+require('dotenv').config();
 
-g = require('../Globals')
+var axios = require('axios')
 
 console.log('packets');
 
-    var packetType = 'N/A';
+var packetType = 'N/A';
 
-    var can = require('socketcan');
+var can = require('socketcan');
 
-    var channel = can.createRawChannel("vcan0", true);
-   
-    // Log any message 
-    channel.addListener("onMessage", function(msg) { 
-        console.log(msg)
 
-    });
+var channel = can.createRawChannel("vcan0", true);
 
-    // Reply any message
-    channel.addListener("onMessage", channel.send, channel);
+// Log any message 
+var n = 0
+var added = false
+channel.addListener("onMessage", function (msg) {
+    //console.log(msg)
+    if (!process.env['PAUSE_TRAFFIC']) {
+        const packet = {
+            index: n,
+            packet_id: msg.id,
+            packet_data: msg.data.toString('hex'),
+            timestamp: msg.ts_sec
+        }
+        if (!added) {
+            // console.log(msg)
+            axios.post('http://localhost:5000/live_packets/add', packet)
+                .then(res => console.log(res.data));
+            added = true
+            n = n + 1
+        }
+    } else
+       added = false
+});
+
+// Reply any message
+channel.addListener("onMessage", channel.send, channel);
+
+async function wait(time) {
+    await new Promise(r => setTimeout(r, time));
+}
 
 async function wait_start() {
-    while (!g.project_created) {
-        await new Promise(r => setTimeout(r, 3000));
-        console.log('test')
+    console.log(process.env['PAUSE_TRAFFIC'])
+    var response = await axios.get("http://localhost:5000/live_packets/")
+    while (!process.env['PROJECT_CREATED']) {
+       wait(100);
     }
+    channel.start();
 }
 
 wait_start();
-
-    console.log('traffic started')
-
-    //channel.start();
-
-
-
-
-
