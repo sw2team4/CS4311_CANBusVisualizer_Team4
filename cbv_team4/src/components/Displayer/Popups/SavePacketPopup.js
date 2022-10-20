@@ -17,10 +17,10 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Rename Packets
+          Save Packet
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className='popup-container'>
         <p>
             Packet has been saved
         </p>
@@ -35,7 +35,7 @@ function SavePacketPopup() {
   return (
     <>
       <Button className='button-color' onClick={() => setModalShow(true)}>
-      Save Project
+      Save Packet
       </Button>
 
       <MyVerticallyCenteredModal
