@@ -1,4 +1,6 @@
 
+g = require('../Globals')
+
 console.log('packets');
 
     var packetType = 'N/A';
@@ -6,24 +8,28 @@ console.log('packets');
     var can = require('socketcan');
 
     var channel = can.createRawChannel("vcan0", true);
-
    
     // Log any message 
     channel.addListener("onMessage", function(msg) { 
-
-            document.getElementById('pkt').innerHTML += `<tr>
-            <td>${msg.ts_sec}</td>
-            <td>${packetType}</td>
-            <td>${msg.id}</td>
-            <td>${msg.data}</td> 
-            </tr>`
+        console.log(msg)
 
     });
 
     // Reply any message
     channel.addListener("onMessage", channel.send, channel);
 
-    channel.start();
+async function wait_start() {
+    while (!g.project_created) {
+        await new Promise(r => setTimeout(r, 3000));
+        console.log('test')
+    }
+}
+
+wait_start();
+
+    console.log('traffic started')
+
+    //channel.start();
 
 
 
