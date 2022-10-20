@@ -122,3 +122,33 @@
 }
 
 /* End of Can-bus-map */
+
+.react-flow__node-selectorNode {
+    font-size: 12px;
+    background: #eee;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: center;
+}  
+
+.nodeContainer .button-color{
+    background-color: white;
+    /* bottom: 50%; */
+    top: 50%;
+    left: 40%;
+    position: absolute;
+    /* float: right; */
+}
+
+.nodeContainer{
+    border: "1px solid black";
+    background-color: "white";
+    border-radius: 4;
+    padding: 5;
+    position: "relative";
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+}
+

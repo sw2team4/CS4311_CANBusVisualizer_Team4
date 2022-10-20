@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import './Visualizer.css'
-import Flow from './Map/Flow';
+import CustomNodeFlow from './Map/Flow';
 
 // React stuff
 import Container from 'react-bootstrap/Container';
@@ -13,13 +13,8 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 // Popups
 import EditPopup from './Popups/EditPopup';
-import RenamePopup from './Popups/RenamePopup';
-import VisibilityPopup from './Popups/VisibilityPopup';
-import ReplayPopup from './Popups/ReplayPopup';
 import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
-import AnnotatePopup from './Popups/AnnotatePopup';
-import RelationshipPopup from './Popups/RelationshipPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
@@ -182,19 +177,19 @@ export default class Visualizer extends Component {
                                         {/* Packet */}
                                         <NavDropdown title="Packet" id="basic-nav-dropdown">
                                             <NavDropdown.Item>
-                                                <EditPopup></EditPopup>
+                                                Edit Packet
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <ReplayPopup></ReplayPopup>
-                                            </NavDropdown.Item>
+                                                Replay Packet
+                                            </NavDropdown.Item>   
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
                                                 <SavePacketPopup></SavePacketPopup>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <AnnotatePopup></AnnotatePopup>
+                                                Annotate Packets
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                         </NavDropdown>
@@ -220,151 +215,6 @@ export default class Visualizer extends Component {
                                 </tr>
                             </thead>
                             <tbody id='pkt'>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
-                                <tr>
-
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                </tr>
                             </tbody>
                         </Table>
                     </div>
@@ -382,26 +232,11 @@ export default class Visualizer extends Component {
                                         </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
-                                    {/* Edit */}
-                                    <NavDropdown title="Edit" id="basic-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <RenamePopup></RenamePopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Assign Icon</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item>
-                                            <VisibilityPopup></VisibilityPopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
                                     {/* Nodes */}
                                     <NavDropdown title="Nodes" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
+                                        <EditPopup></EditPopup>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item>
-                                            <RelationshipPopup></RelationshipPopup>
-                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
                                         <NavDropdown.Divider />
@@ -415,7 +250,7 @@ export default class Visualizer extends Component {
                     </Navbar>
                 </div>
                 <div className='can-map'>
-                    <Flow/>
+                    <CustomNodeFlow/>
                 </div>
             </div>
         )
