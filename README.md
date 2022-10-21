@@ -10,25 +10,16 @@ This repository contains the final implementation of the CAN Bus Visualizer Syst
 
 ## How to start application
 1. Open Kali Linux
-2. Open two seperate terminals in VS Code 
-3. Download the dependencies
+2. Open a terminal a naviate to the repository
+3. Navigate to scripts folder of repo and download the dependencies
 ```
-sudo apt-get install mongodb
-sudo apt install nodejs
-sudo apt install npm
-sudo npm install express cors mongoose dotenv
-sudo npm install -g nodemon
-sudo npm install react-scripts
-sudo npm install react-router-dom
-sudo npm install axios
-sudo npm install react-datepicker
-sudo npm install react-bootstrap bootstrap
-sudo npm install socketcan
-sudo npm install reactflow
+cd scripts
+./dependencies.sh
+```
 
-4. On one terminal, cd to the scripts folder and type the following command:
+4. Start the application (within the scripts folder)
 ```
-./run.sh
+./run2.sh
 ```
 
 ## Miscellaneous Dependencies
