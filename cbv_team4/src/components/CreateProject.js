@@ -180,8 +180,9 @@ handleSubmit(event) {
         body:JSON.stringify(this.state.value)
         }
     ).then(
-      //go to the new window
-      res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
+      // go to the new window - UNCOMMENT THIS
+      // res => console.log(res.data), event => window.location.href='/can-bus-visualizer'
+      );
     }
 
 
@@ -265,6 +266,7 @@ handleSubmit(event) {
               <div className="col-sm-10">
                 <div>
                   <DatePicker
+                    id="e-date"
                     required
                     selected={this.state.date}
                     onChange={this.handleChange}

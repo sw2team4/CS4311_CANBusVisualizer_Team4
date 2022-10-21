@@ -14,7 +14,7 @@ flask_test = db.flask_test # <-- This is the collection within the  'test' db
 @app.route("/")
 def home_page():
     #online_users = mongo.db.users.find({"online": True})
-    return "Hello word"
+    return "Hello world"
 
 '''
 THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
@@ -23,21 +23,20 @@ THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
 def add():
 
     if request.method == "POST":
-        proj_name = request.form.get("p-name")
-        stored_location = request.form.get("s_location-file")
-        user_initials = request.form.get("u-initials")
-        event_name = request.form.get("e-event")
+        proj_name = request.form.get("project-name")
+        stored_location = request.form.get("stored-location")
+        user_initials = request.form.get("user-initials")
+        event_name = request.form.get("event-name")
 
-        """
-        Fix event_date asap
-        """
+        #-----------------------
         event_date=request.form.get("e-date")
+        #-----------------------
 
-        can_id=request.form.get("c-id")
-        vehicle_id=request.form.get("v-id")
-        baud_rate=request.form.get("b-rate")
-        dbc_file=request.form.get("dbc-file")
-        oll_file=request.form.get("off-file") #off limits list file
+        can_id=request.form.get("can-id")
+        vehicle_id=request.form.get("vehicle-id")
+        baud_rate=request.form.get("baud-rate")
+        dbc_file=request.form.get("import-dbc-file")
+        oll_file=request.form.get("off-list-file") #off limits list file
         
         #This is the project schema
         project = {
@@ -55,10 +54,11 @@ def add():
             
            }
 
+
         #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
         post_id = flask_test.insert_one(project).inserted_id
-        return "Added project" + str()#""#return the packet that we just uploaded
-    return render_template("./index.html")
+        return str(project)#""#return the packet that we just uploaded
+    return ""
 
 @app.route("/getall")
 def get_all_packets():
