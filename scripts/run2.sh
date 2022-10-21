@@ -1,4 +1,4 @@
 #!/bin/bash
-cd ../cbv_team4/api
-. venv/bin/activate
-npm start
+
+#start the backend flask server then the frontend react server
+./backend_server.sh & ./frontend_server.sh

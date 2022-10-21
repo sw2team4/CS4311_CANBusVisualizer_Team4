@@ -8,152 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
 
 export default class CreateProject extends Component {
-  // constructor(props) {
-    
-    
-  //   super(props);
-
-  //   this.onChangeName = this.onChangeName.bind(this);
-  //   this.onChangeAnalystInitials = this.onChangeAnalystInitials.bind(this);
-  //   this.onChangeEventName = this.onChangeEventName.bind(this);
-  //   this.onChangeEventDate = this.onChangeEventDate.bind(this);
-  //   this.onChangeCanID = this.onChangeCanID.bind(this);
-  //   this.onChangeVehicleID = this.onChangeVehicleID.bind(this);
-  //   this.onChangeBaudRate = this.onChangeBaudRate.bind(this);
-  //   this.onChangeDbcFileName = this.onChangeDbcFileName.bind(this);
-  //   this.onChangeOffLimitsFileName = this.onChangeOffLimitsFileName.bind(this);
-  //   this.onSubmit = this.onSubmit.bind(this);
-    
-  //   this.state = {
-  //     name: '',
-  //     analyst_initials: '',
-  //     event_name: '',
-  //     event_date: new Date(),
-  //     can_id: 0,
-  //     vehicle_id: 0,
-  //     baud_rate: 0,
-  //     dbc_file_name: '',
-  //     off_limits_file_name: ''
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   axios.get('http://localhost:5000/projects/')
-  //     .then(response => {
-  //         this.setState({
-  //           name: response.data.name,
-  //           analyst_initials: response.data.analyst_initials,
-  //           event_name: response.data.event_name,
-  //           event_date: response.data.event_date,
-  //           can_id: response.data.can_id,
-  //           vehicle_id: response.data.vehicle_id,
-  //           baud_rate: response.data.baud_rate,
-  //           dbc_file_name: response.data.dbc_file_name,
-  //           off_limits_file_name: response.data.off_limits_file_name
-  //         })
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  // }
-
-  // onChangeName(e) {
-  //   this.setState({
-  //     name: e.target.value
-  //   })
-  // }
-  
-  // onChangeAnalystInitials(e) {
-  //   this.setState({
-  //     analyst_initials: e.target.value
-  //   })
-  // }
-
-  // onChangeEventName(e) {
-  //   this.setState({
-  //     event_name: e.target.value
-  //   })
-  // }
-
-  // onChangeEventDate(date) {
-  //   this.setState({
-  //     event_date: date
-  //   })
-  // }
-
-  // onChangeCanID(e) {
-  //   this.setState({
-  //     can_id: e.target.value
-  //   })
-  // }
-
-  // onChangeVehicleID(e) {
-  //   this.setState({
-  //     vehicle_id: e.target.value
-  //   })
-  // }
-
-  // onChangeBaudRate(e) {
-  //   this.setState({
-  //     baud_rate: e.target.value
-  //   })
-  // }
-
-  // onChangeDbcFileName(e) {
-  //   this.setState({
-  //     dbc_file_name: e.target.value
-  //   })
-  // }
-
-  // onChangeOffLimitsFileName(e) {
-  //   this.setState({
-  //     off_limits_file_name: e.target.value
-  //   })
-  // }
-
-  
-  // onSubmit(e) {
-  //   e.preventDefault();
-
-  //   const project = {
-      
-  
-  //     name: this.state.name,
-  //     analyst_initials: this.state.analyst_initials,
-  //     event_name: this.state.event_name,
-  //     event_date: this.state.event_date,
-  //     can_id: this.state.can_id,
-  //     vehicle_id: this.state.vehicle_id,
-  //     baud_rate: this.state.baud_rate,
-  //     dbc_file_name: this.state.dbc_file_name,
-  //     off_limits_file_name: this.state.off_limits_file_name
-
-  //   }
-
-
-  //     console.log(project);
-  //     axios.post('http://localhost:5000/projects/add', project)
-  //       .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
-  // }
-
-
-
 
   constructor(props) {
     super(props);
     this.state = {
-      // name: '',
-      // analyst_initials: '',
-      // event_name: '',
-      // event_date: new Date(),
-      // can_id: 0,
-      // vehicle_id: 0,
-      // baud_rate: 0,
-      // dbc_file_name: '',
-      // off_limits_file_name: '',
-
       value: 'Create Project', // this is how the page knows you submitted  
-      date: new Date()
+      date: new Date() //the only reason date has a field is because the datepicker needs it
       }; 
 
     this.handleChange = this.handleChange.bind(this);
@@ -164,13 +24,12 @@ handleChange(event) {
     this.setState({
       value: event.target.value,
       date: event.target.date
-              });
+    });
 }
 
+
 handleSubmit(event) {
-    console.log("Adding project")
-    
-    //----------------------1) ADD PACKET TO TABLE
+    //----------------------1) Add project to DB
     fetch("/add", {
         method:"POST",
         cache: "no-cache",
@@ -180,10 +39,11 @@ handleSubmit(event) {
         body:JSON.stringify(this.state.value)
         }
     ).then(
-      // go to the new window - UNCOMMENT THIS
-      // res => console.log(res.data), event => window.location.href='/can-bus-visualizer'
+
+      // response => console.log(response.data), event => window.location.href='/can-bus-visualizer' //doesnt post here???!?
+      response => console.log(response.data), event => window.location.href='/'//does post here
       );
-    }
+  }
 
 
   render() {
@@ -195,7 +55,7 @@ handleSubmit(event) {
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name</label>
               <div className="col-sm-10">
                 <input 
-                  type="text" id="p-name" 
+                  type="text" id="p-name"
                   name="project-name" 
                   placeholder="Project Name..." 
                   required
@@ -233,7 +93,7 @@ handleSubmit(event) {
                   placeholder="User Initials"
                   // value={this.state.analyst_initials}
                   required
-                  onChange={this.onChangeAnalystInitials}
+                  // onChange={this.onChangeAnalystInitials}
                 />
               </div>
             </div>
@@ -266,7 +126,7 @@ handleSubmit(event) {
               <div className="col-sm-10">
                 <div>
                   <DatePicker
-                    id="e-date"
+                    name="e-date"
                     required
                     selected={this.state.date}
                     onChange={this.handleChange}
