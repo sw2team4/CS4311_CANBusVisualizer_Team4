@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 // import {useNavigate} from "react-router-dom";
@@ -8,139 +8,188 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
 
 export default class CreateProject extends Component {
-  constructor(props) {
+  // constructor(props) {
     
     
-    super(props);
+  //   super(props);
 
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeAnalystInitials = this.onChangeAnalystInitials.bind(this);
-    this.onChangeEventName = this.onChangeEventName.bind(this);
-    this.onChangeEventDate = this.onChangeEventDate.bind(this);
-    this.onChangeCanID = this.onChangeCanID.bind(this);
-    this.onChangeVehicleID = this.onChangeVehicleID.bind(this);
-    this.onChangeBaudRate = this.onChangeBaudRate.bind(this);
-    this.onChangeDbcFileName = this.onChangeDbcFileName.bind(this);
-    this.onChangeOffLimitsFileName = this.onChangeOffLimitsFileName.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  //   this.onChangeName = this.onChangeName.bind(this);
+  //   this.onChangeAnalystInitials = this.onChangeAnalystInitials.bind(this);
+  //   this.onChangeEventName = this.onChangeEventName.bind(this);
+  //   this.onChangeEventDate = this.onChangeEventDate.bind(this);
+  //   this.onChangeCanID = this.onChangeCanID.bind(this);
+  //   this.onChangeVehicleID = this.onChangeVehicleID.bind(this);
+  //   this.onChangeBaudRate = this.onChangeBaudRate.bind(this);
+  //   this.onChangeDbcFileName = this.onChangeDbcFileName.bind(this);
+  //   this.onChangeOffLimitsFileName = this.onChangeOffLimitsFileName.bind(this);
+  //   this.onSubmit = this.onSubmit.bind(this);
     
-    this.state = {
-      name: '',
-      analyst_initials: '',
-      event_name: '',
-      event_date: new Date(),
-      can_id: 0,
-      vehicle_id: 0,
-      baud_rate: 0,
-      dbc_file_name: '',
-      off_limits_file_name: ''
-    }
-  }
+  //   this.state = {
+  //     name: '',
+  //     analyst_initials: '',
+  //     event_name: '',
+  //     event_date: new Date(),
+  //     can_id: 0,
+  //     vehicle_id: 0,
+  //     baud_rate: 0,
+  //     dbc_file_name: '',
+  //     off_limits_file_name: ''
+  //   }
+  // }
 
-  componentDidMount() {
-    axios.get('http://localhost:5000/projects/')
-      .then(response => {
-          this.setState({
-            name: response.data.name,
-            analyst_initials: response.data.analyst_initials,
-            event_name: response.data.event_name,
-            event_date: response.data.event_date,
-            can_id: response.data.can_id,
-            vehicle_id: response.data.vehicle_id,
-            baud_rate: response.data.baud_rate,
-            dbc_file_name: response.data.dbc_file_name,
-            off_limits_file_name: response.data.off_limits_file_name
-          })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+  // componentDidMount() {
+  //   axios.get('http://localhost:5000/projects/')
+  //     .then(response => {
+  //         this.setState({
+  //           name: response.data.name,
+  //           analyst_initials: response.data.analyst_initials,
+  //           event_name: response.data.event_name,
+  //           event_date: response.data.event_date,
+  //           can_id: response.data.can_id,
+  //           vehicle_id: response.data.vehicle_id,
+  //           baud_rate: response.data.baud_rate,
+  //           dbc_file_name: response.data.dbc_file_name,
+  //           off_limits_file_name: response.data.off_limits_file_name
+  //         })
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  // }
 
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value
-    })
-  }
+  // onChangeName(e) {
+  //   this.setState({
+  //     name: e.target.value
+  //   })
+  // }
   
-  onChangeAnalystInitials(e) {
-    this.setState({
-      analyst_initials: e.target.value
-    })
-  }
+  // onChangeAnalystInitials(e) {
+  //   this.setState({
+  //     analyst_initials: e.target.value
+  //   })
+  // }
 
-  onChangeEventName(e) {
-    this.setState({
-      event_name: e.target.value
-    })
-  }
+  // onChangeEventName(e) {
+  //   this.setState({
+  //     event_name: e.target.value
+  //   })
+  // }
 
-  onChangeEventDate(date) {
-    this.setState({
-      event_date: date
-    })
-  }
+  // onChangeEventDate(date) {
+  //   this.setState({
+  //     event_date: date
+  //   })
+  // }
 
-  onChangeCanID(e) {
-    this.setState({
-      can_id: e.target.value
-    })
-  }
+  // onChangeCanID(e) {
+  //   this.setState({
+  //     can_id: e.target.value
+  //   })
+  // }
 
-  onChangeVehicleID(e) {
-    this.setState({
-      vehicle_id: e.target.value
-    })
-  }
+  // onChangeVehicleID(e) {
+  //   this.setState({
+  //     vehicle_id: e.target.value
+  //   })
+  // }
 
-  onChangeBaudRate(e) {
-    this.setState({
-      baud_rate: e.target.value
-    })
-  }
+  // onChangeBaudRate(e) {
+  //   this.setState({
+  //     baud_rate: e.target.value
+  //   })
+  // }
 
-  onChangeDbcFileName(e) {
-    this.setState({
-      dbc_file_name: e.target.value
-    })
-  }
+  // onChangeDbcFileName(e) {
+  //   this.setState({
+  //     dbc_file_name: e.target.value
+  //   })
+  // }
 
-  onChangeOffLimitsFileName(e) {
-    this.setState({
-      off_limits_file_name: e.target.value
-    })
-  }
+  // onChangeOffLimitsFileName(e) {
+  //   this.setState({
+  //     off_limits_file_name: e.target.value
+  //   })
+  // }
 
   
-  onSubmit(e) {
-    e.preventDefault();
+  // onSubmit(e) {
+  //   e.preventDefault();
 
-    const project = {
+  //   const project = {
       
   
-      name: this.state.name,
-      analyst_initials: this.state.analyst_initials,
-      event_name: this.state.event_name,
-      event_date: this.state.event_date,
-      can_id: this.state.can_id,
-      vehicle_id: this.state.vehicle_id,
-      baud_rate: this.state.baud_rate,
-      dbc_file_name: this.state.dbc_file_name,
-      off_limits_file_name: this.state.off_limits_file_name
+  //     name: this.state.name,
+  //     analyst_initials: this.state.analyst_initials,
+  //     event_name: this.state.event_name,
+  //     event_date: this.state.event_date,
+  //     can_id: this.state.can_id,
+  //     vehicle_id: this.state.vehicle_id,
+  //     baud_rate: this.state.baud_rate,
+  //     dbc_file_name: this.state.dbc_file_name,
+  //     off_limits_file_name: this.state.off_limits_file_name
 
+  //   }
+
+
+  //     console.log(project);
+  //     axios.post('http://localhost:5000/projects/add', project)
+  //       .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
+  // }
+
+
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      // name: '',
+      // analyst_initials: '',
+      // event_name: '',
+      // event_date: new Date(),
+      // can_id: 0,
+      // vehicle_id: 0,
+      // baud_rate: 0,
+      // dbc_file_name: '',
+      // off_limits_file_name: '',
+
+      value: 'Create Project', // this is how the page knows you submitted  
+      date: new Date()
+      }; 
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+handleChange(event) {
+    this.setState({
+      value: event.target.value,
+      date: event.target.date
+              });
+}
+
+handleSubmit(event) {
+    console.log("Adding project")
+    
+    //----------------------1) ADD PACKET TO TABLE
+    fetch("/add", {
+        method:"POST",
+        cache: "no-cache",
+        headers:{
+            "content_type":"application/json",
+        },
+        body:JSON.stringify(this.state.value)
+        }
+    ).then(
+      //go to the new window
+      res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
     }
 
-
-      console.log(project);
-      axios.post('http://localhost:5000/projects/add', project)
-        .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
-  }
 
   render() {
     return (
       <div className="create-project">
         <div className="create-project-container">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.handleSubmit} action="http://localhost:5000/add" method="post">
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name</label>
               <div className="col-sm-10">
@@ -150,14 +199,14 @@ export default class CreateProject extends Component {
                   placeholder="Project Name..." 
                   required
                   className="form-control"
-                  value={this.state.name}
-                  onChange={this.onChangeName}
+                  // value={this.state.name}
+                  //onChange={this.onChangeName}
                 />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Stored Locaion</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Stored Location</label>
               <div className="col-sm-10">
                 <input 
                   type="file" 
@@ -170,7 +219,7 @@ export default class CreateProject extends Component {
             </div>
           
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>User Initias
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>User Initials
                 <br/>
                 <span className='title-required'>(Required)</span>
               </label>
@@ -181,7 +230,7 @@ export default class CreateProject extends Component {
                   id="u-initials" 
                   name="user-initials" 
                   placeholder="User Initials"
-                  value={this.state.analyst_initials}
+                  // value={this.state.analyst_initials}
                   required
                   onChange={this.onChangeAnalystInitials}
                 />
@@ -201,8 +250,8 @@ export default class CreateProject extends Component {
                   name="event-name" 
                   placeholder="Event Name"
                   required
-                  value={this.state.event_name}
-                  onChange={this.onChangeEventName}
+                  // value={this.state.event_name}
+                  // onChange={this.onChangeEventName}
                 />
               </div>
             </div>
@@ -217,8 +266,9 @@ export default class CreateProject extends Component {
                 <div>
                   <DatePicker
                     required
-                    selected={this.state.event_date}
-                    onChange={this.onChangeEventDate}
+                    selected={this.state.date}
+                    onChange={this.handleChange}
+                    // onChange={this.onChangeEventDate}
                   />
                 </div>
               </div>
@@ -236,8 +286,8 @@ export default class CreateProject extends Component {
                   name="can-id" 
                   placeholder="CAN Connector ID..."
                   required
-                  value={this.state.can_id}
-                  onChange={this.onChangeCanID}
+                  // value={this.state.can_id}
+                  // onChange={this.onChangeCanID}
                 />
               </div>
             </div>
@@ -255,8 +305,8 @@ export default class CreateProject extends Component {
                   name="vehicle-id" 
                   placeholder="Vehicle ID..."
                   required
-                  value={this.state.vehicle_id}
-                  onChange={this.onChangeVehicleID}
+                  // value={this.state.vehicle_id}
+                  // onChange={this.onChangeVehicleID}
                 />
               </div>
             </div>
@@ -273,36 +323,39 @@ export default class CreateProject extends Component {
                   name="baud-rate" 
                   placeholder="Baud Rate..." 
                   required
-                  value={this.state.baud_rate}
-                  onChange={this.onChangeBaudRate}/>
+                  // value={this.state.baud_rate}
+                  // onChange={this.onChangeBaudRate}
+                  />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import DBC ile</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import DBC File</label>
               <div className="col-sm-10">
                 <input type="file" 
                   className='form-control-file'
                   id="dbc-file" 
                   name="import-dbc-file" 
-                  value={this.state.dbc_file_name}
-                  onChange={this.onChangeDbcFileName}/>
+                  // value={this.state.dbc_file_name}
+                  // onChange={this.onChangeDbcFileName}
+                  />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import Off-ist File</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import OLL File</label>
               <div className="col-sm-10">
                 <input type="file" 
                   id="off-file" 
                   className='form-control-file'
                   name="off-list-file" 
-                  value={this.state.off_limits_file_name}
-                  onChange={this.onChangeOffLimitsFileName}/>
+                  // value={this.state.off_limits_file_name}
+                  // onChange={this.onChangeOffLimitsFileName}
+                  />
               </div>
             </div>
             <div className='form-group'>
-              <input className="create-project-button" type="submit" value="Create Project"/>
+              <input className="create-project-button" type="submit" onChange={this.handleChange} value={this.state.value}/>
               <input onClick={event => window.location.href='/'} className='cancel-project-button' type="button" value="Cancel"/>
             </div>
         </form>
