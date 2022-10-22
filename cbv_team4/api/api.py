@@ -1,8 +1,9 @@
 # from urllib import request
-from flask import Flask,jsonify, render_template,request
+from flask import Flask,jsonify, render_template,request, redirect
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from flask_cors import CORS
+
 
 
 app = Flask(__name__)
@@ -51,7 +52,7 @@ def add():
     #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
     post_id = flask_test.insert_one(project)
 
-    return "Added project to DB! " #return the packet that we just uploaded
+    return redirect('http://localhost:3000/can-bus-visualizer')#return the projectthat we just uploaded
 
 @app.route("/getall")
 def get_all_packets():
