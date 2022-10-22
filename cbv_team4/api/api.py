@@ -1,5 +1,5 @@
 # from urllib import request
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask,jsonify, render_template,request
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from flask_cors import CORS
@@ -20,7 +20,7 @@ def home_page():
 '''
 THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
 '''
-@app.route("/add_project", methods=["POST"])
+@app.route("/add", methods=["POST"])
 def add():
 
     proj_name = request.form.get("project-name")
@@ -51,10 +51,7 @@ def add():
     #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
     post_id = flask_test.insert_one(project)
 
-    print('Project added to database!')
-
-    return redirect('http://localhost:3000/can-bus-visualizer')
-
+    return "Added project to DB! " #return the packet that we just uploaded
 
 @app.route("/getall")
 def get_all_packets():
