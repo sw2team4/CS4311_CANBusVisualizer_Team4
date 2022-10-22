@@ -30,7 +30,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/kali/Desktop/CS4311_CANBusVisualizer_4/cbv_team4/api/venv"
+set -gx VIRTUAL_ENV "/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/api/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

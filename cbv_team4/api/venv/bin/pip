@@ -1,4 +1,4 @@
-#!/home/kali/Desktop/CS4311_CANBusVisualizer_4/cbv_team4/api/venv/bin/python3
+#!/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/api/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

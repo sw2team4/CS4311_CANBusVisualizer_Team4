@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/home/kali/Desktop/CS4311_CANBusVisualizer_4/cbv_team4/api/venv"
+setenv VIRTUAL_ENV "/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/api/venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
