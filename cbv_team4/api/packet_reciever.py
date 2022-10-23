@@ -24,7 +24,7 @@ start_traffic is using simulator
 @packet_reciever.route('/start_traffic')
 def start_traffic():
     try:
-        msg = can_bus.recv(timeout=3)
+        msg = can_bus.recv()
         pkt = packet(msg.timestamp, 1, msg.arbitration_id, msg.data)
         return str([pkt.timestamp, pkt.id, pkt.data])
     except:
@@ -46,11 +46,7 @@ def simulate_traffic():
                 #AARON: I think I found out why it not receiving the packets, its in a looop at the moment, therefore, it is reading every single line
                 # It does send the the bus and you can see it via candump however, it will take a while untill it recieves something
                 # I added a useful command in ./traffic.sh that tracks a log to traffic. We need to find a way to simulate can packets sent similar to how cangen works.
-                for msg in can_bus:
-                   m = can_bus.recv()
-                   pkt = packet(m.timestamp, 1, m.arbitration_id, m.data)
-                   return str([pkt.timestamp, pkt.id, pkt.data])
-                #return start_traffic()
+                return start_traffic()
             except:
                 return 'packet not recieved'
 
