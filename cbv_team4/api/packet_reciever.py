@@ -43,6 +43,9 @@ def simulate_traffic():
             msg = can.Message(arbitration_id=int(s[2], 16), data=[0xD9, 0x32,0xF,0x46,0xB2,0x3A,0x47,0x2C], is_extended_id=True)
             try:
                 can_bus.send(msg)
+                #AARON: I think I found out why it not receiving the packets, its in a looop at the moment, therefore, it is reading every single line
+                # It does send the the bus and you can see it via candump however, it will take a while untill it recieves something
+                # I added a useful command in ./traffic.sh that tracks a log to traffic. We need to find a way to simulate can packets sent similar to how cangen works.
                 for msg in can_bus:
                    m = can_bus.recv()
                    pkt = packet(m.timestamp, 1, m.arbitration_id, m.data)
