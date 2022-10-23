@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-// import {useNavigate} from "react-router-dom";
-// /* eslint-disable jsx-a11y/alt-text */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
 
@@ -91,6 +88,18 @@ export default class CreateProject extends Component {
 
 
   onSubmit(e) {
+  //   fetch("/dummy", {
+  //     method:"POST",
+  //     cache: "no-cache",
+  //     headers:{
+  //         "content_type":"application/json",
+  //     },
+  //     //body:JSON.stringify(this.state.value)
+  //     }
+  // ).then(response => {
+  //   console.log(response);
+  
+  // })
 
   }
 
@@ -98,7 +107,7 @@ export default class CreateProject extends Component {
     return (
       <div className="create-project">
         <div className="create-project-container">
-          <form onSubmit={this.onSubmit} action="http://localhost:5000/add" method="post">
+          <form onSubmit={this.onSubmit} action="http://localhost:5000/add_project" method="post">
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name
                 <br />
