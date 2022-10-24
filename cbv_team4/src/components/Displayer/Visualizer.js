@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import './Visualizer.css'
 import CustomNodeFlow from './Map/Flow';
 
@@ -15,10 +14,9 @@ import Table from 'react-bootstrap/Table';
 import EditPopup from './Popups/EditPopup';
 import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
-// import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
-import raw from '../../J1939-Sample-Data-CL3000.txt';
+
 
 
 export default class Visualizer extends Component {
@@ -32,52 +30,67 @@ export default class Visualizer extends Component {
 
     //For Testing purposes
     //fetch the local can file and create to a an array string, where each element represents a row from the packet tables (AKA a packet)
-    async getCANFile() {
-        var text;
-        const file = fetch(raw).then(r => r.text()).then(text => { return text });
-        await file.then(value => {
-            text = value.split('\n');
+    // async getCANFile() {
+    //     var text;
+    //     const file = fetch(raw).then(r => r.text()).then(text => { return text });
+    //     await file.then(value => {
+    //         text = value.split('\n');
 
-        }).catch(err => {
-            console.log(err);
-        });
-        //console.log(text);
-        return text;
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
+    //     //console.log(text);
+    //     return text;
 
+    // }
+
+    ToggleTraffic() {
+        // this.pause_traffic ^= 1
+        // if (this.pause_traffic) {
+        //     this.PauseTraffic()
+        // } else {
+        //     this.StartTraffic()
+        // }
+        
+            fetch('http://localhost:5000/toggle_traffic',)
+            .then(response => 
+                response.json()
+            )
+            .then(data => {
+            // data is a parsed JSON object
+            console.log(data.traffic_toggle)
+            })
+            .catch(
+                (e) => {
+                    console.log(e)
+                }
+            )
+        
     }
 
-    async ToggleTraffic() {
-        this.pause_traffic ^= 1
-        if (this.pause_traffic) {
-            this.PauseTraffic()
-        } else {
-            this.StartTraffic()
-        }
-    }
+    // async PauseTraffic() {
+    //     clearInterval(this.interval_callback)
 
-    async PauseTraffic() {
-        clearInterval(this.interval_callback)
+    //     console.log("Live Traffic Paused")
+    // }
 
-        console.log("Live Traffic Paused")
-    }
+    // async StartTraffic() {
+    //     console.log("Live Traffic Started")
 
-    async StartTraffic() {
-        console.log("Live Traffic Started")
+    //     var can_file = this.getCANFile()
 
-        var can_file = this.getCANFile()
+    //     this.interval_callback = setInterval(async () => {
+    //         this.parseCANFile(can_file)
 
-        this.interval_callback = setInterval(async () => {
-            this.parseCANFile(can_file)
+    //         var wait_time = this.time / this.num_packets
+    //         var response = await axios.get("http://localhost:5000/packets/")
 
-            var wait_time = this.time / this.num_packets
-            var response = await axios.get("http://localhost:5000/packets/")
-
-            var target = this.current_index + this.num_packets
-            for (let i = this.current_index; i < target; i++) {
-                setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
-            }
-        }, this.time)
-    }
+    //         var target = this.current_index + this.num_packets
+    //         for (let i = this.current_index; i < target; i++) {
+    //             setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
+    //         }
+    //     }, this.time)
+    // }
 
 
     //get packets from database and display from table
@@ -103,32 +116,32 @@ export default class Visualizer extends Component {
     // }
 
     //parse packet file into 4 data fields, push to data base
-    async parseCANFile(text) {
-        // axios.get('http://localhost:5000/packets/')
-        //     .catch((error) => {
-        //         console.log(error);
-        //     })
-        const lines = await text;
-        var target = this.current_index + this.num_packets
-        for (let i = this.current_index; i < target; i++) {
-            var msg = lines[i].split(';');
+    // async parseCANFile(text) {
+    //     // axios.get('http://localhost:5000/packets/')
+    //     //     .catch((error) => {
+    //     //         console.log(error);
+    //     //     })
+    //     const lines = await text;
+    //     var target = this.current_index + this.num_packets
+    //     for (let i = this.current_index; i < target; i++) {
+    //         var msg = lines[i].split(';');
 
-            var packet = {
-                index: i,
-                timestamp: msg[0],
-                packet_type: msg[1],
-                packet_id: msg[2],
-                packet_data: msg[3],
-            }
+    //         var packet = {
+    //             index: i,
+    //             timestamp: msg[0],
+    //             packet_type: msg[1],
+    //             packet_id: msg[2],
+    //             packet_data: msg[3],
+    //         }
 
 
-            // console.log(packet);
-            axios.post('http://localhost:5000/packets/add', packet)
-                .then(res => console.log(res.data));
+    //         // console.log(packet);
+    //         axios.post('http://localhost:5000/packets/add', packet)
+    //             .then(res => console.log(res.data));
 
-        }
+    //     }
 
-    }
+    // }
 
 
 
