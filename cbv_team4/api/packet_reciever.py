@@ -39,7 +39,6 @@ simulate_traffic is using the text file without sending packets to simulator- TH
 @packet_reciever.route('/simulate_texfile_traffic')
 def simulate_textfile_traffic():
     try:
-        return None
         f = open('packets.txt','r')
         for line in f.readlines()[1:20]:
             line_array = line.split(';')
