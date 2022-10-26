@@ -20,12 +20,12 @@ import SavePacketPopup from './Popups/SavePacketPopup';
 
 export default class Visualizer extends Component {
 
-    time = 1000
+    time = 2000
     num_packets = 1
     current_index = 0
     pause_traffic = 1
     interval_callback = null
-    first_start = false
+    first_start = true
 
 
     //For Testing purposes
@@ -56,14 +56,26 @@ export default class Visualizer extends Component {
 
     async PauseTraffic() {
         clearInterval(this.interval_callback)
-
         console.log("Live Traffic Paused")
+                .then(response =>
+                    response.json()
+                )
+                .then(data => {
+                    // data is a parsed JSON object
+                    console.log(data)
+                })
+                .catch(
+                    (e) => {
+                        console.log(e)
+                    }
+                )
+
     }
 
     async StartTraffic() {
         console.log("Live Traffic Started")
 
-        if (!this.first_start) {
+        if (this.first_start) {
             fetch('http://localhost:5000/invoke_traffic',)
                 .then(response =>
                     response.json()
@@ -77,18 +89,19 @@ export default class Visualizer extends Component {
                         console.log(e)
                     }
                 )
-            this.first_start = true
+            this.first_start = false
         }
 
 
         this.interval_callback = setInterval(async () => {
             fetch('http://localhost:5000/get_packet')
                 .then(response =>
-                    response.text()
+                    response.json()
                 )
                 .then(data => {
                     // data is a parsed JSON object
                     console.log(data)
+                    this.displayPackets(data)
                 })
                 .catch(
                     (e) => {
@@ -110,11 +123,11 @@ export default class Visualizer extends Component {
 
 
     //get packets from database and display from table
-    async displayPackets(packet) {
+    async displayPackets(packet){
         var packetTimestamp = packet.timestamp
-        var packetType = packet.packet_type
-        var packetID = packet.packet_id
-        var packetData = packet.packet_data
+        var packetType = packet.type
+        var packetID = packet.id
+        var packetData = packet.data
 
         document.getElementById('pkt').innerHTML += `<tr>
                 <td>${packetTimestamp}</td>
