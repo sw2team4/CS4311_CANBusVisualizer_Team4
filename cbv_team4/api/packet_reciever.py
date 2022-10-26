@@ -1,16 +1,16 @@
 from concurrent.futures import thread
 from crypt import methods
 import json
+from sqlite3 import Timestamp
 from tracemalloc import start
 from flask_pymongo import PyMongo
-from pymongo import MongoClient
+from pymongo import MongoClient,DESCENDING
 from flask import Flask,jsonify, render_template, request, redirect, Blueprint
 from flask_cors import CORS
 from packet import Packet
 from project_configuration import can_id
 from pprint import pprint 
 from threading import Event
-import threading
 import can
 import time
 import logging
@@ -42,34 +42,35 @@ simulate_traffic is using the text file without sending packets to simulator- TH
 '''
 @packet_reciever.route('/simulate_texfile_traffic', methods=['POST', 'GET'])
 def simulate_textfile_traffic():
-    data = request.get_json()
-    def running_traffic(**kwargs): 
-        try:
-            your_params = kwargs.get('post_data', {})
-            f = open('packets.txt','r')
-            for line in f.readlines()[1:]:
-                timestamp, type, id, data = line.split(';')
-                # if not running.is_set():
-                #     running.wait()
-                # def __init__(self, timestamp, type, id, data, decoded=-1):
-                packet = Packet(timestamp, type, id, data.split('\n')[0])
-                print(line)
-                add_packet(packet)
-                your_params = packet.to_json()
-                time.sleep(1)
-        finally:
-            f.close()
+    #temporary logic issue, traffic still  keeps on going even if paused from front end...expected behavior?
+    #uncomment this line below to stop traffic flowing and pushing to db
+    #return None
+    global current_packet
+    try:
+        f = open('packets.txt','r')
+        for line in f.readlines()[1:]:
+            timestamp, type, id, data = line.split(';')
+            if not running.is_set():
+                running.wait()
+            # def __init__(self, timestamp, type, id, data, decoded=-1):
+            packet = Packet(timestamp, type, id, data.split('\n')[0])
+            print(line)
+            current_packet = packet.to_json()
+            add_packet(packet)
+            time.sleep(1)
+        return 'traffic stopped due to no incoming packets'
+    finally:
+        f.close()
             
-    thread = threading.Thread(target=running_traffic, kwargs={'post_data':data})
-    thread.start()
-    return {"message" : "Accepted"} , 202
-
 
 @packet_reciever.route('/get_packet')
 def get_packet():
-    return 'nothing'
+    last_packet = packets.find_one({'packet_id': current_packet['packet_id'] },sort=[( '_id', DESCENDING )])
+    
+    return { "timestamp" : last_packet['packet_timestamp'],"type" : last_packet['packet_type'],'id': last_packet['packet_id'],'data': last_packet['packet_data']}
 
-@packet_reciever.route('/add_packet', methods=['POST'])
+
+@packet_reciever.route('/add_packet')
 def add_packet(packet):
     packet_schema= packet.to_json()
     packets.insert_one(packet_schema)
@@ -80,36 +81,11 @@ def deleteall_project():
     packets.delete_many({})
     return "deleted all!"
 
-# @packet_reciever.route('/pause_traffic')
-# def pause_traffic():
-    
-#     if running.is_set():
-#         running.clear()
-
-#     return False
-
-# @packet_reciever.route('/resume_traffic')
-# def resume_traffic():
-#     running.set()
-#     return True
 
 @packet_reciever.route('/invoke_traffic')
 def invoke_traffic():
     simulate_textfile_traffic()
-
-
-    #if the sim hasnt started up then start it before toggling resume/pause
-    # if(not TOGGLE_SIM):
-    #     simulate_textfile_traffic()
-    #     TOGGLE_SIM = True
-
-        
-    # if(TOGGLE):
-    #     # TOGGLE = pause_traffic()
-    #     return {'traffic_toggle': 'traffic paused'}
-    # else:
-    #     # TOGGLE = resume_traffic()
-    #     return {'traffic_toggle' : 'traffic resumed'}
+    return 'traffic invoked'
     
 
 '''
