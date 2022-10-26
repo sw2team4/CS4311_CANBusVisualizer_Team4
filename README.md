@@ -19,7 +19,7 @@ cd scripts
 
 4. Start the application (within the scripts folder)
 ```
-./run2.sh
+./run.sh
 ```
 
 ## Miscellaneous Dependencies

@@ -4,12 +4,13 @@ import json
 from tracemalloc import start
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
-from flask import Flask,jsonify, render_template,request, redirect, Blueprint
+from flask import Flask,jsonify, render_template, request, redirect, Blueprint
 from flask_cors import CORS
 from packet import Packet
 from project_configuration import can_id
 from pprint import pprint 
 from threading import Event
+import threading
 import can
 import time
 import logging
@@ -19,11 +20,13 @@ running = Event()
 running.set() #at the start of the program it is running
 
 TOGGLE = True
-
+TOGGLE_SIM = False
 
 
 #Must put this blueprint in api.py so that these routes can be called
 packet_reciever = Blueprint('packet_reciever', __name__)
+
+CORS(packet_reciever)
 
 #db info
 client = MongoClient('mongodb+srv://sw2_fall22:password*123@cluster0.mp0jclc.mongodb.net/test', 5000)
@@ -32,26 +35,39 @@ packets = db.packets # <-- This is the collection within the  'test' db
 can_bus = can.interface.Bus('vcan0', bustype = 'socketcan')
 
 
+current_packet = None
 
 '''
 simulate_traffic is using the text file without sending packets to simulator- THIS IS FOR DEMO USE ONLY
 '''
-@packet_reciever.route('/simulate_texfile_traffic')
+@packet_reciever.route('/simulate_texfile_traffic', methods=['POST', 'GET'])
 def simulate_textfile_traffic():
-    try:
-        f = open('packets.txt','r')
-        for line in f.readlines()[1:20]:
-            line_array = line.split(';')
-            if not running.is_set():
-                running.wait()
-            packet = Packet(line_array[0],line_array[1],line_array[2],line_array[3])
-            print(line)
-            add_packet(packet)
-            time.sleep(1)
-        return 'look at your terminal in vs code where flask is running'
-    finally:
-        f.close()
+    data = request.get_json()
+    def running_traffic(**kwargs): 
+        try:
+            your_params = kwargs.get('post_data', {})
+            f = open('packets.txt','r')
+            for line in f.readlines()[1:]:
+                timestamp, type, id, data = line.split(';')
+                # if not running.is_set():
+                #     running.wait()
+                # def __init__(self, timestamp, type, id, data, decoded=-1):
+                packet = Packet(timestamp, type, id, data.split('\n')[0])
+                print(line)
+                add_packet(packet)
+                your_params = packet.to_json()
+                time.sleep(1)
+        finally:
+            f.close()
+            
+    thread = threading.Thread(target=running_traffic, kwargs={'post_data':data})
+    thread.start()
+    return {"message" : "Accepted"} , 202
 
+
+@packet_reciever.route('/get_packet')
+def get_packet():
+    return 'nothing'
 
 @packet_reciever.route('/add_packet', methods=['POST'])
 def add_packet(packet):
@@ -64,28 +80,36 @@ def deleteall_project():
     packets.delete_many({})
     return "deleted all!"
 
-@packet_reciever.route('/pause_traffic')
-def pause_traffic():
+# @packet_reciever.route('/pause_traffic')
+# def pause_traffic():
     
-    if running.is_set():
-        running.clear()
+#     if running.is_set():
+#         running.clear()
 
-    return False
+#     return False
 
-@packet_reciever.route('/resume_traffic')
-def resume_traffic():
-    running.set()
-    return True
+# @packet_reciever.route('/resume_traffic')
+# def resume_traffic():
+#     running.set()
+#     return True
 
-@packet_reciever.route('/toggle_traffic')
-def toggle_traffic():
-    global TOGGLE
-    if(TOGGLE):
-        TOGGLE = pause_traffic()
-        return {'traffic_toggle': 'traffic paused'}
-    else:
-        TOGGLE = resume_traffic()
-        return {'traffic_toggle' : 'traffic resumed'}
+@packet_reciever.route('/invoke_traffic')
+def invoke_traffic():
+    simulate_textfile_traffic()
+
+
+    #if the sim hasnt started up then start it before toggling resume/pause
+    # if(not TOGGLE_SIM):
+    #     simulate_textfile_traffic()
+    #     TOGGLE_SIM = True
+
+        
+    # if(TOGGLE):
+    #     # TOGGLE = pause_traffic()
+    #     return {'traffic_toggle': 'traffic paused'}
+    # else:
+    #     # TOGGLE = resume_traffic()
+    #     return {'traffic_toggle' : 'traffic resumed'}
     
 
 '''

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Visualizer.css'
 import CustomNodeFlow from './Map/Flow';
-
 // React stuff
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -26,6 +25,7 @@ export default class Visualizer extends Component {
     current_index = 0
     pause_traffic = 1
     interval_callback = null
+    first_start = false
 
 
     //For Testing purposes
@@ -45,52 +45,68 @@ export default class Visualizer extends Component {
     // }
 
     ToggleTraffic() {
-        // this.pause_traffic ^= 1
-        // if (this.pause_traffic) {
-        //     this.PauseTraffic()
-        // } else {
-        //     this.StartTraffic()
-        // }
-        
-            fetch('http://localhost:5000/toggle_traffic',)
-            .then(response => 
-                response.json()
-            )
-            .then(data => {
-            // data is a parsed JSON object
-            console.log(data.traffic_toggle)
-            })
-            .catch(
-                (e) => {
-                    console.log(e)
-                }
-            )
-        
+        this.pause_traffic ^= 1
+        if (this.pause_traffic) {
+            this.PauseTraffic()
+        } else {
+            this.StartTraffic()
+        }
+
     }
 
-    // async PauseTraffic() {
-    //     clearInterval(this.interval_callback)
+    async PauseTraffic() {
+        clearInterval(this.interval_callback)
 
-    //     console.log("Live Traffic Paused")
-    // }
+        console.log("Live Traffic Paused")
+    }
 
-    // async StartTraffic() {
-    //     console.log("Live Traffic Started")
+    async StartTraffic() {
+        console.log("Live Traffic Started")
 
-    //     var can_file = this.getCANFile()
+        if (!this.first_start) {
+            fetch('http://localhost:5000/invoke_traffic',)
+                .then(response =>
+                    response.json()
+                )
+                .then(data => {
+                    // data is a parsed JSON object
+                    console.log(data)
+                })
+                .catch(
+                    (e) => {
+                        console.log(e)
+                    }
+                )
+            this.first_start = true
+        }
 
-    //     this.interval_callback = setInterval(async () => {
-    //         this.parseCANFile(can_file)
 
-    //         var wait_time = this.time / this.num_packets
-    //         var response = await axios.get("http://localhost:5000/packets/")
+        this.interval_callback = setInterval(async () => {
+            fetch('http://localhost:5000/get_packet')
+                .then(response =>
+                    response.text()
+                )
+                .then(data => {
+                    // data is a parsed JSON object
+                    console.log(data)
+                })
+                .catch(
+                    (e) => {
+                        console.log(e)
+                    }
+                )
+            // current_index += 1
+            // this.parseCANFile(can_file)
 
-    //         var target = this.current_index + this.num_packets
-    //         for (let i = this.current_index; i < target; i++) {
-    //             setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
-    //         }
-    //     }, this.time)
-    // }
+            // var wait_time = this.time / this.num_packets
+
+            // var target = this.current_index + this.num_packets
+            // for (let i = this.current_index; i < target; i++) {
+            //     setTimeout((packet = response.data[i]) => this.displayPackets(packet), wait_time)
+            // }
+        }, this.time)
+    }
+
 
 
     //get packets from database and display from table
@@ -196,7 +212,7 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
                                                 Replay Packet
-                                            </NavDropdown.Item>   
+                                            </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
                                                 <SavePacketPopup></SavePacketPopup>
@@ -264,7 +280,7 @@ export default class Visualizer extends Component {
                     </Navbar>
                 </div>
                 <div className='can-map'>
-                    <CustomNodeFlow/>
+                    <CustomNodeFlow />
                 </div>
             </div>
         )

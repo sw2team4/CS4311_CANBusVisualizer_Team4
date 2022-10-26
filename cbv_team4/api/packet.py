@@ -1,18 +1,35 @@
+import itertools
+
 class Packet(object):
+    # newid = itertools.count().next
     def __init__(self, timestamp, type, id, data, decoded=-1):
+        self.index = 0
         self.timestamp = timestamp
         self.type = type
         self.id = id
         self.data = data
         self.decoded = decoded
+        self.version = 0
         self.prev = []
+    
+    # def __init__(self, index, timestamp, type, id, data, version, decoded=-1):
+    #     self.index = index
+    #     self.timestamp = timestamp
+    #     self.type = type
+    #     self.id = id
+    #     self.data = data
+    #     self.decoded = decoded
+    #     self.version = version
+    #     self.prev = []
     
     def to_json(self):
         p = {
-            "packet_name" : self.timestamp ,
-            "packet_type" : self.type ,
-            "packet_id" : self.id ,
+            #"index" : self.index,
+            "packet_timestamp" : self.timestamp,
+            "packet_type" : self.type,
+            "packet_id" : self.id,
             "packet_data" : self.data,
+            "decoded": self.decoded,
         }
         return p
 
