@@ -51,7 +51,7 @@ def add_project():
     }
 
     #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
-    #post_id = projects.insert_one(project)
+    post_id = projects.insert_one(project)
 
     # define dbc file from cantools
 
