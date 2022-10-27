@@ -16,8 +16,6 @@ import SavePacketPopup from './Popups/SavePacketPopup';
 
 //For Testing purposes
 
-
-
 export default class Visualizer extends Component {
 
     time = 2000
@@ -54,7 +52,7 @@ export default class Visualizer extends Component {
 
     }
 
-    async PauseTraffic() {
+    PauseTraffic() {
         clearInterval(this.interval_callback)
         console.log("Live Traffic Paused")
                 .then(response =>
@@ -69,10 +67,9 @@ export default class Visualizer extends Component {
                         console.log(e)
                     }
                 )
-
     }
 
-    async StartTraffic() {
+    StartTraffic() {
         console.log("Live Traffic Started")
 
         if (this.first_start) {

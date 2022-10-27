@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from flask import Flask, jsonify, render_template,request, redirect, Blueprint
 from flask_cors import CORS
+# from werkzeug import secure_filename
 
 can_id = 'vcan0' #This is the CAN channel - this is updated on line 27
 
@@ -29,6 +30,11 @@ def add_project():
     baud_rate=request.form.get("baud-rate")
     dbc_file=request.form.get("import-dbc-file")
     oll_file=request.form.get("off-list-file") #off limits list file
+
+    if request.method == 'POST':
+      f = request.files['import-dbc-file']
+      f.save('./dbc_files/dbc-file.dbc')
+
     
     #This is the project schema
     project = {
@@ -40,12 +46,14 @@ def add_project():
         "CAN ID" : can_id,
         "Vehicle ID" : vehicle_id,
         "Baud Rate" : baud_rate,
-        "DBC File" : dbc_file,
+        "DBC File" : 'UPLOADED DBC FILE',
         "Off Limits List File" : oll_file,
     }
 
     #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
-    post_id = projects.insert_one(project)
+    #post_id = projects.insert_one(project)
+
+    # define dbc file from cantools
 
     return redirect('http://localhost:3000/can-bus-visualizer')#return the projectthat we just uploaded
 
@@ -67,3 +75,4 @@ def get_project(x=5):
 def deleteall_project():
     projects.delete_many({})
     return "deleted all!"
+

@@ -47,18 +47,18 @@ def simulate_textfile_traffic():
     #return None
     global current_packet
     try:
-        f = open('packets.txt','r')
-        for line in f.readlines()[1:]:
-            timestamp, type, id, data = line.split(';')
-            if not running.is_set():
-                running.wait()
-            # def __init__(self, timestamp, type, id, data, decoded=-1):
-            packet = Packet(timestamp, type, id, data.split('\n')[0])
-            print(line)
-            current_packet = packet.to_json()
-            add_packet(packet)
-            time.sleep(1)
-        return 'traffic stopped due to no incoming packets'
+        while True:
+            f = open('packets.txt','r')
+            for line in f.readlines()[1:]:
+                timestamp, type, id, data = line.split(';')
+                if not running.is_set():
+                    running.wait()
+                # def __init__(self, timestamp, type, id, data, decoded=-1):
+                packet = Packet(timestamp, type, id, data.split('\n')[0])
+                print(line)
+                current_packet = packet.to_json()
+                add_packet(packet)
+                time.sleep(1)
     finally:
         f.close()
             

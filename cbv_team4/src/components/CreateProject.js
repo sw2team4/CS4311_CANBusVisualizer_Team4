@@ -4,7 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../create-project.css'
 
+
 export default class CreateProject extends Component {
+
+
   constructor(props) {
     super(props);
 
@@ -20,13 +23,13 @@ export default class CreateProject extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: '',
-      analyst_initials: '',
-      event_name: '',
+      name: 'AARON',
+      analyst_initials: 'AZ',
+      event_name: 'EV1',
       event_date: new Date(),
-      can_id: 0,
-      vehicle_id: 0,
-      baud_rate: 0,
+      can_id: 1250,
+      vehicle_id: 500,
+      baud_rate: 2500,
       dbc_file_name: '',
       off_limits_file_name: ''
     }
@@ -80,6 +83,8 @@ export default class CreateProject extends Component {
     })
   }
 
+
+
   onChangeOffLimitsFileName(e) {
     this.setState({
       off_limits_file_name: e.target.value
@@ -88,26 +93,15 @@ export default class CreateProject extends Component {
 
 
   onSubmit(e) {
-  //   fetch("/dummy", {
-  //     method:"POST",
-  //     cache: "no-cache",
-  //     headers:{
-  //         "content_type":"application/json",
-  //     },
-  //     //body:JSON.stringify(this.state.value)
-  //     }
-  // ).then(response => {
-  //   console.log(response);
-  
-  // })
-
+    // let data = document.getElementById("dbc-file");
+    // fetch('http://localhost:5000/uploader', {method: "POST", body: data}).then(response => console.log(response.text).catch((e) => console.log(e)))
   }
 
   render() {
     return (
       <div className="create-project">
         <div className="create-project-container">
-          <form onSubmit={this.onSubmit} action="http://localhost:5000/add_project" method="post">
+          <form onSubmit={this.onSubmit} action='http://localhost:5000/add_project' encType='multipart/form-data' method="post">
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name
                 <br />
@@ -259,7 +253,8 @@ export default class CreateProject extends Component {
                   id="dbc-file"
                   name="import-dbc-file"
                   value={this.state.dbc_file_name}
-                  onChange={this.onChangeDbcFileName} />
+                  onChange={this.onChangeDbcFileName} 
+                />
               </div>
             </div>
 
