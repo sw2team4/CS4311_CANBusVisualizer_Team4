@@ -54,6 +54,19 @@ export default class Visualizer extends Component {
 
     PauseTraffic() {
         clearInterval(this.interval_callback)
+        // fetch('http://localhost:5000/pause_traffic',)
+        //     .then(response =>
+        //         response.json()
+        //     )
+        //     .then(data => {
+        //         // data is a parsed JSON object
+        //         console.log(data)
+        //     })
+        //     .catch(
+        //         (e) => {
+        //             console.log(e)
+        //         }
+        //     )
         console.log("Live Traffic Paused")
                 .then(response =>
                     response.json()
@@ -71,23 +84,19 @@ export default class Visualizer extends Component {
 
     StartTraffic() {
         console.log("Live Traffic Started")
-
-        if (this.first_start) {
-            fetch('http://localhost:5000/invoke_traffic',)
-                .then(response =>
-                    response.json()
-                )
-                .then(data => {
-                    // data is a parsed JSON object
-                    console.log(data)
-                })
-                .catch(
-                    (e) => {
-                        console.log(e)
-                    }
-                )
-            this.first_start = false
-        }
+        fetch('http://localhost:5000/invoke_traffic',)
+            .then(response =>
+                response.json()
+            )
+            .then(data => {
+                // data is a parsed JSON object
+                console.log(data)
+            })
+            .catch(
+                (e) => {
+                    console.log(e)
+                }
+            )
 
 
         this.interval_callback = setInterval(async () => {
@@ -120,7 +129,7 @@ export default class Visualizer extends Component {
 
 
     //get packets from database and display from table
-    async displayPackets(packet){
+    async displayPackets(packet) {
         var packetTimestamp = packet.timestamp
         var packetType = packet.type
         var packetID = packet.id

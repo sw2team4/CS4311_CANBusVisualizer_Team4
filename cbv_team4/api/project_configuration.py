@@ -1,9 +1,12 @@
 
 from flask_pymongo import PyMongo
-from pymongo import MongoClient
+from pymongo import MongoClient, ASCENDING, HASHED, TEXT
 from flask import Flask, jsonify, render_template,request, redirect, Blueprint
 from flask_cors import CORS
-# from werkzeug import secure_filename
+import uuid
+from global_variables import dbc, pid
+import packet_reciever
+
 
 can_id = 'vcan0' #This is the CAN channel - this is updated on line 27
 
@@ -17,6 +20,7 @@ projects = db.projects # <-- This is the collection within the  'test' db
 '''
 THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
 '''
+#Add Project to Database and redirects page to can bus visualizer
 @project_configuration.route("/add_project", methods=["POST"])
 def add_project():
 
@@ -28,33 +32,39 @@ def add_project():
     can_id=request.form.get("can-id")
     vehicle_id=request.form.get("vehicle-id")
     baud_rate=request.form.get("baud-rate")
-    dbc_file=request.form.get("import-dbc-file")
+    #dbc_file=request.form.get("import-dbc-file")
     oll_file=request.form.get("off-list-file") #off limits list file
 
+    pid = uuid.uuid1()
+    #Place inserted DBC file to local directory for use later
     if request.method == 'POST':
       f = request.files['import-dbc-file']
-      f.save('./dbc_files/dbc-file.dbc')
+      # f.save(f'./dbc_files/{pid}.dbc') # uncomment for release
+      f.save('./dbc_files/dbc-file.dbc') # uncomment for testing
 
+    dbc.add_file('./dbc_files/dbc-file.dbc')
     
     #This is the project schema
     project = {
-        "Project Name" : proj_name ,
-        "Project Location" : stored_location ,
+        "_id": str(pid),
+        "Name" : proj_name ,
+        "Location" : stored_location ,
         "User Initials" : user_initials ,
         "Event Name" : event_name ,
         "Event Date" : event_date,
         "CAN ID" : can_id,
         "Vehicle ID" : vehicle_id,
         "Baud Rate" : baud_rate,
-        "DBC File" : 'UPLOADED DBC FILE',
-        "Off Limits List File" : oll_file,
+        "Off-Limits List File" : oll_file,
     }
+    #ensure's uniqueness for each project information in the database
+    projects.create_index([('user_id', TEXT)], unique=True)
+    #insert project to database
+    projects.insert_one(project)
 
-    #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
-    post_id = projects.insert_one(project)
-
-    # define dbc file from cantools
-
+    # Automatically start traffic upon project creation
+    # packet_reciever.run_traffic()
+    
     return redirect('http://localhost:3000/can-bus-visualizer')#return the projectthat we just uploaded
 
 @project_configuration.route("/getall_projects")

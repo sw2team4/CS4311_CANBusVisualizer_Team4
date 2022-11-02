@@ -8,7 +8,6 @@ from flask_cors import CORS
 #Other files with other routes that are needed
 from packet_reciever import packet_reciever
 from project_configuration import project_configuration
-from dbc_file_container import dbc_file_container
 from node_manager import node_manager
 
 #Main app and the other files that contain the other routes

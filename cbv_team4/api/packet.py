@@ -2,7 +2,7 @@ import itertools
 
 class Packet(object):
     # newid = itertools.count().next
-    def __init__(self,  timestamp, type, id, data, index=0, decoded=-1):
+    def __init__(self,  timestamp: str, type: int, id: int, data: str, index=0, decoded=None):
         self.timestamp = timestamp
         self.type = type
         self.id = id
@@ -21,7 +21,8 @@ class Packet(object):
     #     self.decoded = decoded
     #     self.version = version
     #     self.prev = []
-    
+
+    #Converts Packet information to acceptable response format in JSON
     def to_json(self):
         p = {
             "index" : self.index,
@@ -29,8 +30,14 @@ class Packet(object):
             "packet_type" : self.type,
             "packet_id" : self.id,
             "packet_data" : self.data,
-            "decoded": self.decoded,
+            "decoded_id": 'undefined',
+            "decoded_name": 'undefined',
+            "decoded_comment" : 'undefined'
         }
+        if self.decoded is not None:
+            p["decoded_id"] = self.decoded.frame_id
+            p["decoded_name"] = self.decoded.name
+            p["decoded_comment"] = self.decoded.comment
         return p
 
     def __str__(self):
