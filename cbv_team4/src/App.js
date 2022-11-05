@@ -8,6 +8,7 @@ import Errorpage from './components/ErrorProject';
 import Sync from './components/Sync';
 import Displayer from './components/Displayer';
 import Visualizer from './components/Displayer/Visualizer';
+import Visualizer2 from './components/Displayer/Visualizer2';
 import HI from './components/Displayer/Popups';
 
 function App() { //Rename to Home later
@@ -19,6 +20,7 @@ function App() { //Rename to Home later
         <Route exact path="/sync" element={<Sync />}></Route>
         <Route exact path="/can-bus-displayer" element={<Displayer />}></Route>
         <Route exact path="/can-bus-visualizer" element={<Visualizer />}></Route>
+        <Route exact path="/can-bus-visualizer2" element={<Visualizer2 />}></Route>
         <Route exact path="/can-bus-hi" element={<HI />}></Route>
         <Route exact path="*" element={<Errorpage />}></Route>
       </Routes>
