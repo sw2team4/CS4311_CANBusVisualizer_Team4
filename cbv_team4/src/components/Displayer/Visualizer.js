@@ -18,7 +18,7 @@ import SavePacketPopup from './Popups/SavePacketPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
-import raw from './J1939-Sample-Data-CL3000.txt';
+import raw from '/home/kali/CS4311_CANBusVisualizer_4/cbv_team4/src/J1939-Sample-Data-CL3000.txt';
 
 export default class Visualizer extends Component {
 
