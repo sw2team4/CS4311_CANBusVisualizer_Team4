@@ -1,31 +1,31 @@
-import itertools
+# TODO: When accessing packets in the table (frontend)  see to it to use ID instead of index
+# TODO: Add a way to update fields from database in the case analyst makes their own DBC file
 
 class Packet(object):
-    # newid = itertools.count().next
-    def __init__(self,  timestamp: str, type: int, id: int, data: str, index=0, decoded=None):
+    '''
+    Description: Default constructor for Packet
+    @param: timestamp: str: Time corresponding to when the packet was received
+    @param: type: int: Type of packet
+    @param: id: int: Hex ID of raw packet from CAN Bus
+    @param: data: str: CAN Data in Hex from a raw 
+    @param: decoded: ?: Decoded fields corresponding to ID when matched with DBC File
+    '''
+    def __init__(self,  timestamp: str, type: int, id: int, data: str, decoded=None):
         self.timestamp = timestamp
         self.type = type
         self.id = id
         self.data = data
-        self.index = index
         self.decoded = decoded
-        # self.version = 0
-        # self.prev = []
+        self.version = 0 # Current version of packet
+        self.prev = [] # All previous verions of modified packet
     
-    # def __init__(self, index, timestamp, type, id, data, version, decoded=-1):
-    #     self.index = index
-    #     self.timestamp = timestamp
-    #     self.type = type
-    #     self.id = id
-    #     self.data = data
-    #     self.decoded = decoded
-    #     self.version = version
-    #     self.prev = []
-
     #Converts Packet information to acceptable response format in JSON
+    '''
+    Description: Returns packet schema for database in JSON format
+    @return: p: str: JSON format of packet
+    '''
     def to_json(self):
         p = {
-            "index" : self.index,
             "packet_timestamp" : self.timestamp,
             "packet_type" : self.type,
             "packet_id" : self.id,
@@ -39,6 +39,9 @@ class Packet(object):
             p["decoded_name"] = self.decoded.name
             p["decoded_comment"] = self.decoded.comment
         return p
-
-    def __str__(self):
-        return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'
+'''
+Description: Give packet as string format
+@return: str: Return timestamp, type, id, and data of a packet object
+'''
+def __str__(self):
+    return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'

@@ -1,9 +1,9 @@
 
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
-from flask import Flask, jsonify, render_template,request, redirect, Blueprint
-from flask_cors import CORS
-
+from flask import Blueprint
+#TODO: Possibly Refactor Node Manager or Rename Node Manager for Database Functionality only 
+#TODO: Node Manager should work ONLY with Node Container
 #Must put this blueprint in api.py so that these routes can be called
 node_manager = Blueprint('node_manager', __name__)
 
@@ -15,15 +15,14 @@ nodes = db.nodes # <-- This is the collection within the  'test' db
 THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
 '''
 @node_manager.route("/addnode", methods=["POST"])
-def addnode():
-  
-    #This is the node schema
+def add_node():
+    # This is the node schema
     node = {
         "Node Name" : "test",
         "Node Icon" : "test" ,
     }
 
-    #insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
+    # Insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
     post_id = nodes.insert_one(node)
 
     return "Added a node to the node db!"
@@ -43,6 +42,6 @@ def get_node(x=5):
 
 
 @node_manager.route("/deleteall_nodes")
-def deleteall_nodes():
+def delete_all_nodes():
     nodes.delete_many({})
     return "deleted all!"
