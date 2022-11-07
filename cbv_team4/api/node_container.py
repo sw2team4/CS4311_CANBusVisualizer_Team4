@@ -18,7 +18,7 @@ class Node_Container(object):
     @param: node: Node object
     '''
     def add(self, key, node):
-        assert(key is not None and node is not None, 'Fields must not by empty')
+        assert key is not None and node is not None, 'Fields must not by empty'
         self.node[key] = node
 
     '''
@@ -29,6 +29,6 @@ class Node_Container(object):
     def get(self, id=None):
         if id is None:
             return self.node
-        assert(id in self.node.keys(), 'ID not found within set')
+        assert id in self.node.keys(), 'ID not found within set'
         return self.node[id]
 

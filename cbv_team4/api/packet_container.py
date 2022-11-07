@@ -20,7 +20,7 @@ class Packet_Container(object):
     @param: packet: Packet: Packet to be added
     '''
     def add_saved(self, packet: Packet):
-        assert(packet is not None, 'Packet field must not be empty')
+        assert packet is not None, 'Packet field must not be empty'
         self.saved[packet.id] = packet
 
     '''
@@ -28,7 +28,7 @@ class Packet_Container(object):
     @param: packet: Packet: Packet to be added
     '''
     def add_session(self, packet: Packet):
-        assert(packet is not None, 'Packet field must not be empty')
+        assert packet is not None, 'Packet field must not be empty'
         self.session[packet.id] = packet
 
     '''
