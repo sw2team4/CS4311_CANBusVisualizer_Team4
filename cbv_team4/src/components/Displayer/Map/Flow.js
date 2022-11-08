@@ -7,6 +7,7 @@ import { ContextMenu } from './contextMenu';
 import './updateNode.css';
 
 
+
 // import Engine from 'cbv_team4/src/images/Engine.png'
 
 const nodeTypes = {
@@ -167,6 +168,8 @@ const initialNodes = [
         type: 'default',
     },
 ]
+
+console.log(typeof initialNodes[1].id)
 
 // Create Edges - hard coded
 const initialEdges = [
