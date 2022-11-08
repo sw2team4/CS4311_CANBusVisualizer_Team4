@@ -67,7 +67,7 @@ def add_project():
     projects.insert_one(project)
 
     # Automatically start traffic upon project creation
-    # packet_receiver.run_traffic()
+    packet_receiver.init_traffic()
     
     return redirect('http://localhost:3000/can-bus-visualizer')#return the projectthat we just uploaded
 

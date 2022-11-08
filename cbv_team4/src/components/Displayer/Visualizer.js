@@ -19,11 +19,11 @@ import SavePacketPopup from './Popups/SavePacketPopup';
 export default class Visualizer extends Component {
 
     time = 2000
-    num_packets = 1
-    current_index = 0
+    // num_packets = 1
+    // current_index = 0
     pause_traffic = 1
     interval_callback = null
-    first_start = true
+    // first_start = true
 
 
     //For Testing purposes
@@ -54,50 +54,22 @@ export default class Visualizer extends Component {
 
     PauseTraffic() {
         clearInterval(this.interval_callback)
-        // fetch('http://localhost:5000/pause_traffic',)
-        //     .then(response =>
-        //         response.json()
-        //     )
-        //     .then(data => {
-        //         // data is a parsed JSON object
-        //         console.log(data)
-        //     })
-        //     .catch(
-        //         (e) => {
-        //             console.log(e)
-        //         }
-        //     )
-        console.log("Live Traffic Paused")
-                .then(response =>
-                    response.json()
-                )
-                .then(data => {
-                    // data is a parsed JSON object
-                    console.log(data)
-                })
-                .catch(
-                    (e) => {
-                        console.log(e)
-                    }
-                )
+
+        fetch('http://localhost:5000/pause_traffic')
+            .catch((e) => {
+                console.log(e)
+            })
+        
+        console.log('Traffic Paused')
     }
 
     StartTraffic() {
-        console.log("Live Traffic Started")
-        fetch('http://localhost:5000/invoke_traffic',)
-            .then(response =>
-                response.json()
-            )
-            .then(data => {
-                // data is a parsed JSON object
-                console.log(data)
+        fetch('http://localhost:5000/start_traffic')
+            .catch((e) => {
+                console.log(e)
             })
-            .catch(
-                (e) => {
-                    console.log(e)
-                }
-            )
-
+        
+        console.log('Traffic Started')
 
         this.interval_callback = setInterval(async () => {
             fetch('http://localhost:5000/get_packet')
@@ -106,7 +78,7 @@ export default class Visualizer extends Component {
                 )
                 .then(data => {
                     // data is a parsed JSON object
-                    console.log(data)
+                    // console.log(data)
                     this.displayPackets(data)
                 })
                 .catch(
@@ -142,7 +114,7 @@ export default class Visualizer extends Component {
                 <td>${packetData}</td> 
                 </tr>`
 
-        this.current_index++
+        // this.current_index++
 
     }
 
@@ -177,9 +149,6 @@ export default class Visualizer extends Component {
     //     }
 
     // }
-
-
-
 
     render() {
         return (

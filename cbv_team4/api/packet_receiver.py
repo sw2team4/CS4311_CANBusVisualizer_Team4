@@ -1,18 +1,16 @@
-from sqlite3 import Timestamp
-from tracemalloc import start
 from flask_pymongo import PyMongo
 from pymongo import MongoClient,DESCENDING
 from flask import  Blueprint
 from flask_cors import CORS
 from packet import Packet
-from project_configuration import can_id
-from threading import Event
 import can
 import time
+from project_configuration import can_id
 from global_variables import dbc, packets, pid
 
 # TODO: Import threading
 import threading
+from threading import Event
 
 #Must put this blueprint in api.py so that these routes can be called
 packet_receiver = Blueprint('packet_receiver', __name__)
@@ -24,50 +22,9 @@ db = client['test']
 db_packets = db.packets # <-- This is the collection within the  'test' db
 can_bus = can.interface.Bus('vcan0', bustype = 'socketcan')
 
-
 current_packet = None
-pause_traffic = True
-first_start = True
 running = Event()
-running.set() # at the start of the program it is running
-
-# TODO
-# t = threading.Thread()
-
-# def init_traffic():
-#     t = threading.Thread(thread=run_traffic())
-#     t.start()
-#     t.join()
-
-'''
-simulate_traffic is using the text file without sending packets to simulator- THIS IS FOR DEMO USE ONLY
-'''
-@packet_receiver.route('/simulate_texfile_traffic', methods=['POST', 'GET'])
-def simulate_textfile_traffic():
-    #temporary logic issue, traffic still  keeps on going even if paused from front end...expected behavior?
-    #uncomment this line below to stop traffic flowing and pushing to db
-    #return None
-    #TODO: Use pid from project manager class
-    # print(pid)
-    global current_packet
-    try:
-        while True:
-            f = open('packets.txt','r')
-            for line in f.readlines()[1:]:
-                timestamp, type, id, data = line.split(';')
-                if not running.is_set():
-                    running.wait()
-                # def __init__(self, timestamp, type, id, data, decoded=-1):
-                packet = Packet(timestamp, int(type), int(id, 16), data.split('\n')[0])
-                decoded = dbc.decode(packet.id)
-                packet.decoded = decoded
-                current_packet = packet.to_json()
-                add_packet(packet)
-                packets.add_session(packet)
-                time.sleep(1)
-    finally:
-        f.close()
-            
+running.clear() # at the start of the program it is running
 
 '''
 Description: Returns the last received packet from CAN Bus
@@ -77,7 +34,7 @@ Description: Returns the last received packet from CAN Bus
 def get_packet():
     global current_packet
 
-    assert(current_packet is not None, 'Packet is not defined.')
+    assert current_packet is not None, 'Packet is not defined.'
     
     # last_packet = db_packets.find_one({'packet_id': current_packet['packet_id'] },sort=[( '_id', DESCENDING )])
     
@@ -90,9 +47,8 @@ def get_packet():
 Description: Add packet to database collection: packets
 @return: str: Confirmation of packet added to collection
 '''
-@packet_receiver.route('/add_packet')
 def add_packet(packet):
-    packet_schema= packet.to_json()
+    packet_schema = packet.to_json()
     db_packets.insert_one(packet_schema)
     return 'added packet!'
 
@@ -105,40 +61,7 @@ def deleteall_project():
     db_packets.delete_many({})
     return "deleted all!"
 
-'''
-Description: Starts traffic simulation from text file
-@return: str: Confirmation of traffic invoked
-'''
-@packet_receiver.route('/invoke_traffic')
-def invoke_traffic():
-    simulate_textfile_traffic()
-    return 'traffic invoked'
-    
-
-# TODO
-# '''
-# start_traffic is using simulator and receive packets
-# '''
-# @packet_receiver.route('/start_traffic', methods=["POST"])
-# # Function used to testing purposes
-# def start_traffic():
-#     # pause_traffic = True
-#     # running.set()
-#     t.start()
-    
-#     return 'Traffic Started'
-
-# TODO
-# @packet_receiver.route('/pause_traffic', methods=["POST"])
-# # Function used to testing purposes
-# def pause_traffic():
-#     # pause_traffic = False
-#     # print('Traffic Paused')
-#     # if running.is_set():
-#     #     running.clear()
-#     t.pau
-#     return 'Traffic Paused'
-#TODO: 
+# TODO: 
 # Function used for actual traffic
 # def start_traffic():
 #     try:
@@ -149,3 +72,62 @@ def invoke_traffic():
 #         return str([pkt.timestamp, pkt.id, pkt.data])
 #     except:
 #         return 'packet not received'
+
+'''
+Description: Simulates live traffic from text file. For testing until live traffic decoding is working.
+'''
+def simulate_textfile_traffic():
+    global running
+    global current_packet
+
+    try:
+        f = open('packets.txt', 'r')
+        while True:
+            for line in f.readlines()[1:]:
+                if not running.is_set():
+                    print('Traffic Paused')
+                    running.wait()
+                
+                timestamp, type, id, data = line.split(';')
+                # def __init__(self, timestamp, type, id, data, decoded=-1):
+                packet = Packet(timestamp, int(type), int(id, 16), data.split('\n')[0])
+                packet.decoded = dbc.decode(packet.id)
+                current_packet = packet.to_json()
+
+                # Add packet to database
+                add_packet(packet)
+
+                # Add packet to session packets
+                packets.add_session(packet)
+
+                time.sleep(1)
+    finally:
+        f.close()
+
+t = threading.Thread(target=simulate_textfile_traffic)
+
+'''
+Description: Starts traffic thread by setting event variable.
+@return: str: Confirmation of Traffic Started
+'''
+@packet_receiver.route('/start_traffic')
+def start_traffic():
+    running.set()
+
+    return 'Traffic Started'
+
+'''
+Description: Pauses traffic thread by clearing event variable.
+@return: str: Confirmation of Traffic Paused
+'''
+@packet_receiver.route('/pause_traffic')
+def pause_traffic():
+    running.clear()
+
+    return 'Traffic Paused'
+
+'''
+Description: Starts background thread to run traffic.
+'''
+def init_traffic():
+    t.start()
