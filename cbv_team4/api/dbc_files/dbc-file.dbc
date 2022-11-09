@@ -7258,7 +7258,6 @@ BO_ 2633832958 ILI: 200 Vector__XXX
  SG_ SpecialIgnitorLoop37Resistance : 736|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop38Resistance : 752|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop39Resistance : 768|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
- SG_ SpecialIgnitorLoop3Resistance : 192|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop40Resistance : 784|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop41Resistance : 800|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop42Resistance : 816|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX

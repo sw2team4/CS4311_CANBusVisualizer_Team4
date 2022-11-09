@@ -87,7 +87,7 @@ def simulate_textfile_traffic():
                 if not running.is_set():
                     print('Traffic Paused')
                     running.wait()
-                
+                #TODO: Fix to start first packet of the text file
                 timestamp, type, id, data = line.split(';')
                 # def __init__(self, timestamp, type, id, data, decoded=-1):
                 packet = Packet(timestamp, int(type), int(id, 16), data.split('\n')[0])
@@ -131,3 +131,18 @@ Description: Starts background thread to run traffic.
 '''
 def init_traffic():
     t.start()
+
+@packet_receiver.route('/filter')
+def filter():
+    id = packets.filter_session(0, 0x4f031fe) # Filter by id
+    timestamp = packets.filter_session(1, '183fd3e0d7c') # Filter by timestamp
+
+    print(f'by id: {id[0].to_json()}')
+    
+    print('by timestamp: ')
+    for i in range(len(timestamp)):
+        print(timestamp[i].to_json())
+
+    return 'work'
+
+#TODO: Write a bubble sort function and test

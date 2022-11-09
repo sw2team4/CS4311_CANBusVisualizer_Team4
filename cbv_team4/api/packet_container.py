@@ -52,10 +52,22 @@ class Packet_Container(object):
         return self.session[id]
     
     '''
+    Description
     '''
-    def sort(self):
+    #TODO Implement with bubbe sort for now.
+    def sort_saved(self, sort_by: int):
+        s = []
+        pass
+    #TODO Implement with bubbe sort for now.
+    def sort_filter(self, sort_by: int):
         pass
 
+
+    '''
+    Description:
+    @param:
+    @param:
+    '''
     def filter_saved(self, filter_type: int, filter_field):
         assert filter_type is not None and filter_field is not None, 'ID field must not be empty'
 
@@ -67,6 +79,24 @@ class Packet_Container(object):
             elif filter_type == 1: # Timestamp
                 if self.saved[key].timestamp == filter_field:
                     f.append(self.saved[key])
+        return f
+
+    '''
+    Description:
+    @param:
+    @param: 
+    '''
+    def filter_session(self, filter_type: int, filter_field):
+        assert filter_type is not None and filter_field is not None, 'ID field must not be empty'
+
+        f = []
+        for key in self.session:
+            if filter_type == 0: # Node
+                if self.session[key].id == filter_field:
+                    f.append(self.session[key])
+            elif filter_type == 1: # Timestamp
+                if self.session[key].timestamp == filter_field:
+                    f.append(self.session[key])
         return f
 
         

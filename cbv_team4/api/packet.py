@@ -28,7 +28,7 @@ class Packet(object):
         p = {
             "packet_timestamp" : self.timestamp,
             "packet_type" : self.type,
-            "packet_id" : self.id,
+            "packet_id" : hex(self.id),
             "packet_data" : self.data,
             "decoded_id": 'undefined',
             "decoded_name": 'undefined',
