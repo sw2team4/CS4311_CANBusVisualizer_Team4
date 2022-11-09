@@ -50,3 +50,23 @@ class Packet_Container(object):
         if id is None:
             return self.session
         return self.session[id]
+    
+    '''
+    '''
+    def sort(self):
+        pass
+
+    def filter_saved(self, filter_type: int, filter_field):
+        assert filter_type is not None and filter_field is not None, 'ID field must not be empty'
+
+        f = []
+        for key in self.saved:
+            if filter_type == 0: # Node
+                if self.saved[key].id == filter_field:
+                    f.append(self.saved[key])
+            elif filter_type == 1: # Timestamp
+                if self.saved[key].timestamp == filter_field:
+                    f.append(self.saved[key])
+        return f
+
+        
