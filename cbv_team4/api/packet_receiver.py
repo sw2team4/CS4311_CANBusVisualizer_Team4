@@ -7,8 +7,9 @@ import can
 import time
 from project_configuration import can_id
 from global_variables import dbc, packets, pid
+#TODO: Table needs to be scrollable or followed
+#TODO: Popups are not right on Kali
 
-# TODO: Import threading
 import threading
 from threading import Event
 
@@ -143,6 +144,47 @@ def filter():
     for i in range(len(timestamp)):
         print(timestamp[i].to_json())
 
-    return 'work'
+    return 'filtered'
 
 #TODO: Write a bubble sort function and test
+@packet_receiver.route('/sort')
+def sort():
+    id_a = packets.sort_session(0)
+    id_d = packets.sort_session(1)
+    time_a = packets.sort_session(2)
+    time_d = packets.sort_session(3)
+    
+    return 'sorted'
+
+#TODO: Will need to work with a pop up (Replay Packet) or a on hover event in ()
+@packet_receiver.route('/replay')
+def replay():
+    index = 0 # get index from table
+
+    items = packets.session.items()
+    packet = items[index][1]
+
+    # send to can bus
+    # can_bus.send(replayed_packet) # convert to can.Message (id, data, timestamp)
+    
+    return packet.to_json() # return and add to table
+
+@packet_receiver.route('/edit')
+def edit():
+    index = 0
+    # grab data, id from document
+
+    items = packets.session.items()
+    packet = items[index][1]
+
+    edited = packet.copy()
+    # update edited fields to data and id
+
+    packet.version = 1
+    packet.prev.add(edited)
+
+    # make most recently edited packet shown in table at index ?
+
+    # can_bus.send(replayed_packet) # convert to can.Message (id, data, timestamp)
+    
+    return packet.to_json()

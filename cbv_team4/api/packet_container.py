@@ -52,84 +52,25 @@ class Packet_Container(object):
         return self.session[id]
     
     '''
-    Description
-    Ref: https://www.geeksforgeeks.org/python-program-for-bubble-sort/
+    Description: Sort session packets by ascending id, descending id, Oldest packet, or Most Recent packets
+    @param: sort_type: int: option to sort session packets by type
     '''
-    #TODO Implement with bubble sort for now. 
-    #Question,should we sort the saved packets array? Or Give a temporary saved packet array to use to display in table?
-    #Sort by highest ID,Lowest ID, Oldest ID or Most recent
-    #We need to moduralize this method into smaller method by types of sorts instead of the sort_by method
-    #This is textbook high cohesion...
-    def sort_saved_by_highest_id(self, sort_by: int):
-        s = [i for i in self.saved]
-        n = len(self.saved)
-        # optimize code, so if the array is already sorted, it doesn't need
-        # to go through the entire process
-        swapped = False
-        # Traverse through all array elements
-        for i in range(n-1):
-            # range(n) also work but outer loop will
-            # repeat one time more than needed.
-            # Last i elements are already in place
-            for j in range(0, n-i-1):
-
-                # traverse the array from 0 to n-i-1
-                # Swap if the element found is greater
-                # than the next element
-                if s[j] > s[j + 1]:
-                    swapped = True
-                    s[j], s[j + 1] = s[j + 1], s[j]
+    def sort_session(self, sort_type: int):
+        cpy = []
+        if sort_type == 0: # Sort By ID - Ascending
+            cpy = sorted(self.session.items(), reverse=False)
+        elif sort_type == 1: # Sort By ID - Descending
+            cpy = sorted(self.session.items(), reverse=True)
+        elif sort_type == 2: # Sort By Oldest
+            cpy = sorted(self.session.items(), key=lambda item: item[1].timestamp, reverse=False)
+        elif sort_type == 3: # Sort By Most Recent
+            cpy = sorted(self.session.items(), key=lambda item: item[1].timestamp, reverse=True)
+        return cpy
         
-            if not swapped:
-                # if we haven't needed to make a single swap, we
-                # can just exit the main loop.
-                return 'not swapped'
-            else:
-                #give a temporary saved packets list to view when the user chooses this option
-                temporary_saved_packets = dict()
-                for key in s:
-                    temporary_saved_packets[key] = self.session[key]
-                return temporary_saved_packets
 
-    #This is logical cohesion...but it is what it is
-    def sort_saved_by_lowest_id(self):
-        s = [i for i in self.saved]
-        n = len(self.saved)
-        # optimize code, so if the array is already sorted, it doesn't need
-        # to go through the entire process
-        swapped = False
-        # Traverse through all array elements
-        for i in range(n-1):
-            # range(n) also work but outer loop will
-            # repeat one time more than needed.
-            # Last i elements are already in place
-            for j in range(0, n-i-1):
-
-                # traverse the array from 0 to n-i-1
-                # Swap if the element found is less than or equal
-                # than the next element
-                if s[j] <= s[j + 1]:
-                    swapped = True
-                    s[j], s[j + 1] = s[j + 1], s[j]
-        
-            if not swapped:
-                # if we haven't needed to make a single swap, we
-                # can just exit the main loop.
-                return 'not swapped'
-            else:
-                #give a temporary saved packets list to view when the user chooses this option
-                temporary_saved_packets = dict()
-                for key in s:
-                    temporary_saved_packets[key] = self.session[key]
-                return temporary_saved_packets
-
-    def sort_saved_by_oldest_id(self):
-        pass 
-    def sort_saved_by_newest_id(self):
-        pass   
 
     #TODO Implement with bubbe sort for now.
-    def sort_filter(self, sort_by: int):
+    def sort_saved(self, sort_by: int):
         pass
 
 
