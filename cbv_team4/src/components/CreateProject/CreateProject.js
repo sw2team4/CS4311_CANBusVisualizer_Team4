@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../create-project.css'
+import '../CreateProject/Create-project.css'
 
 
 export default class CreateProject extends Component {

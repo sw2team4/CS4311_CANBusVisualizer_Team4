@@ -6,7 +6,7 @@ body, html {
 
 /* Primary div for component */
 .create-project{
-    background: url(./images/HomeScreen.jpg);
+    background: url(./images/CreateNewProject.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;  

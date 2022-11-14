@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Visualizer.css'
-import CustomNodeFlow from './Map/Flow';
+import CustomNodeFlow from '../Map/Flow';
+
 // React stuff
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -10,11 +11,17 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 // Popups
-import EditPopup from './Popups/EditPopup';
-import SavePopup from './Popups/SavePopup';
-import SavePacketPopup from './Popups/SavePacketPopup';
+import EditPopup from '../Popups/Edit/EditPopup';
+import SavePopup from '../Popups/SaveProject/SavePopup';
+import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
+// import {getPackets} from './SocketCAN.js'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
+import DummyData from './DummyData';
 
 //For Testing purposes
+// import raw from './J1939-Sample-Data-CL3000.txt';
 
 export default class Visualizer extends Component {
 
@@ -151,6 +158,7 @@ export default class Visualizer extends Component {
     // }
 
     render() {
+        
         return (
             <div className='visualizer'>
 
@@ -233,6 +241,31 @@ export default class Visualizer extends Component {
                                 </tr>
                             </thead>
                             <tbody id='pkt'>
+                            <OverlayTrigger
+                                trigger="hover"
+                                placement="right"                                
+                                overlay={
+                                    <Popover id={'popover-positioned-right'}>
+                                    <Popover.Header as="h3">{'Decoded Information'}</Popover.Header>
+                                    <Popover.Body>
+                                        <strong>Decoded Packet</strong>
+                                        <br/>
+                                        {/* {DummyData && DummyData.map(({id}) =>  (
+                                            <div key={id} className="row">
+                                                <strong>{id}</strong>
+                                            </div>
+                                        ))} */}
+                                    </Popover.Body>
+                                    </Popover>
+                                }
+                            >
+                                <tr>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                    <td>hi</td>
+                                </tr>
+                                </OverlayTrigger>
                             </tbody>
                         </Table>
                     </div>

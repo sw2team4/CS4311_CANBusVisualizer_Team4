@@ -2,10 +2,10 @@ import React from 'react'
 // import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import './editPopup.css'
-
+import '../Edit/EditPopup.css'
 
 function MyVerticallyCenteredModal(props) {
+  
   return (
     <Modal
       {...props}
@@ -20,27 +20,6 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* <Form className='popup-container'>
-          <Form.Group className="form-group row mb-3" controlId="formBasicEmail">
-            <Form.Label className='col-sm-2 col-form-label col-form-label-sm popups-title'>Packet Name</Form.Label>
-            <Form.Control className='popups-inputs' placeholder="Enter here..."/>
-
-          </Form.Group>
-
-          <Form.Group className="form-group row mb-3" controlId="formBasicPassword">
-            <Form.Label className='col-sm-2 col-form-label col-form-label-sm popups-title'>Packet ID</Form.Label>
-            <Form.Control className='popups-inputs' placeholder="Enter here..." />
-          </Form.Group>
-
-          <Form.Group className="form-group row mb-3" controlId="formBasicPassword">
-            <Form.Label className='col-sm-2 col-form-label col-form-label-sm popups-title'>Packet Data</Form.Label>
-            <Form.Control className='popups-inputs' placeholder="Enter here..." />
-          </Form.Group>
-
-          <Button className='popup-update-button' variant="primary" type="submit">
-            Update
-          </Button>
-        </Form> */}
         <Form className='popup-container'>
           <div className='nodeName'>
             <label>Node Name:</label><br/>
