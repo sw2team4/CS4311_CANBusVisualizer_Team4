@@ -10,7 +10,7 @@ class Packet(object):
     @param: data: str: CAN Data in Hex from a raw 
     @param: decoded: ?: Decoded fields corresponding to ID when matched with DBC File
     '''
-    def __init__(self,  timestamp: str, type: int, id: int, data: str, decoded=None):
+    def __init__(self,  timestamp: str, type: int, id: int, data: str, decoded=None, ignore=False):
         self.timestamp = timestamp
         self.type = type
         self.id = id
@@ -18,6 +18,7 @@ class Packet(object):
         self.decoded = decoded
         self.version = 0 # Current version of packet
         self.prev = [] # All previous verions of modified packet
+        self.ignore = ignore
     
     #Converts Packet information to acceptable response format in JSON
     '''
@@ -32,7 +33,8 @@ class Packet(object):
             "packet_data" : self.data,
             "decoded_id": 'undefined',
             "decoded_name": 'undefined',
-            "decoded_comment" : 'undefined'
+            "decoded_comment" : 'undefined',
+            "ignore": self.ignore
         }
         if self.decoded is not None:
             p["decoded_id"] = self.decoded.frame_id

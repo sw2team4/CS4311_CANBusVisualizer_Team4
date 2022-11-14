@@ -2,7 +2,8 @@ class Off_Limits_Node(object):
     def __init__(self, id, data):
         self.id = id
         self.data = data
-
+        
+# TODO: export..
 class Off_Limits(object):
     def __init__(self):
         self.db = []
@@ -33,6 +34,16 @@ class Off_Limits(object):
     def add_node(self, id, data):
         node = Off_Limits_Node(str(id), str(data))
         self.db.append(node)
+    '''
+    Description: Find off limit node 
+    @param: int: id: ID of node that should remain untouched.
+    '''
+    def find(self, id: str):
+        for node in self.db:
+            if node.id == id:
+                # print(f'node id: {id} found')
+                return True
+        return False
     
     '''
     Description: Export/create off-limits list to CSV.

@@ -6,7 +6,7 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, pid
+from global_variables import dbc, packets, pid, oll
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
 
@@ -93,6 +93,7 @@ def simulate_textfile_traffic():
                 # def __init__(self, timestamp, type, id, data, decoded=-1):
                 packet = Packet(timestamp, int(type), int(id, 16), data.split('\n')[0])
                 packet.decoded = dbc.decode(packet.id)
+                packet.ignore = oll.find(id)
                 current_packet = packet.to_json()
 
                 # Add packet to database
