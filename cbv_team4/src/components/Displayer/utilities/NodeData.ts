@@ -1,18 +1,18 @@
-// import CustomNodeData from "../Map/CustomNodeData";
+import CustomNodeData from "../Map/CustomNodeData";
 
-// interface NodePosition {
-//     x: number,
-//     y: number
-// }
+interface NodePosition {
+    x: number,
+    y: number
+}
 
-// interface NodeData{
-//     isBlacklisted: boolean,
-//     projectId: string,
-//     nodeID: string,
-//     name: string,
-//     data: CustomNodeData | null,
-//     position: NodePosition |null,
-//     relationships: string[]
-// }
+interface NodeData{
+    isBlacklisted: boolean,
+    projectId: string,
+    nodeID: string,
+    name: string,
+    data: CustomNodeData | null,
+    position: NodePosition |null,
+    relationships: string[]
+}
 
-// export default NodeData
+export default NodeData
