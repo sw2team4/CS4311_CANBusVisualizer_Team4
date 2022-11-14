@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import './Visualizer.css'
-import CustomNodeFlow from './Map/Flow';
+import '../Visualizer/Visualizer.css'
+// import CustomNodeFlow from './Map/Flow';
+import UpdateNode from '../Map/updateNode';
+
 
 // React stuff
 import Container from 'react-bootstrap/Container';
@@ -12,9 +14,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 // Popups
-import EditPopup from './Popups/EditPopup';
-import SavePopup from './Popups/SavePopup';
-import SavePacketPopup from './Popups/SavePacketPopup';
+import EditPopup from '../Popups/Edit/EditPopup';
+import SavePopup from '../Popups/SaveProject/SavePopup';
+import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
@@ -250,7 +252,7 @@ export default class Visualizer extends Component {
                     </Navbar>
                 </div>
                 <div className='can-map'>
-                    <CustomNodeFlow/>
+                    <UpdateNode/>
                 </div>
             </div>
         )

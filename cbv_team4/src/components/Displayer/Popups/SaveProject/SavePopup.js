@@ -1,8 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import '../SaveProject/SavePopup.css'
 
 function MyVerticallyCenteredModal(props) {
   return (
@@ -11,37 +10,30 @@ function MyVerticallyCenteredModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      backdrop="static"
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Edit Packets
+          Save Project
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
         <p>
-            <label>Edit Packet</label>
-            <input type="text"/>
+            Project has been saved
         </p>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }
 
-function Popups() {
+function SavePopup() {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-      Edit Packets
+      <Button className='button-color' onClick={() => setModalShow(true)}>
+      Save Project
       </Button>
-      {/* <NavDropdown.item onClick={() => setModalShow(true)}>
-        Edit Packets
-      </NavDropdown.item> */}
 
       <MyVerticallyCenteredModal
         show={modalShow}
@@ -52,4 +44,6 @@ function Popups() {
 }
 
 
-export default Popups;
+
+
+export default SavePopup;

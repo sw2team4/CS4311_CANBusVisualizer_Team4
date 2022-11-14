@@ -1,5 +1,5 @@
 import React from 'react'
-import '../sync.css';
+import '../Sync/Sync.css';
 
 function Sync() {
   return (

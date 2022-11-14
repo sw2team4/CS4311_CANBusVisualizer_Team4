@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // import {useNavigate} from "react-router-dom";
 // /* eslint-disable jsx-a11y/alt-text */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../create-project.css'
+import '../CreateProject/Create-project.css'
 
 export default class CreateProject extends Component {
   constructor(props) {
