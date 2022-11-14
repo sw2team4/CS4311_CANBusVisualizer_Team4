@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-// import {useNavigate} from "react-router-dom";
-// /* eslint-disable jsx-a11y/alt-text */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CreateProject/Create-project.css'
 
+
 export default class CreateProject extends Component {
+
+
   constructor(props) {
-    
-    
     super(props);
 
     this.onChangeName = this.onChangeName.bind(this);
@@ -23,38 +21,18 @@ export default class CreateProject extends Component {
     this.onChangeDbcFileName = this.onChangeDbcFileName.bind(this);
     this.onChangeOffLimitsFileName = this.onChangeOffLimitsFileName.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    
+
     this.state = {
-      name: '',
-      analyst_initials: '',
-      event_name: '',
+      name: 'AARON',
+      analyst_initials: 'AZ',
+      event_name: 'EV1',
       event_date: new Date(),
-      can_id: 0,
-      vehicle_id: 0,
-      baud_rate: 0,
+      can_id: 1250,
+      vehicle_id: 500,
+      baud_rate: 2500,
       dbc_file_name: '',
       off_limits_file_name: ''
     }
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:5000/projects/')
-      .then(response => {
-          this.setState({
-            name: response.data.name,
-            analyst_initials: response.data.analyst_initials,
-            event_name: response.data.event_name,
-            event_date: response.data.event_date,
-            can_id: response.data.can_id,
-            vehicle_id: response.data.vehicle_id,
-            baud_rate: response.data.baud_rate,
-            dbc_file_name: response.data.dbc_file_name,
-            off_limits_file_name: response.data.off_limits_file_name
-          })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
   }
 
   onChangeName(e) {
@@ -62,7 +40,7 @@ export default class CreateProject extends Component {
       name: e.target.value
     })
   }
-  
+
   onChangeAnalystInitials(e) {
     this.setState({
       analyst_initials: e.target.value
@@ -105,49 +83,35 @@ export default class CreateProject extends Component {
     })
   }
 
+
+
   onChangeOffLimitsFileName(e) {
     this.setState({
       off_limits_file_name: e.target.value
     })
   }
 
-  
+
   onSubmit(e) {
-    e.preventDefault();
-
-    const project = {
-      
-  
-      name: this.state.name,
-      analyst_initials: this.state.analyst_initials,
-      event_name: this.state.event_name,
-      event_date: this.state.event_date,
-      can_id: this.state.can_id,
-      vehicle_id: this.state.vehicle_id,
-      baud_rate: this.state.baud_rate,
-      dbc_file_name: this.state.dbc_file_name,
-      off_limits_file_name: this.state.off_limits_file_name
-
-    }
-
-
-      console.log(project);
-      axios.post('http://localhost:5000/projects/add', project)
-        .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
+    // let data = document.getElementById("dbc-file");
+    // fetch('http://localhost:5000/uploader', {method: "POST", body: data}).then(response => console.log(response.text).catch((e) => console.log(e)))
   }
 
   render() {
     return (
       <div className="create-project">
         <div className="create-project-container">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} action='http://localhost:5000/add_project' encType='multipart/form-data' method="post">
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Project Name
+                <br />
+                <span className='title-required'>(Required)</span>
+              </label>
               <div className="col-sm-10">
-                <input 
-                  type="text" id="p-name" 
-                  name="project-name" 
-                  placeholder="Project Name..." 
+                <input
+                  type="text" id="p-name"
+                  name="project-name"
+                  placeholder="Project Name..."
                   required
                   className="form-control"
                   value={this.state.name}
@@ -157,29 +121,32 @@ export default class CreateProject extends Component {
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Stored Locaion</label>
-              <div className="col-sm-10">
-                <input 
-                  type="file" 
-                  id="s-location-file" 
-                  name="stored-location"
-                  className='form-control-file'
-                  required
-                />          
-              </div>
-            </div>
-          
-            <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>User Initias
-                <br/>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Stored Location
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
-                <input 
-                  className='form-control' 
-                  type="text" 
-                  id="u-initials" 
-                  name="user-initials" 
+                <input
+                  type="file"
+                  id="s-location-file"
+                  name="stored-location"
+                  className='form-control-file'
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>User Initials
+                <br />
+                <span className='title-required'>(Required)</span>
+              </label>
+              <div className="col-sm-10">
+                <input
+                  className='form-control'
+                  type="text"
+                  id="u-initials"
+                  name="user-initials"
                   placeholder="User Initials"
                   value={this.state.analyst_initials}
                   required
@@ -190,15 +157,15 @@ export default class CreateProject extends Component {
 
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Event Name
-               <br/>
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
-                <input 
-                  className='form-control' 
-                  type="text" 
-                  id="e-event" 
-                  name="event-name" 
+                <input
+                  className='form-control'
+                  type="text"
+                  id="e-event"
+                  name="event-name"
                   placeholder="Event Name"
                   required
                   value={this.state.event_name}
@@ -210,7 +177,7 @@ export default class CreateProject extends Component {
 
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Event Date
-               <br/>
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
@@ -223,17 +190,17 @@ export default class CreateProject extends Component {
                 </div>
               </div>
             </div>
-          
+
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Can Connector ID
-                <br/>
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
-                <input className='form-control' 
-                  type="text" 
-                  id="c-id" 
-                  name="can-id" 
+                <input className='form-control'
+                  type="text"
+                  id="c-id"
+                  name="can-id"
                   placeholder="CAN Connector ID..."
                   required
                   value={this.state.can_id}
@@ -244,15 +211,15 @@ export default class CreateProject extends Component {
 
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Vehicle ID
-               <br/>
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
-                <input 
-                  className='form-control' 
-                  type="text" 
-                  id="v-id" 
-                  name="vehicle-id" 
+                <input
+                  className='form-control'
+                  type="text"
+                  id="v-id"
+                  name="vehicle-id"
                   placeholder="Vehicle ID..."
                   required
                   value={this.state.vehicle_id}
@@ -263,51 +230,52 @@ export default class CreateProject extends Component {
 
             <div className="form-group row">
               <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Baud Rate
-              <br/>
+                <br />
                 <span className='title-required'>(Required)</span>
               </label>
               <div className="col-sm-10">
-                <input className='form-control' 
-                  type="text" 
-                  id="b-rate" 
-                  name="baud-rate" 
-                  placeholder="Baud Rate..." 
+                <input className='form-control'
+                  type="text"
+                  id="b-rate"
+                  name="baud-rate"
+                  placeholder="Baud Rate..."
                   required
                   value={this.state.baud_rate}
-                  onChange={this.onChangeBaudRate}/>
+                  onChange={this.onChangeBaudRate} />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import DBC ile</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import DBC File</label>
               <div className="col-sm-10">
-                <input type="file" 
+                <input type="file"
                   className='form-control-file'
-                  id="dbc-file" 
-                  name="import-dbc-file" 
+                  id="dbc-file"
+                  name="import-dbc-file"
                   value={this.state.dbc_file_name}
-                  onChange={this.onChangeDbcFileName}/>
+                  onChange={this.onChangeDbcFileName} 
+                />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import Off-ist File</label>
+              <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Import Off-limits File</label>
               <div className="col-sm-10">
-                <input type="file" 
-                  id="off-file" 
+                <input type="file"
+                  id="off-file"
                   className='form-control-file'
-                  name="off-list-file" 
+                  name="off-list-file"
                   value={this.state.off_limits_file_name}
-                  onChange={this.onChangeOffLimitsFileName}/>
+                  onChange={this.onChangeOffLimitsFileName} />
               </div>
             </div>
             <div className='form-group'>
-              <input className="create-project-button" type="submit" value="Create Project"/>
-              <input onClick={event => window.location.href='/'} className='cancel-project-button' type="button" value="Cancel"/>
+              <input className="create-project-button" type="submit" value="Create Project" />
+              <input onClick={event => window.location.href = '/'} className='cancel-project-button' type="button" value="Cancel" />
             </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     )
   }
 }
