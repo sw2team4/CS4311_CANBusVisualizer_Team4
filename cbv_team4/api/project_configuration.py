@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, pid
+from global_variables import dbc, pid, oll
 import packet_receiver
 
 
@@ -31,7 +31,7 @@ def add_project():
     can_id = request.form.get("can-id")
     vehicle_id = request.form.get("vehicle-id")
     baud_rate = request.form.get("baud-rate")
-    oll_file = request.form.get("off-list-file") # Off-limits list file
+    # oll_file = request.form.get("off-list-file") # Off-limits list file
     
     # Define unique project id
     # TODO: use pid from project manager class
@@ -44,7 +44,16 @@ def add_project():
       # f.save(f'./dbc_files/{pid}.dbc') # uncomment for release
       f.save('./dbc_files/dbc-file.dbc') # uncomment for testing
 
+    
     dbc.add_file('./dbc_files/dbc-file.dbc')
+
+    # Place inserted Off limits file to local directory for use later
+    if request.method  ==  'POST':
+      f = request.files['off-list-file']
+      # f.save(f'./#/{pid}.#') # uncomment for release
+      f.save('./off-limits-list-files/off-limits-list-file.csv') # uncomment for testing
+
+    oll.add_file('./off-limits-list-files/off-limits-list-file.csv')
     
     # This is the project schema
     project = {
@@ -57,7 +66,6 @@ def add_project():
         "CAN ID" : can_id,
         "Vehicle ID" : vehicle_id,
         "Baud Rate" : baud_rate,
-        "Off-Limits List File" : oll_file,
     }
     
     # Ensure uniqueness for each project information in the database

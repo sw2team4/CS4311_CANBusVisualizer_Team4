@@ -69,7 +69,7 @@ BO_ 2297441790 ACCS: 8 Vector__XXX
  SG_ SpptVTsssRpttRtAtSs : 54|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ VrtlAlrtnExtnddRng : 32|16@1+ (0.01,-320) [-320|322.55] "m/(s*s)" Vector__XXX
  SG_ VrtlAlrtnFgrfMrtExtnddRng : 52|2@1+ (1,0) [0|3] "" Vector__XXX
-    
+
 BO_ 2297455358 ETC12: 8 Vector__XXX
  SG_ TrnsmssnDrtnlOtptShftSpd : 32|16@1+ (1,-32127) [-32127|32128] "rpm" Vector__XXX
  SG_ TrnsmssnHdrsttLp1Prssr : 0|16@1+ (1,0) [0|64255] "kPa" Vector__XXX
@@ -7258,6 +7258,7 @@ BO_ 2633832958 ILI: 200 Vector__XXX
  SG_ SpecialIgnitorLoop37Resistance : 736|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop38Resistance : 752|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop39Resistance : 768|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
+ SG_ SpecialIgnitorLoop3Resistance : 192|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop40Resistance : 784|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop41Resistance : 800|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
  SG_ SpecialIgnitorLoop42Resistance : 816|16@1+ (0.1,0) [0|6425.5] "ohm" Vector__XXX
