@@ -4,12 +4,14 @@ from flask_cors import CORS
 # Other python files which contain other routes that are needed
 from packet_receiver import packet_receiver
 from project_configuration import project_configuration
+from syncronizer import syncronizer
 from node_manager import node_manager
 
 # Main app and the other files that contain the other routes
 app = Flask(__name__)
 app.register_blueprint(packet_receiver)
 app.register_blueprint(project_configuration)
+app.register_blueprint(syncronizer)
 # app.register_blueprint(node_manager)
 CORS(app)
 #TODO: make sure backend is killed with scripts
