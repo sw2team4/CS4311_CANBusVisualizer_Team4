@@ -17,7 +17,7 @@ import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
 // import {getPackets} from './SocketCAN.js'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-
+//TODO: table on hover stops working after traffic starts
 import DummyData from './DummyData';
 
 //For Testing purposes
