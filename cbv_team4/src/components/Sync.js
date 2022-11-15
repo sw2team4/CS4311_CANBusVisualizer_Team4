@@ -26,7 +26,7 @@ export default class Visualizer extends Component {
     }
 
     componentDidMount() {
-      axios.get('http://localhost:5000/projects/')
+      axios.get('http://localhost:5000/sync/')
         .then(response => {
             this.setState({
               src_data: response.data.src_data,
@@ -81,7 +81,7 @@ export default class Visualizer extends Component {
 
       
       console.log(project);
-      axios.post('http://localhost:5000/projects/add', project)
+      axios.post('http://localhost:5000/sync/', project)
         .then(res => console.log(res.data), event => window.location.href='/can-bus-visualizer');
     }
     
@@ -171,7 +171,7 @@ export default class Visualizer extends Component {
               </label>
               <div className="col-sm-10">
                 <input 
-                  type="text" id="password-sync"
+                  type="text" id="dst-fldr"
                   name="password" 
                   placeholder=""
                   required
