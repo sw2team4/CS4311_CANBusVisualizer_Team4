@@ -78,7 +78,12 @@ body, html {
     background-image: url('./images/CanBusManager.png');
     background-size: cover;
 }
-
+.sixthButton{
+    padding: 60px 60px;
+    outline: none;
+    background-image: url('./images/export.png');
+    background-size: cover;
+}
 ul{
     display: flex;
     gap: 5em;
