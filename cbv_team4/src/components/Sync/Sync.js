@@ -83,7 +83,7 @@ return (
               <input 
                 type="text" id="source" 
                 name="source-data" 
-                placeholder="" 
+                placeholder="/home/kali/" 
                 required
                 className="form-control"
                 value={this.state.src_data}
@@ -154,8 +154,8 @@ return (
             <div className="col-sm-10">
               <input 
                 type="text" id="dst-fldr"
-                name="password" 
-                placeholder=""
+                name="dest-data" 
+                placeholder="/home/"
                 required
                 className='form-control' 
                 value={this.state.dest_fldr}
@@ -163,6 +163,10 @@ return (
               />
             </div>
           </div>
+
+        <div>
+        <input className="sync-button" type="submit" name="Submit" onChange={this.onSubmit}  value="Sync"/>
+        </div>
       </form>
     </div>
 
@@ -171,9 +175,6 @@ return (
       <h1 className='sync-title'>Sync</h1>
       <img className='comp' src={Comp} height={300} width={300} alt=""/>
       <img className='comp1' src={Comp} height={300} width={300} alt=""/>
-      <div>
-        <input className="sync-button" type="submit" value="Sync"/>
-      </div>
       <form>
       <input onClick={event => window.location.href='/'} className='cancel-sync-button' type="button" value="Cancel"/>
       </form>
