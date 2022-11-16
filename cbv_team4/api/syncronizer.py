@@ -1,7 +1,6 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, Blueprint
 from flask_cors import CORS
 import subprocess
-from flask import  Blueprint
 
 
 syncronizer = Blueprint('syncronizer', __name__)

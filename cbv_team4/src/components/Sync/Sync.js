@@ -1,8 +1,6 @@
 import React, {useState, useEffect, Component} from 'react'
 import '../Sync/Sync.css';
 import Comp from './images/Comp3.png'
-import {useNavigate} from "react-router-dom";
-import axios from 'axios'
 
 
 export default class Visualizer extends Component {
