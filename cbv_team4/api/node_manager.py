@@ -14,12 +14,16 @@ nodes = db.nodes # <-- This is the collection within the  'test' db
 '''
 THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
 '''
-@node_manager.route("/addnode", methods=["POST"])
+@node_manager.route("/addnode")
 def add_node():
     # This is the node schema
     node = {
         "Node Name" : "test",
-        "Node Icon" : "test" ,
+        "Node ID" : "ID",
+        "Node Icon" : "test" ,#jpg image or something...
+        "Node Comment" : "comment",
+        "Node Annotation" : "annotation",
+        "Node Relationship" : "relationship" "Node ID"
     }
 
     # Insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12

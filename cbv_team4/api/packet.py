@@ -41,9 +41,9 @@ class Packet(object):
             p["decoded_name"] = self.decoded.name
             p["decoded_comment"] = self.decoded.comment
         return p
-'''
-Description: Give packet as string format
-@return: str: Return timestamp, type, id, and data of a packet object
-'''
-def __str__(self):
-    return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'
+    '''
+    Description: Give packet as string format
+    @return: str: Return timestamp, type, id, and data of a packet object
+    '''
+    def __str__(self):
+        return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'

@@ -6,7 +6,7 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, pid, oll
+from global_variables import dbc, packets, oll
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
 
@@ -147,7 +147,6 @@ def filter():
 
     return 'filtered'
 
-#TODO: Write a bubble sort function and test
 @packet_receiver.route('/sort')
 def sort():
     id_a = packets.sort_session(0)

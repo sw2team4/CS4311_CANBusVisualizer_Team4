@@ -3,8 +3,9 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, pid, oll
+from global_variables import dbc, oll
 import packet_receiver
+from project import Project
 
 
 can_id = 'vcan0' # This is the CAN channel - this is updated on line 27
@@ -31,12 +32,18 @@ def add_project():
     can_id = request.form.get("can-id")
     vehicle_id = request.form.get("vehicle-id")
     baud_rate = request.form.get("baud-rate")
-    # oll_file = request.form.get("off-list-file") # Off-limits list file
+    #dbc_file_name = request.form.get("import-dbc-file") dbc file name
+    # oll_file = request.form.get("off-list-file") # Off-limits list file name
     
+
     # Define unique project id
-    # TODO: use pid from project manager class
-    global pid
     pid = uuid.uuid1()
+
+    project = Project(pid, proj_name, stored_location, user_initials, event_name, event_date, can_id, vehicle_id)
+    
+    # Creates project file
+    project.create()
+
 
     # Place inserted DBC file to local directory for use later
     if request.method  ==  'POST':
