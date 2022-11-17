@@ -15,24 +15,27 @@ projects = db.projects
 nodes = db.nodes
 packets = db.packets
 
-def save_ (dataFrame, path):
-    return
-
-@exporter.route('/export', methods=["POST", "GET"])
-def export():
-    #Not connected with frontend
-    #project_name = request.form.get("get-project-name")
-    #directory_path = request.form.get("get-directory-path")
-
-    project_df = pd.DataFrame(list(projects.find()))
-    nodes_df = pd.DataFrame(list(nodes.find()))
+@exporter.route('/export/packetCSV', methods=["POST", "GET"])
+def packetCSV():
     packets_df = pd.DataFrame(list(packets.find()))
 
-    #project_df.to_xml(namespaces={"doc": "http://127.0.0.1:5000/export"}, prefix="doc")
-    #Snodes_df.to_json()
     packets_df.to_csv("packets.csv")
 
+    return "Packets to csv"
 
+@exporter.route('/export/nodesCSV', methods=["POST", "GET"])
+def nodeCSV():
+    nodes_df = pd.DataFrame(list(nodes.find()))
 
-    return "IDK if it exports"
+    nodes_df.to_csv("nodes.csv")
+
+    return "Nodes to csv"
+
+@exporter.route('/export/projectCSV', methods=["POST", "GET"])
+def projectCSV():
+    project_df = pd.DataFrame(list(projects.find()))
+
+    project_df.to_csv("project.csv")
+
+    return "project to csv"
 
