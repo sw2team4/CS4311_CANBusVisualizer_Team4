@@ -27,14 +27,14 @@ class Packet(object):
     '''
     def to_json(self):
         p = {
-            "packet_timestamp" : self.timestamp,
-            "packet_type" : self.type,
-            "packet_id" : hex(self.id),
-            "packet_data" : self.data,
+            "timestamp" : self.timestamp,
+            "type" : self.type,
+            "id" : hex(self.id),
+            "data" : self.data,
             "decoded_id": 'undefined',
             "decoded_name": 'undefined',
             "decoded_comment" : 'undefined',
-            "ignore": self.ignore
+            "ignore": self.ignore,
         }
         if self.decoded is not None:
             p["decoded_id"] = self.decoded.frame_id

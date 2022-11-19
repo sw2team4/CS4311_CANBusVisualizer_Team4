@@ -42,6 +42,8 @@ pip install flask python-dotenv
 echo " "
 pip install Flask-PyMongo
 echo " "
+pip install ruamel.yaml
+echo " "
 
 #Remove lines below if causing problems then run ./dependencies.sh again
 #sudo npm audit fix --force #take out this line if can't render

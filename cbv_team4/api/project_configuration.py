@@ -65,14 +65,14 @@ def add_project():
     # This is the project schema
     project = {
         "_id": str(pid),
-        "Name" : proj_name ,
-        "Location" : stored_location ,
-        "User Initials" : user_initials ,
-        "Event Name" : event_name ,
-        "Event Date" : event_date,
-        "CAN ID" : can_id,
-        "Vehicle ID" : vehicle_id,
-        "Baud Rate" : baud_rate,
+        "Name" : str(proj_name),
+        "Location" : str(stored_location),
+        "User Initials" : str(user_initials) ,
+        "Event Name" : str(event_name),
+        "Event Date" : str(event_date),
+        "CAN ID" : str(can_id),
+        "Vehicle ID" : str(vehicle_id),
+        "Baud Rate" : str(baud_rate),
     }
     
     # Ensure uniqueness for each project information in the database

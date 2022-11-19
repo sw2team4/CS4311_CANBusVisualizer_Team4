@@ -1,5 +1,6 @@
 import os
 import json
+import ruamel.yaml
 class Project(object):
 
     '''
@@ -36,13 +37,15 @@ class Project(object):
     '''
     def create(self, path = ''):
         if len(path) == 0:
+            #where you can want to save project file
             path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop') 
         
         data = self.to_json()
         #TODO: CREATE DEFAULT PROJECT DIRECTORY
+
         file = f'{path}/{self.name}.cbp'
         with open(file, 'w') as f:
-            f.write(json.dumps(data, indent=4))
+            f.write(ruamel.yaml.dump(data, Dumper=ruamel.yaml.RoundTripDumper ,indent=4))
 
         print(f'Project file exported to: {file}.')
 
@@ -62,7 +65,7 @@ class Project(object):
 
     def update_project_event_name(self, new_event_name):
         self.current_project.event_name = new_event_name
-        
+
     def update_project_event_date(self,new_event_date):
         self.current_project.event_date = new_event_date
 
