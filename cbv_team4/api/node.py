@@ -1,6 +1,9 @@
 # TODO: Add name, id, icon, comment, relationship, ...
 #  - See SRS or CRC
 
+# class Off_Limits_Node(Node):
+#     def _
+
 class Node(object):
     def __init__(self, name, id, icon, comment, annotation, relationship = None):
         self.name = name
