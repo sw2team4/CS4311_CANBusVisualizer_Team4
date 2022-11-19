@@ -89,15 +89,18 @@ export default class Visualizer extends Component {
         var packetData = packet.data
 
         document.getElementById('pkt').innerHTML += `
-                <tr >
+                <tr>
                 <td>${packetTimestamp}</td>
                 <td>${packetType}</td>
                 <td>${packetID}</td>
                 <td>${packetData}</td>
                 </tr>
-    
         `
-        
+        document.getElementById('dc').innerHTML += `   
+                ${packet.decoded_id}\n
+                ${packet.decoded_name}\n
+                ${packet.decoded_comment}\n
+        `
         // this.current_index++
 
         }
@@ -191,8 +194,7 @@ render() {
                                     <Popover id='popover-positioned-right'>
                                         <Popover.Header as='h3'>Decoded Information</Popover.Header>
                                             <Popover.Body>
-                                                <strong>Decoded Packet</strong>
-                                                <br/>
+                                                <pre id='dc'></pre>
                                             </Popover.Body>
                                         </Popover>
                                 }>                                
