@@ -1,14 +1,9 @@
 # TODO: TAKEOUT DATA WHEN CREATING OFF LIMITS LIST
 from packet import Packet
 
-class Off_Limits_Node(object):
-    def __init__(self, name, comment):
-        self.name = name if name is not None else 'NA'
-        self.comment = comment if comment is not None else 'NA'
-
 class Off_Limits(object):
     def __init__(self):
-        self.db = {}
+        self.db = set()
 
     '''
     Description: Injects a csv or text file into off-limits class.
@@ -19,6 +14,7 @@ class Off_Limits(object):
         assert len(s) > 1 and s[-1].lower() == 'csv' or s[-1].lower() == 'txt', 'Invalid Off-limits file format.'
         print(filename)
         try:
+            #TODO: Make sure CSV File is compatible format (checks)
             with open(filename, 'r') as f:
                 for id in f.readlines()[1:]:
                     self.add(id)
@@ -30,8 +26,24 @@ class Off_Limits(object):
     Description: Adds ID to off-limits list.
     @param: int: id: ID of node that should remain untouched.
     '''
-    def add(self, id: str, packet: Packet):
-        self.db[id] = Off_Limits_Node(packet.decoded.name, packet.decoded.comment)
+    def add(self, id: str):
+        self.db.add(id)
+
+    '''
+    Description:
+    @param: str: 
+    @return: str: 
+    '''
+    def get(self, id):
+        pass
+
+    '''
+    Description:
+    @param: str: 
+    @return: str: 
+    '''
+    def get_all(self):
+        pass
 
     '''
     Description: Adds ID to off-limits list.
@@ -43,12 +55,10 @@ class Off_Limits(object):
 
     '''
     Description: Find off limit node 
-    @param: int: id: ID of node that should remain untouched.
+    @param: bool: id: ID of node that should remain untouched.
     '''
     def find(self, id: str):
-        if not self.db[id]:
-            return -1
-        return self.db[id]
+        return id in self.db
     
     '''
     Description: Export/create off-limits list to CSV.
