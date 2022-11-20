@@ -2,8 +2,8 @@ from flask import Blueprint, request
 from pymongo import MongoClient, TEXT
 from flask_cors import CORS
 import pandas as pd
-import json
-#import numpy as np
+from PIL import ImageGrab, Image
+from selenium import webdriver
 
 exporter = Blueprint('exporter', __name__)
 CORS(exporter)
@@ -46,6 +46,7 @@ def projectCSV():
 
 @exporter.route('/export/packetJSON', methods=["POST", "GET"])
 def packetJSON():
+
     packets_df = pd.DataFrame(list(packets.find({},{"_id": 1, 
                                     "timestamp": 1, 
                                     "type": 1, 
@@ -57,10 +58,12 @@ def packetJSON():
                                     "ignore": 1})))
 
     packets_df.to_json("packet.json", default_handler=str)
+
     return "Packets to JSON"
 
 @exporter.route('/export/nodesJSON', methods=["POST", "GET"])
 def nodeJSON():
+
     nodes_df = pd.DataFrame(list(nodes.find({},{"_id": 1, 
                                     "Node Name": 1, 
                                     "Node ID": 1, 
@@ -68,11 +71,14 @@ def nodeJSON():
                                     "Node Comment": 1, 
                                     "Node Annotation": 1, 
                                     })))
+
     nodes_df.to_json("nodes.json", default_handler=str)
+
     return "Nodes to JSON"
 
 @exporter.route('/export/projectJSON', methods=["POST", "GET"])
 def projectJSON():
+
     projects_df = pd.DataFrame(list(projects.find({}, {"_id": 1, 
                                     "Name": 1, 
                                     "Location": 1,
@@ -82,7 +88,9 @@ def projectJSON():
                                     "Can ID": 1,
                                     "Vehicle ID": 1,
                                     "Baud Rate": 1})))
+
     projects_df.to_json("/home/kali/Desktop/projects.json", default_handler=str)
+
     return "project to JSON"
 
 #-----------------XML-----------------------------
@@ -201,6 +209,17 @@ def projectXML():
     return "project to XML"
 
 #------------PNG-----------------------------------
+@exporter.route('/export/mapPNG', methods=["POST", "GET"])
+def mapPNG():
+#                               
+
+    return "image saved"
 
 #------------JPG-----------------------------------
+
+@exporter.route('/export/mapJPG', methods=["POST", "GET"])
+def mapJPG():
+#                               
+
+    return "image saved"
 

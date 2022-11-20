@@ -19,6 +19,10 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 //TODO: table on hover stops working after traffic starts
 import DummyData from './DummyData';
+import ExportNodes from '../Popups/Export/ExportNodes';
+import ExportMap from '../Popups/Export/ExportMap';
+import ExportTraffic from '../Popups/Export/ExportTraffic';
+import ExportLimit from '../Popups/Export/ExportLimit';
 
 //For Testing purposes
 // import raw from './J1939-Sample-Data-CL3000.txt';
@@ -187,6 +191,13 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Open Saved Project</NavDropdown.Item>
                                             <NavDropdown.Divider />
+                                            <NavDropdown.Item>
+                                                <ExportTraffic></ExportTraffic>
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item>
+                                                <ExportLimit></ExportLimit>
+                                            </NavDropdown.Item>
                                         </NavDropdown>
                                         {/* View */}
                                         <NavDropdown title="View" id="basic-nav-dropdown">
@@ -281,6 +292,15 @@ export default class Visualizer extends Component {
                                         <NavDropdown.Item>
                                             <SavePopup></SavePopup>
                                         </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportNodes></ExportNodes>
+                                            </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportMap></ExportMap>
+                                            </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     {/* Nodes */}

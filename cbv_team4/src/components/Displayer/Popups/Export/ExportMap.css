@@ -1,0 +1,35 @@
+/* Style the label to display next to the inputs */
+.popups-title{
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: medium;
+    /* color: red; */
+    font-weight: bolder;
+}
+
+.popups-inputs{
+    width: 60%;
+    /* margin-left: 100px; */
+}
+
+.popup-container{
+    margin-left: 120px;
+}
+
+.popup-update-button{
+    background-color: skyblue;
+    color: black;
+    padding: 10px 0px;
+    border: 2px solid black;
+    border-radius: 4px;
+    border-color: black;
+    cursor: pointer;
+    float: right;
+    width: 20%;
+}
+
+.popup-update-button:hover{
+    background-color: blue !important;
+    border-color: black !important;
+    color: black;
+
+}
