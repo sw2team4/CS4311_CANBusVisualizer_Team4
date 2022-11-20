@@ -20,6 +20,10 @@ import SavePopup from './Popups/SavePopup';
 import SavePacketPopup from './Popups/SavePacketPopup';
 import AnnotatePopup from './Popups/AnnotatePopup';
 import RelationshipPopup from './Popups/RelationshipPopup';
+import ExportNodes from './Popups/ExportNodes';
+import ExportMap from './Popups/ExportMap';
+import ExportTraffic from './Popups/ExportTraffic';
+import ExportLimit from './Popups/ExportLimit';
 // import {getPackets} from './SocketCAN.js'
 
 //For Testing purposes
@@ -166,6 +170,13 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Open Saved Project</NavDropdown.Item>
                                             <NavDropdown.Divider />
+                                            <NavDropdown.Item>
+                                                <ExportTraffic></ExportTraffic>
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item>
+                                                <ExportLimit></ExportLimit>
+                                            </NavDropdown.Item>
                                         </NavDropdown>
                                         {/* View */}
                                         <NavDropdown title="View" id="basic-nav-dropdown">
@@ -221,149 +232,149 @@ export default class Visualizer extends Component {
                             </thead>
                             <tbody id='pkt'>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
 
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
 
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                                 <tr>
 
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
-                                    <td>I wub</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -380,6 +391,15 @@ export default class Visualizer extends Component {
                                         <NavDropdown.Item>
                                             <SavePopup></SavePopup>
                                         </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportNodes></ExportNodes>
+                                            </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportMap></ExportMap>
+                                            </NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     {/* Edit */}

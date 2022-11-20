@@ -93,7 +93,7 @@ export default class Visualizer extends Component {
       <div className="sync-project-container">
         <form>
         <div className="form-group row">
-            <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Source Data
+            <label className='col-sm-2 col-form-label col-form-label-sm create-titles'>Source Folder
             <br/>
                 <span className='title-required'>(Required)</span>
             </label>
@@ -122,7 +122,7 @@ export default class Visualizer extends Component {
                   placeholder="192.168.1.1" 
                   required
                   className="form-control"
-                  value={this.state.dest_un}
+                  value={this.state.dest_ip}
                   onChange={this.onChangeDestIP}
                 />
               </div>

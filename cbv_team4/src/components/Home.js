@@ -23,7 +23,6 @@ function Home() {
                 <li><button onClick={() => navigate("/sync")} className='thirdButton' type='button'></button></li>
                 <li><button className='fourthButton' type='button'></button></li>
                 <li><button className='fifthButton' type='button'></button></li>
-                <li><button className='sixthButton' type='button'></button></li>
             </ul>
         </div>
     </div>
