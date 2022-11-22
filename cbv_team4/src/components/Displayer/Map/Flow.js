@@ -1,6 +1,6 @@
-import ReactFlow, {Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, MiniMap, useNodesState, useEdgesState} from 'reactflow';
+import ReactFlow, { Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, MiniMap, useNodesState, useEdgesState } from 'reactflow';
 import 'reactflow/dist/style.css'
-import {useState, useCallback, useEffect} from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import CustomNode from './CustomNode';
 import { ContextMenu } from './contextMenu';
@@ -14,14 +14,15 @@ const nodeTypes = {
     selectorNode: CustomNode,
 };
 
-function random(min, max){
+function random(min, max) {
     return min + Math.random() * (max - min);
 }
 
 const initBgColor = '#1A192B';
 //Format
-var dp = sessionStorage.getItem()
+// var dp = sessionStorage.getItem()
 // Create nodes
+/*
 const initialNodes = [
     {
         id: 'CAN-BUS-MAP', //required
@@ -196,49 +197,85 @@ const initialEdges = [
     { id: 'TC1-TC2', source: 'TC1', target: 'TC2', type: 'smoothstep', style: {stroke: 'black'}},
     { id: 'TC2-TC3', source: 'TC2', target: 'TC3', type: 'smoothstep', style: {stroke: 'black'}},
     { id: 'TC3-CAN-BUS-MAP', source: 'TC3', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-
-
-
-
 ];
+*/
+
+// define constants
+const baseNode = 'CAN-BUS-MAP'
+const maxNodes = 5
+
+/*
+id: 'HVES1C1', //required
+        position: {x: -1700, y: -200}, //required
+        data: {label: 'High Voltage Energy Storage 1 Control 1'},
+        expandParent: true,
+        type: 'input',
+*/
+
+// current index of total nodes
+var index = 0
+
+// automated initial nodes; baseNode is line
+var initialNodes = [
+    {
+        id: baseNode, //required
+        position: { x: 0, y: 0 }, //required
+        data: null,
+        type: 'output',
+        style: { border: '1px solid black', width: 10000, height: 1, backgroundColor: 'black' },
+        dragging: false,
+        // hidden: true,
+        dragHandle: false,
+        parentNode: '',
+    }
+];
+
+// automated initial edges
+var initialEdges = [];
+
+for (var i = 1; i <= maxNodes; i++) {
+    var node = { id: i, position: { x: 0, y: 0 }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
+    var edge = { id: i, source: i, target: baseNode, type: 'smoothstep', style: { stroke: 'black' } }
+    initialNodes.push(node)   
+    initialEdges.push(edge)
+}
+
+console.log(initialNodes)
+console.log(initialEdges)
+
 // const initialEdges = [];
 
 
 function Flow() {
-    // const [nodes, setNodes] = useState(initialNodes);
-    // const [edges, setEdges] = useState(initialEdges);
-    const [open,setOpen] = useState(false);
-    const [isOpen,setIsOpen] = useState(false);
-    const [position,setPosition] = useState({});
+    const [nodes, setNodes] = useState(initialNodes);
+    const [edges, setEdges] = useState(initialEdges);
+    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [position, setPosition] = useState({});
     const [elements, setElements] = useState([]);  // main data elements for save
     const [nodeData, setnodeData] = useState(null);
     const [bgColor, setBgColor] = useState(initBgColor);
     const [inputChange, setinputChange] = useState("");
 
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
     const [nodeName, setNodeName] = useState('Node 1');
     const [nodeBg, setNodeBg] = useState('#eee');
     const [nodeHidden, setNodeHidden] = useState(false);
 
 
+    const onNodesChange = useCallback(
+        (changes) => setNodes((nds) => 
+            applyNodeChanges(changes, nds)), []
+    );
 
-
-
-
-    // const onNodesChange = useCallback(
-    //     (changes) => setNodes((nds) => 
-    //         applyNodeChanges(changes, nds)), []
-    // );
-
-    // const onEdgesChange = useCallback(
-    //     (changes) => setEdges((eds) => 
-    //     applyEdgeChanges(changes, eds)), []
-    // );
+    const onEdgesChange = useCallback(            (changes) => setEdges((eds) => 
+        applyEdgeChanges(changes, eds)), []
+    );
 
     const onConnect = useCallback(
-        (params) => setEdges((eds) => 
+        (params) => setEdges((eds) =>
             addEdge(params, eds)), []
     );
 
@@ -255,9 +292,9 @@ function Flow() {
     const onElementClick = (event, node) => {
         handleClickOpen();
         setnodeData(node);
-        const findElement = elements.find(items=>items.id===node.id);
-        if(findElement){
-          setinputChange(findElement?.data?.label||findElement?.label);
+        const findElement = elements.find(items => items.id === node.id);
+        if (findElement) {
+            setinputChange(findElement?.data?.label || findElement?.label);
         }
     };
 
@@ -269,7 +306,7 @@ function Flow() {
     const handleClickOpen = () => {
         setOpen(true);
     };
-    
+
     const handleClose = () => {
         setOpen(false);
         setElements([...elements])
@@ -277,8 +314,8 @@ function Flow() {
     };
 
     let id = elements.length;
-    const getId = () => `node_${id+1}`;
-    
+    const getId = () => `node_${id + 1}`;
+
     const onContextMenu = (e) => {
         console.log(e.target);
         e.preventDefault();
@@ -289,32 +326,32 @@ function Flow() {
 
     const createNew = () => {
         const newNode = {
-          id: getId(),
-          type: 'customnode',
-          data: { label: 'An input node', type:"node" },
-          position: { x: 20, y: 20 },
-          sourcePosition: 'right',
+            id: getId(),
+            type: 'customnode',
+            data: { label: 'An input node', type: "node" },
+            position: { x: 20, y: 20 },
+            sourcePosition: 'right',
         }
         setElements((es) => es.concat(newNode));
     }
-      
-        useEffect(() => {
-        if(nodeData){
+
+    useEffect(() => {
+        if (nodeData) {
             setElements((els) =>
-            els.map((el) => {
-                if (el.id === nodeData.id) {
-                // it's important that you create a new object here
-                // in order to notify react flow about the change
-                el.data = {
-                    ...el.data,
-                    label: inputChange,
-                };
-                }
-                return el;
-            })
+                els.map((el) => {
+                    if (el.id === nodeData.id) {
+                        // it's important that you create a new object here
+                        // in order to notify react flow about the change
+                        el.data = {
+                            ...el.data,
+                            label: inputChange,
+                        };
+                    }
+                    return el;
+                })
             );
         }
-        }, [inputChange]);
+    }, [inputChange]);
 
     const handleHidden = (event) => {
         const hiddenStatus = event.target.hidden;
@@ -324,114 +361,114 @@ function Flow() {
     const UpdateNode = () => {
         useEffect(() => {
             setNodes((nds) =>
-              nds.map((node) => {
-                if (node.id === 'HVES1C1') {
-                  // it's important that you create a new object here
-                  // in order to notify react flow about the change
-                  node.data = {
-                    ...node.data,
-                    label: nodeName,
-                  };
-                }
-        
-                return node;
-              })
+                nds.map((node) => {
+                    if (node.id === 'HVES1C1') {
+                        // it's important that you create a new object here
+                        // in order to notify react flow about the change
+                        node.data = {
+                            ...node.data,
+                            label: nodeName,
+                        };
+                    }
+
+                    return node;
+                })
             );
-          }, [nodeName, setNodes]);
-        
-          useEffect(() => {
+        }, [nodeName, setNodes]);
+
+        useEffect(() => {
             setNodes((nds) =>
-              nds.map((node) => {
-                if (node.id === '1') {
-                  // it's important that you create a new object here
-                  // in order to notify react flow about the change
-                  node.style = { ...node.style, backgroundColor: nodeBg };
-                }
-        
-                return node;
-              })
+                nds.map((node) => {
+                    if (node.id === '1') {
+                        // it's important that you create a new object here
+                        // in order to notify react flow about the change
+                        node.style = { ...node.style, backgroundColor: nodeBg };
+                    }
+
+                    return node;
+                })
             );
-          }, [nodeBg, setNodes]);
-        
-          useEffect(() => {
+        }, [nodeBg, setNodes]);
+
+        useEffect(() => {
             setNodes((nds) =>
-              nds.map((node) => {
-                if (node.id === '1') {
-                  // when you update a simple type you can just update the value
-                  node.hidden = nodeHidden;
-                }
-        
-                return node;
-              })
+                nds.map((node) => {
+                    if (node.id === '1') {
+                        // when you update a simple type you can just update the value
+                        node.hidden = nodeHidden;
+                    }
+
+                    return node;
+                })
             );
             setEdges((eds) =>
-              eds.map((edge) => {
-                if (edge.id === 'e1-2') {
-                  edge.hidden = nodeHidden;
-                }
-        
-                return edge;
-              })
+                eds.map((edge) => {
+                    if (edge.id === 'e1-2') {
+                        edge.hidden = nodeHidden;
+                    }
+
+                    return edge;
+                })
             );
-          }, [nodeHidden, setNodes, setEdges]);
-      
+        }, [nodeHidden, setNodes, setEdges]);
+
     }
-      
 
-  return (
-    <div style={{height: '45%', width: '98%', marginTop: '4%', marginLeft: '1%'}}>
-        <ReactFlow
-            elements={elements}
-            nodes={nodes} 
-            onNodesChange={onNodesChange}
-            edges={edges}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            nodeTypes={nodeTypes}
-            fitView
-            onNodeContextMenu={onContextMenu}
-            onElementClick={onElementClick}
-            onUpdate={UpdateNode}
-        >
-            <div className="updatenode__controls">
-        <label>label:</label>
-        <input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
 
-        <label className="updatenode__bglabel">background:</label>
-        <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
+    return (
+        <div style={{ height: '45%', width: '98%', marginTop: '4%', marginLeft: '1%' }}>
+            <ReactFlow
+                elements={elements}
+                nodes={nodes}
+                onNodesChange={onNodesChange}
+                edges={edges}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
+                nodeTypes={nodeTypes}
+                fitView
+                onNodeContextMenu={onContextMenu}
+                onElementClick={onElementClick}
+                onUpdate={UpdateNode}
+            >
+                <div className="updatenode__controls">
+                    <label>label:</label>
+                    <input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
 
-        <div className="updatenode__checkboxwrapper">
-          <label>hidden:</label>
-          <input
-            type="checkbox"
-            checked={nodeHidden}
-            onChange={(evt) => setNodeHidden(evt.target.checked)}
-          />
-        </div>
-      </div>
-            <ContextMenu
-                isOpen={isOpen}
-                position={position}
-                // onMouseLeave={()=>setIsOpen(false)}
-                actions={[{label:'Delete', effect:deleteNode}, {label:'Hidden', effect:handleHidden}, {label:'Add Off-Limits', effect:handleHidden}, {label:'Rename', effect:handleHidden}]}
+                    <label className="updatenode__bglabel">background:</label>
+                    <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
 
-            />
-            <Background/>
-            <Controls/>
-            <MiniMap style={minimapStyle}
-                nodeStrokeColor={(n) => {
-                    if (n.type === 'input') return '#0041d0';
-                    if (n.type === 'selectorNode') return bgColor;
-                    if (n.type === 'output') return '#ff0072';
+                    <div className="updatenode__checkboxwrapper">
+                        <label>hidden:</label>
+                        <input
+                            type="checkbox"
+                            checked={nodeHidden}
+                            onChange={(evt) => setNodeHidden(evt.target.checked)}
+                        />
+                    </div>
+                </div>
+                <ContextMenu
+                    isOpen={isOpen}
+                    position={position}
+                    // onMouseLeave={()=>setIsOpen(false)}
+                    actions={[{ label: 'Delete', effect: deleteNode }, { label: 'Hidden', effect: handleHidden }, { label: 'Add Off-Limits', effect: handleHidden }, { label: 'Rename', effect: handleHidden }]}
+
+                />
+                <Background />
+                <Controls />
+                <MiniMap style={minimapStyle}
+                    nodeStrokeColor={(n) => {
+                        if (n.type === 'input') return '#0041d0';
+                        if (n.type === 'selectorNode') return bgColor;
+                        if (n.type === 'output') return '#ff0072';
                     }}
                     nodeColor={(n) => {
-                    if (n.type === 'selectorNode') return bgColor;
-                    return '#fff';
-                }}
-            />
-        </ReactFlow>
-    </div>
-  )
+                        if (n.type === 'selectorNode') return bgColor;
+                        return '#fff';
+                    }}
+                />
+            </ReactFlow>
+        </div>
+    )
 }
 
 export default Flow

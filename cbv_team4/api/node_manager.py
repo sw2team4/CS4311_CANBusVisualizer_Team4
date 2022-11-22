@@ -1,7 +1,7 @@
 
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
-from flask import Blueprint
+from flask import Blueprint, request
 #TODO: Possibly Refactor Node Manager or Rename Node Manager for Database Functionality only 
 #TODO: Node Manager should work ONLY with Node Container
 #Must put this blueprint in api.py so that these routes can be called
@@ -49,3 +49,10 @@ def get_node(x=5):
 def delete_all_nodes():
     nodes.delete_many({})
     return "deleted all!"
+
+@node_manager.route('/edit_node',methods=['POST'])
+def edit_node():
+
+    node_name = request.form.get("nodeName")
+    
+    pass
