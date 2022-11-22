@@ -80,13 +80,15 @@ export default class Visualizer extends Component {
                 )
         }, this.time)
     }
-
+    
     //get packets from database and display from table
     async displayPackets(packet) {
         var packetTimestamp = packet.timestamp
         var packetType = packet.type
         var packetID = packet.id
         var packetData = packet.data
+
+        sessionStorage.setItem("display packet",packet)
 
         document.getElementById('pkt').innerHTML += `
                 <tr>

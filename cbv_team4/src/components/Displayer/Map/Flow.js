@@ -19,8 +19,8 @@ function random(min, max){
 }
 
 const initBgColor = '#1A192B';
-
-
+//Format
+var dp = sessionStorage.getItem()
 // Create nodes
 const initialNodes = [
     {
