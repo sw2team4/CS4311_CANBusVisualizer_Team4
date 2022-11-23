@@ -19,210 +19,23 @@ function random(min, max) {
 }
 
 const initBgColor = '#1A192B';
-//Format
-// var dp = sessionStorage.getItem()
-// Create nodes
-/*
-const initialNodes = [
-    {
-        id: 'CAN-BUS-MAP', //required
-        position: {x: -5000, y: 0}, //required
-        data: null,
-        type: 'output',
-        style: { border: '1px solid black', width: 10000, height: 1, backgroundColor: 'black'},
-        dragging: false,
-        // hidden: true,
-        dragHandle: false,
-        parentNode: '',
-    },
-    {
-        id: 'CN', //required
-        position: {x: -4900, y: -200}, //required
-        data: {label: 'Crash Notification'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'WAND', //required
-        position: {x: -4800, y: -200}, //required
-        // data: {label: 'Wand Sensor'},
-        type: 'selectorNode',
-    },
-    {
-        id: 'LDISP', //required
-        position: {x: -4700, y: -200}, //required
-        data: {label: 'Linear Displacement Sensor'},
-        expandParent: true,
-        type: 'input',
-
-    },
-    {
-        id: 'MSI2', //required
-        position: {x: -4500, y: -200}, //required
-        data: {label: 'Magnet Status Information 2'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'ACCS', //required
-        position: {x: -4300, y: -200}, //required
-        data: {label: 'Acceleration Sensor'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'ETC12', //required
-        position: {x: -4100, y: -200}, //required
-        data: {label: 'Electronic Transmission Controller #12'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'B2', //required
-        position: {x: -3900, y: -200}, //required
-        data: {label: 'Brakes 2'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'HRW', //required
-        position: {x: -3700, y: -200}, //required
-        data: {label: 'High Resolution Wheel Speed'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'TSC1', //required
-        position: {x: -3500, y: -200}, //required
-        data: {label: 'Torque/Speed Control 1'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'TC1', //required tree
-        position: {x: -1500, y: -600}, //required
-        data: {label: 'Transmission Control 1'},
-        expandParent: true,
-        type: 'default',
-    },
-    {
-        id: 'XBR', //required
-        position: {x: -3100, y: -200}, //required
-        data: {label: 'External Brake Request'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'AUXIO5', //required
-        position: {x: -2900, y: -200}, //required
-        data: {label: 'Auxiliary Input/Output Status 5'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'SRASI', //required
-        position: {x: -2700, y: -200}, //required
-        data: {label: 'Transmission Control 1'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'CCVS2', //required
-        position: {x: -2500, y: -200}, //required
-        data: {label: 'Cruise Control / Vehicle Speed 2'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'AEBS2', //required
-        position: {x: -2300, y: -200}, //required
-        data: {label: 'Advanced Emergency Braking System 2'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'TC2', //required
-        position: {x: -1500, y: -400}, //required
-        data: {label: 'Transmission Control 2'},
-        expandParent: true,
-        type: 'default',
-    },
-    {
-        id: 'CCVS2', //required
-        position: {x: -1900, y: -200}, //required
-        data: {label: 'Cruise Control / Vehicle Speed 2'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'HVES1C1', //required
-        position: {x: -1700, y: -200}, //required
-        data: {label: 'High Voltage Energy Storage 1 Control 1'},
-        expandParent: true,
-        type: 'input',
-    },
-    {
-        id: 'TC3', //required
-        position: {x: -1500, y: -200}, //required
-        data: {label: 'Transmission Control 3'},
-        expandParent: true,
-        type: 'default',
-        
-    },
-]
-
-console.log(typeof initialNodes[1].id)
-
-// Create Edges - hard coded
-const initialEdges = [
-    { id: 'CN-CAN-BUS-MAP', source: 'CN', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'},},
-    { id: '', source: '', target: '', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'LDISP-CAN-BUS-MAP', source: 'LDISP', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'MSI2-CAN-BUS-MAP', source: 'MSI2', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'ACCS-CAN-BUS-MAP', source: 'ACCS', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'ETC12-CAN-BUS-MAP', source: 'ETC12', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'B2-CAN-BUS-MAP', source: 'B2', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'HRW-CAN-BUS-MAP', source: 'HRW', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'TSC1-CAN-BUS-MAP', source: 'TSC1', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    // { id: 'TC1-CAN-BUS-MAP', source: 'TC1', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'XBR-CAN-BUS-MAP', source: 'XBR', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'AUXIO5-CAN-BUS-MAP', source: 'AUXIO5', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'SRASI-CAN-BUS-MAP', source: 'SRASI', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'AEBS2-CAN-BUS-MAP', source: 'AEBS2', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    // { id: 'TC2-CAN-BUS-MAP', source: 'TC2', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'HVES1C1-CAN-BUS-MAP', source: 'HVES1C1', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    // { id: 'TC3-CAN-BUS-MAP', source: 'TC3', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'CCVS2-CAN-BUS-MAP', source: 'CCVS2', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-    // tree
-    { id: 'TC1-TC2', source: 'TC1', target: 'TC2', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'TC2-TC3', source: 'TC2', target: 'TC3', type: 'smoothstep', style: {stroke: 'black'}},
-    { id: 'TC3-CAN-BUS-MAP', source: 'TC3', target: 'CAN-BUS-MAP', type: 'smoothstep', style: {stroke: 'black'}},
-];
-*/
 
 // define constants
 const baseNode = 'CAN-BUS-MAP'
-const maxNodes = 5
+const baseWidth = 1500
+const baseHeight = 1
+const maxNodes = 20
 
-/*
-id: 'HVES1C1', //required
-        position: {x: -1700, y: -200}, //required
-        data: {label: 'High Voltage Energy Storage 1 Control 1'},
-        expandParent: true,
-        type: 'input',
-*/
-
-// current index of total nodes
 var index = 0
 
 // automated initial nodes; baseNode is line
 var initialNodes = [
     {
         id: baseNode, //required
-        position: { x: 0, y: 0 }, //required
+        position: { x: -(baseWidth / 2), y: 0 }, //required
         data: null,
         type: 'output',
-        style: { border: '1px solid black', width: 10000, height: 1, backgroundColor: 'black' },
+        style: { border: '1px solid black', width: baseWidth, height: baseHeight, backgroundColor: 'black' },
         dragging: false,
         // hidden: true,
         dragHandle: false,
@@ -233,20 +46,42 @@ var initialNodes = [
 // automated initial edges
 var initialEdges = [];
 
+const half = (maxNodes / 2)
+const quarter = (maxNodes / 4)
+const scalar = (baseWidth / maxNodes) * 2.5
+var n = 1
+
+//Setting a range where nodes and edges will be displayed in map
 for (var i = 1; i <= maxNodes; i++) {
-    var node = { id: i, position: { x: 0, y: 0 }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
-    var edge = { id: i, source: i, target: baseNode, type: 'smoothstep', style: { stroke: 'black' } }
+    if ((i / half) > 1) {
+        var y = -75
+    } else {
+        var y = 50
+    }
+    //split to 4 quadrants around the origin and increment n
+    //n symbolizes we are in the next quadrent
+    if (i % 4 == 0)
+        n += 1
+    
+    console.log(i  + " " + n + " " +  (i / quarter))
+    var quad = (i / quarter)
+    //decide to place nodes left or right of the map
+    if (Math.floor(quad + 1) % 2 == 0)
+    //left of can bus node origin
+        var x = -((1 + i % quarter) * scalar)
+    else
+    //right of can bus node origin
+    //TODO: Fill in the Label - automated
+        var x = ((i % quarter) * scalar)
+    var node = { id: 'node' + String(i), position: { x: x, y: y }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
+    var edge = { id: 'edge' + String(i), source: 'node' + String(i), target: baseNode, type: 'smoothstep', style: { stroke: 'black' } }
     initialNodes.push(node)   
     initialEdges.push(edge)
 }
 
-console.log(initialNodes)
-console.log(initialEdges)
-
-// const initialEdges = [];
-
-
 function Flow() {
+    
+
     const [nodes, setNodes] = useState(initialNodes);
     const [edges, setEdges] = useState(initialEdges);
     const [open, setOpen] = useState(false);

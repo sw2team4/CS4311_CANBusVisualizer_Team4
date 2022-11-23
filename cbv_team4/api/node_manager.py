@@ -54,5 +54,4 @@ def delete_all_nodes():
 def edit_node():
 
     node_name = request.form.get("nodeName")
-    
     pass

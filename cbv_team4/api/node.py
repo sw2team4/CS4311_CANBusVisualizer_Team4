@@ -3,7 +3,7 @@
 
 # class Off_Limits_Node(Node):
 #     def _
-
+from pymongo import MongoClient
 class Node(object):
     def __init__(self, name, id, icon, comment, annotation, relationship = None):
         self.name = name
@@ -13,7 +13,13 @@ class Node(object):
         self.annotation = annotation
         self.relationship = relationship # This will be another Node()...maybe or just the name/ID of a node (reminds me of Graphs)
 
-
+    '''
+    Description
+    '''
+    #Frontend needed
+    def set_name(self, name):
+        self.annotation = name
+        
     '''
     Description
     '''
