@@ -7,6 +7,11 @@ import './ExportNodes.css'
 
 
 function MyVerticallyCenteredModal(props) {
+
+  async function exportXML() {
+    return ;
+  }
+
   return (
     <Modal
       {...props}
@@ -22,13 +27,17 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body>
         <p>
-        <button type="button">XML</button>
+        <button type="button" 
+        onClick={async () => {await exportXML("Example");} 
+        }>
+          XML
+        </button>
         <br></br>
         <br></br>
-        <button type="button">Json</button>
+        <button type="button" >Json</button>
         <br></br>
         <br></br>
-        <button type="button">CSV</button>
+        <button type="button" >CSV</button>
         </p>
       </Modal.Body>
     </Modal>
