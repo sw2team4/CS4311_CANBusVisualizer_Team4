@@ -115,8 +115,9 @@
 
 .can-map{
     width: 50vw;
-    height: 100vw;
+    height: 88vw;
     left: 50%;
+    top: 94px;
     position: absolute;
     /* bottom: 10px; */
 }

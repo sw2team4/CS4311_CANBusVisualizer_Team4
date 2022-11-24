@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+
+set src_data [lindex $argv 0]         
+set dest_ip [lindex $argv 1]           
+set dest_un [lindex $argv 2]           
+set dest_pw [lindex $argv 3]           
+set dest_dir [lindex $argv 4]
+
+spawn rsync -av $src_data $dest_un@$dest_ip:$dest_dir
+expect "$dest_un@$dest_ip's password: \r" 
+send "$dest_pw\r";
+expect eof
