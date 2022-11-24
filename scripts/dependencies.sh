@@ -26,13 +26,13 @@ echo " "
 echo " "
 sudo npm install reactflow
 echo " "
+sudo npm install react-bootstrap bootstrap
+echo " "
 
 echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 
 echo " "
 sudo apt-get install python3
-echo " "
-sudo npm install react-bootstrap bootstrap
 echo " "
 pip install -U flask-cors
 echo " "
@@ -41,6 +41,10 @@ echo " "
 pip install flask python-dotenv
 echo " "
 pip install Flask-PyMongo
+echo " "
+
+echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
+sudo apt-get install expect
 echo " "
 
 #Remove lines below if causing problems then run ./dependencies.sh again
