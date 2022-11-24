@@ -198,66 +198,68 @@ export default class Visualizer extends Component {
                                         <th>Data</th>
                                     </tr>
                                 </thead>
-                                <tbody id='pkt'>
-                                    <OverlayTrigger
-                                        trigger="hover"
-                                        placement="right"
-                                        overlay={
-                                            <Popover id={'popover-positioned-right'}>
-                                                <Popover.Header as="h3">{'Decoded Information'}</Popover.Header>
-                                                <Popover.Body>
-                                                    <strong>Decoded Packet</strong>
-                                                    <br />
-                                                    {/* {DummyData && DummyData.map(({id}) =>  (
-                                            <div key={id} className="row">
-                                                <strong>{id}</strong>
-                                            </div>
-                                        ))} */}
-                                                </Popover.Body>
-                                            </Popover>
-                                        }
-                                    >
-                                        <tr>
-                                            <td>hi</td>
-                                            <td>hi</td>
-                                            <td>hi</td>
-                                            <td>hi</td>
-                                        </tr>
-                                    </OverlayTrigger>
-                                </tbody>
+                                <OverlayTrigger
+                                    trigger='hover'
+                                    placement='right'
+                                    overlay={
+                                        <Popover id='popover-positioned-right'>
+                                            <Popover.Header as='h3'>Decoded Information</Popover.Header>
+                                            <Popover.Body>
+                                                <pre id='dc'></pre>
+                                            </Popover.Body>
+                                        </Popover>
+                                    }>
+                                    <tbody id='pkt'>
+                                    </tbody>
+                                </OverlayTrigger>
                             </Table>
                         </div>
                     </div>
+
+                    
                     <div className='mapDisplayer'>
-                        <Navbar expand="lg" variant='dark' className='color-nav'>
-                            <Container>
-                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                                <Navbar.Collapse id="basic-navbar-nav">
-                                    <Nav className="me-auto">
-                                        {/* File */}
-                                        <NavDropdown title="File" id="basic-nav-dropdown">
-                                            <NavDropdown.Item>
-                                                <SavePopup></SavePopup>
+                    <Navbar expand="lg" variant='dark' className='color-nav'>
+                        <Container>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    {/* File */}
+                                    <NavDropdown title="File" id="basic-nav-dropdown">
+                                        <NavDropdown.Item>
+                                            <SavePopup></SavePopup>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportNodes></ExportNodes>
                                             </NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                        </NavDropdown>
-                                        {/* Nodes */}
-                                        <NavDropdown title="Nodes" id="basic-nav-dropdown">
-                                            <EditPopup></EditPopup>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item href="/">Select All</NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                        </NavDropdown>
-                                    </Nav>
-                                </Navbar.Collapse>
-                                <label className=''>Map</label>
-                            </Container>
-                        </Navbar>
-                    </div>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                                <ExportMap></ExportMap>
+                                            </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                    </NavDropdown>
+                                    {/* Nodes */}
+                                    <NavDropdown title="Nodes" id="basic-nav-dropdown">
+                                        <EditPopup></EditPopup>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="/">Select All</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar.Collapse>
+                            <label className=''>Map</label>
+                        </Container>
+                    </Navbar>
+                </div>
+
+
+
+
                     <div className='can-map'>
                         <CustomNodeFlow />
                     </div>
