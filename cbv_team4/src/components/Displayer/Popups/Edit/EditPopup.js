@@ -54,7 +54,7 @@ function MyVerticallyCenteredModal(props) {
           <div className='colorInput'>
             <input type="color"></input>
             <br></br>
-            <button type='submit'>Update</button>
+            <button type='button'>Update</button>
           </div>
         </Form>
       </Modal.Body>

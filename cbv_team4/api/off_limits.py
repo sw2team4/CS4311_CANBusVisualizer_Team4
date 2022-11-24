@@ -1,12 +1,9 @@
-class Off_Limits_Node(object):
-    def __init__(self, id, data):
-        self.id = id
-        self.data = data
-        
-# TODO: export..
+# TODO: TAKEOUT DATA WHEN CREATING OFF LIMITS LIST
+from packet import Packet
+
 class Off_Limits(object):
     def __init__(self):
-        self.db = []
+        self.db = set()
 
     '''
     Description: Injects a csv or text file into off-limits class.
@@ -14,36 +11,54 @@ class Off_Limits(object):
     '''
     def add_file(self, filename: str):
         s = filename.split('.')
-        assert len(s) > 1 and s[-1].lower() == 'csv' or s[-1].lower() == 'txt', 'Invalid Off-Limites file format.'
+        assert len(s) > 1 and s[-1].lower() == 'csv' or s[-1].lower() == 'txt', 'Invalid Off-limits file format.'
         print(filename)
         try:
+            #TODO: Make sure CSV File is compatible format (checks)
             with open(filename, 'r') as f:
-                for line in f.readlines()[1:]:
-                    id, data = line.split(',')
-                    node = Off_Limits_Node(id, data)
-                    self.db.append(node)
+                for id in f.readlines()[1:]:
+                    self.add(id)
         except Exception as e:
             print(e)
         print(self.db)
     
     '''
-    Description: Adds node to off-limits list.
+    Description: Adds ID to off-limits list.
+    @param: int: id: ID of node that should remain untouched.
+    '''
+    def add(self, id: str):
+        self.db.add(id)
+
+    '''
+    Description:
+    @param: str: 
+    @return: str: 
+    '''
+    def get(self, id):
+        pass
+
+    '''
+    Description:
+    @param: str: 
+    @return: str: 
+    '''
+    def get_all(self):
+        pass
+
+    '''
+    Description: Adds ID to off-limits list.
     @param: int: id: ID of node that should remain untouched.
     @param: int: data: tbd
     '''
-    def add_node(self, id, data):
-        node = Off_Limits_Node(str(id), str(data))
-        self.db.append(node)
+    def remove(self, id: str):
+        self.db.pop(id)
+
     '''
     Description: Find off limit node 
-    @param: int: id: ID of node that should remain untouched.
+    @param: bool: id: ID of node that should remain untouched.
     '''
     def find(self, id: str):
-        for node in self.db:
-            if node.id == id:
-                # print(f'node id: {id} found')
-                return True
-        return False
+        return id in self.db
     
     '''
     Description: Export/create off-limits list to CSV.
