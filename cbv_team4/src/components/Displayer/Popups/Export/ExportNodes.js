@@ -1,16 +1,38 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import Form from 'react-bootstrap/Form';
 import './ExportNodes.css'
- 
 
 
 function MyVerticallyCenteredModal(props) {
 
-  async function exportXML() {
-    return ;
-  }
+  function handleExportCSV() {
+    fetch('http://localhost:5000/export/nodesCSV', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+    }).then(() => {
+        alert("Downloaded all nodes to /home/kali/Desktop/ as CSV");
+    })
+  }//handle export
+
+  function handleExportJSON() {
+    fetch('http://localhost:5000/export/nodesJSON', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+    }).then(() => {
+        alert("Downloaded all nodes to /home/kali/Desktop/ as JSON");
+    })
+  }//handle export
+
+
+  function handleExportXML() {
+    fetch('http://localhost:5000/export/nodesXML', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+    }).then(() => {
+        alert("Downloaded all nodes to /home/kali/Desktop/ as XML");
+    })
+  }//handle export
 
   return (
     <Modal
@@ -27,17 +49,13 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body>
         <p>
-        <button type="button" 
-        onClick={async () => {await exportXML("Example");} 
-        }>
-          XML
-        </button>
+        <button type="button" onClick={handleExportXML}>XML</button>
         <br></br>
         <br></br>
-        <button type="button" >Json</button>
+        <button type="button" onClick={handleExportJSON}>Json</button>
         <br></br>
         <br></br>
-        <button type="button" >CSV</button>
+        <button type="button" onClick={handleExportCSV}>CSV</button>
         </p>
       </Modal.Body>
     </Modal>
