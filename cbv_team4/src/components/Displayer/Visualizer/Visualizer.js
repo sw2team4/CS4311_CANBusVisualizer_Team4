@@ -216,50 +216,48 @@ export default class Visualizer extends Component {
                         </div>
                     </div>
 
-                    
-                    <div className='mapDisplayer'>
-                    <Navbar expand="lg" variant='dark' className='color-nav'>
-                        <Container>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    {/* File */}
-                                    <NavDropdown title="File" id="basic-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <SavePopup></SavePopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item>
+
+                    <div className='mapDisplayer'
+                    >
+                        <Navbar expand="lg" variant='dark' className='color-nav'>
+                            <Container>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="me-auto">
+                                        {/* File */}
+                                        <NavDropdown title="File" id="basic-nav-dropdown">
+                                            <NavDropdown.Item>
+                                                <SavePopup></SavePopup>
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item>
                                                 <ExportNodes></ExportNodes>
                                             </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item>
                                                 <ExportMap></ExportMap>
                                             </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
-                                    {/* Nodes */}
-                                    <NavDropdown title="Nodes" id="basic-nav-dropdown">
-                                        <EditPopup></EditPopup>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Select All</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
-                                </Nav>
-                            </Navbar.Collapse>
-                            <label className=''>Map</label>
-                        </Container>
-                    </Navbar>
-                </div>
-
-
-
-
+                                            <NavDropdown.Divider />
+                                        </NavDropdown>
+                                        {/* Nodes */}
+                                        <NavDropdown title="Nodes" id="basic-nav-dropdown">
+                                            <EditPopup></EditPopup>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item href="/">Select All</NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                        </NavDropdown>
+                                    </Nav>
+                                </Navbar.Collapse>
+                                <label className=''>Map</label>
+                            </Container>
+                        </Navbar>
+                    </div>
+                    
                     <div className='can-map'>
                         <CustomNodeFlow />
                     </div>

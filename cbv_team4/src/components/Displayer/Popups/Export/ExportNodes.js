@@ -11,7 +11,7 @@ function MyVerticallyCenteredModal(props) {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
     }).then(() => {
-        alert("Downloaded all nodes to /home/kali/Desktop/ as CSV");
+        alert("Exported all nodes to /home/kali/Desktop/ as CSV");
     })
   }//handle export
 
@@ -20,7 +20,7 @@ function MyVerticallyCenteredModal(props) {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
     }).then(() => {
-        alert("Downloaded all nodes to /home/kali/Desktop/ as JSON");
+        alert("Exported all nodes to /home/kali/Desktop/ as JSON");
     })
   }//handle export
 
@@ -30,7 +30,7 @@ function MyVerticallyCenteredModal(props) {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
     }).then(() => {
-        alert("Downloaded all nodes to /home/kali/Desktop/ as XML");
+        alert("Exported all nodes to /home/kali/Desktop/ as XML");
     })
   }//handle export
 
@@ -64,7 +64,7 @@ function MyVerticallyCenteredModal(props) {
 
 function SavePopup() {
   const [modalShow, setModalShow] = React.useState(false);
-
+ 
   return (
     <>
       <Button className='button-color' onClick={() => setModalShow(true)}>

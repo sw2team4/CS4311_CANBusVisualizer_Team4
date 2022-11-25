@@ -7,11 +7,11 @@ function SavePopup() {
   const [setModalShow] = React.useState(false);
 
   function handleExport() {
-    fetch('http://localhost:5000/export/packetCSV', {
+    fetch('http://localhost:5000/export/packetXML', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
     }).then(() => {
-        alert("Downloaded all traffic to /home/kali/Desktop/ as CSV");
+        alert("Exported all packets to /home/kali/Desktop/ as XML");
     })
   }//handle export
 

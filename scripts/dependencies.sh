@@ -28,6 +28,10 @@ sudo npm install reactflow
 echo " "
 sudo npm install react-bootstrap bootstrap
 echo " "
+npm i use-react-screenshot --legacy-peer-deps
+echo " "
+sudo npm install --save react html2canvas
+echo " "
 
 echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 

@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { createRef }  from 'react'
+import { useScreenshot, createFileName } from "use-react-screenshot";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import Form from 'react-bootstrap/Form';
 import './ExportMap.css'
  
-
 
 function MyVerticallyCenteredModal(props) {
   return (
