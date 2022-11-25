@@ -15,8 +15,8 @@ from flask import Blueprint, request
 from pymongo import MongoClient, TEXT
 from flask_cors import CORS
 import pandas as pd
-from PIL import ImageGrab, Image
-from selenium import webdriver
+# from PIL import ImageGrab, Image
+# from selenium import webdriver
 import subprocess
 
 
