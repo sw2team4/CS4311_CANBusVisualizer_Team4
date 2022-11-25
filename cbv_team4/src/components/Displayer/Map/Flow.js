@@ -6,6 +6,8 @@ import CustomNode from './CustomNode';
 import { ContextMenu } from './contextMenu';
 import './updateNode.css';
 
+sessionStorage.setItem('packet', null)
+
 
 
 // import Engine from 'cbv_team4/src/images/Engine.png'
@@ -18,6 +20,19 @@ function random(min, max) {
     return min + Math.random() * (max - min);
 }
 
+// receive node data
+var index = 0
+function add_node() {
+    sessionStorage.getItem('packet').addEventListener('change', (event) => {
+        console.log('item changed')
+    })
+    // var packet = JSON.parse(sessionStorage.getItem('packet'))
+    // // var node = { id: 'node' + String(i), position: { x: x, y: y }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
+    // initialNodes[index]['label'] = packet['comment']
+    // console.log(initialNodes[index++])
+}
+
+
 const initBgColor = '#1A192B';
 
 // define constants
@@ -25,8 +40,6 @@ const baseNode = 'CAN-BUS-MAP'
 const baseWidth = 1500
 const baseHeight = 1
 const maxNodes = 20
-
-var index = 0
 
 // automated initial nodes; baseNode is line
 var initialNodes = [
@@ -58,12 +71,7 @@ for (var i = 1; i <= maxNodes; i++) {
     } else {
         var y = 50
     }
-    //split to 4 quadrants around the origin and increment n
-    //n symbolizes we are in the next quadrent
-    if (i % 4 == 0)
-        n += 1
     
-    console.log(i  + " " + n + " " +  (i / quarter))
     var quad = (i / quarter)
     //decide to place nodes left or right of the map
     if (Math.floor(quad + 1) % 2 == 0)
@@ -80,8 +88,6 @@ for (var i = 1; i <= maxNodes; i++) {
 }
 
 function Flow() {
-    
-
     const [nodes, setNodes] = useState(initialNodes);
     const [edges, setEdges] = useState(initialEdges);
     const [open, setOpen] = useState(false);
