@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Visualizer.css'
-import CustomNodeFlow from '../Map/Flow';
+import CustomNodeFlow, {initialNodes} from '../Map/Flow';
 
 // React stuff
 import Container from 'react-bootstrap/Container';
@@ -31,12 +31,16 @@ export default class Visualizer extends Component {
 
     time = 2000
     // num_packets = 1
-    // current_index = 0
+    current_index = 0
     pause_traffic = 1
     interval_callback = null
     // first_start = true
 
-
+    AddNode(packet) {
+        console.log(initialNodes[this.current_index])
+    //	initialNodes[this.current_index].data.label = 'hello world'
+        this.current_index++;
+    }
 
     ToggleTraffic() {
         this.pause_traffic ^= 1
@@ -94,6 +98,8 @@ export default class Visualizer extends Component {
         var packetData = packet.data
 
         sessionStorage.setItem("packet", packet)
+
+        this.AddNode(packet)
 
         var popover = (
             <Popover id="popover-basic">
