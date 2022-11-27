@@ -1,5 +1,5 @@
-import React, { createRef }  from 'react'
-import { useScreenshot, createFileName } from "use-react-screenshot";
+import React from 'react'
+// import { useScreenshot, createFileName } from "use-react-screenshot";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './ExportMap.css'
