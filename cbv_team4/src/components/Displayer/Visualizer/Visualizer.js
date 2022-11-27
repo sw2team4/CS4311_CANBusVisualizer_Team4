@@ -318,10 +318,7 @@ export default class Visualizer extends Component {
                     </div>
 
                     <div className='can-map' id='cmap'>
-
-                        <p>HELLO</p>
-
-                        {/* <CustomNodeFlow /> */}
+                        <CustomNodeFlow />
                     </div>
                 </div>
             </div>
