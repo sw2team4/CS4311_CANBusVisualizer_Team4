@@ -250,7 +250,10 @@ export default class Visualizer extends Component {
                             </Table>
                         </div>
                     </div>
-                    <div className='mapDisplayer'>
+
+
+                    <div className='mapDisplayer'
+                    >
                         <Navbar expand="lg" variant='dark' className='color-nav'>
                             <Container>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -289,6 +292,7 @@ export default class Visualizer extends Component {
                             </Container>
                         </Navbar>
                     </div>
+                    
                     <div className='can-map'>
                         <CustomNodeFlow />
                     </div>

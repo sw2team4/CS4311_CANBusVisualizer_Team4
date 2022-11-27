@@ -1,9 +1,24 @@
+'''
+
+Purpose of file:
+
+    Export functionality in python connected to components on cbv_team4/src/components/Displayer/Visualizer/Visualizer.js
+
+
+    Last Updated: 
+    
+        Noah @ 11/24/22 - add oll export functionality
+
+
+'''
 from flask import Blueprint, request
 from pymongo import MongoClient, TEXT
 from flask_cors import CORS
 import pandas as pd
-from PIL import ImageGrab, Image
-from selenium import webdriver
+# from PIL import ImageGrab, Image
+# from selenium import webdriver
+import subprocess
+
 
 exporter = Blueprint('exporter', __name__)
 CORS(exporter)
@@ -16,6 +31,11 @@ projects = db.projects
 nodes = db.nodes
 packets = db.packets
 
+
+@exporter.route('/export/oll', methods=["POST", "GET"])
+def oll():
+    subprocess.run(['cp', './off-limits-list-files/off-limits-list-file.csv', '/home/kali/Desktop/'], shell=False)
+    return "Exported OLL to Desktop"
 #-----------------CSV------------------------------------
 
 @exporter.route('/export/packetCSV', methods=["POST", "GET"])
@@ -27,7 +47,7 @@ def packetCSV():
     return "Packets to csv"
 
 @exporter.route('/export/nodesCSV', methods=["POST", "GET"])
-def nodeCSV():
+def nodeCSV(): 
     nodes_df = pd.DataFrame(list(nodes.find()))
 
     nodes_df.to_csv("/home/kali/Desktop/nodes.csv")

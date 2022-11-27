@@ -17,9 +17,9 @@ export default class Visualizer extends Component {
       this.state = {
           src_data: '',
           dest_ip: '',
-          dest_un: '',
-          dest_pw: '',
-          dest_fldr: '',
+          dest_un: 'kali',
+          dest_pw: 'kali',
+          dest_fldr: '/home/kali/Desktop/',
       }
 
 
@@ -81,7 +81,7 @@ return (
               <input 
                 type="text" id="source" 
                 name="source-data" 
-                placeholder="/home/kali/" 
+                placeholder="/home/kali/Desktop/projectX" 
                 required
                 className="form-control"
                 value={this.state.src_data}
