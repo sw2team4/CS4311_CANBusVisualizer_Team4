@@ -93,8 +93,27 @@ export default class Visualizer extends Component {
         var packetID = packet.id
         var packetData = packet.data
 
-        sessionStorage.setItem("display packet", packet)
+        sessionStorage.setItem("packet", packet)
 
+        var popover = (
+            <Popover id="popover-basic">
+                <Popover.Header as="h3">Decoded Information</Popover.Header>
+                <Popover.Body>
+                    node information
+                </Popover.Body>
+            </Popover>
+        );
+
+        var overlay = (
+            <OverlayTrigger trigger="hover" placment="right" overlay={popover}>
+                <tr overlay = {popover}>
+                    <td>{packetTimestamp}</td>
+                    <td>{packetType}</td>
+                    <td>{packetID}</td>
+                    <td>{packetData}</td>
+                </tr>
+            </OverlayTrigger>
+        );
         document.getElementById('pkt').innerHTML += `
                 <tr>
                 <td>${packetTimestamp}</td>
@@ -108,6 +127,19 @@ export default class Visualizer extends Component {
                 ${packet.decoded_name}\n
                 ${packet.decoded_comment}\n
         `
+        
+        // document.getElementById('pkt').append(overlay)
+        
+        //creating ref
+        // this.myRef= React.createRef();
+        // this.myRef.current.value = overlay
+
+        //document.getElementById(packetID).insertAdjacentHTML("afterend", "<OverlayTrigger trigger='hover' placement='right' overlay={ <Popover id='popover-positioned-right'> <Popover.Header as='h3'>Decoded Information</Popover.Header> <Popover.Body> <pre id='dc'></pre> </Popover.Body> </Popover> }> <tbody id='pkt'> </tbody> </OverlayTrigger>")
+        // document.getElementById('dc').innerHTML += `   
+        //         ${packet.decoded_id}\n
+        //         ${packet.decoded_name}\n
+        //         ${packet.decoded_comment}\n
+        // `
         // this.current_index++
 
     }
@@ -198,7 +230,10 @@ export default class Visualizer extends Component {
                                         <th>Data</th>
                                     </tr>
                                 </thead>
-                                <OverlayTrigger
+                                <tbody id = 'pkt'>
+
+                                </tbody>
+                                {/* <OverlayTrigger
                                     trigger='hover'
                                     placement='right'
                                     overlay={
@@ -211,7 +246,7 @@ export default class Visualizer extends Component {
                                     }>
                                     <tbody id='pkt'>
                                     </tbody>
-                                </OverlayTrigger>
+                                </OverlayTrigger> */}
                             </Table>
                         </div>
                     </div>
