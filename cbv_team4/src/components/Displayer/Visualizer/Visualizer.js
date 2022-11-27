@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Visualizer.css'
-import CustomNodeFlow, {initialNodes} from '../Map/Flow';
+import CustomNodeFlow, { initialNodes } from '../Map/Flow';
 
 // React stuff
 import Container from 'react-bootstrap/Container';
@@ -18,15 +18,16 @@ import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 //TODO: table on hover stops working after traffic starts
-import DummyData from './DummyData';
 import ExportNodes from '../Popups/Export/ExportNodes';
-import ExportMap from '../Popups/Export/ExportMap';
 import ExportTraffic from '../Popups/Export/ExportTraffic';
 import ExportLimit from '../Popups/Export/ExportLimit';
 
+// import * as htmlToImage from 'html-to-image';
+// import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';/
+import domtoimage from 'dom-to-image';
+
 //TODO: table on hover stops working after traffic starts
 //Found issue, overlay tags one element and not by iteration - Talk with tony for feedback
-
 export default class Visualizer extends Component {
 
     time = 2000
@@ -38,7 +39,7 @@ export default class Visualizer extends Component {
 
     AddNode(packet) {
         console.log(initialNodes[this.current_index])
-    //	initialNodes[this.current_index].data.label = 'hello world'
+        //	initialNodes[this.current_index].data.label = 'hello world'
         this.current_index++;
     }
 
@@ -112,7 +113,7 @@ export default class Visualizer extends Component {
 
         var overlay = (
             <OverlayTrigger trigger="hover" placment="right" overlay={popover}>
-                <tr overlay = {popover}>
+                <tr overlay={popover}>
                     <td>{packetTimestamp}</td>
                     <td>{packetType}</td>
                     <td>{packetID}</td>
@@ -133,9 +134,9 @@ export default class Visualizer extends Component {
                 ${packet.decoded_name}\n
                 ${packet.decoded_comment}\n
         `
-        
+
         // document.getElementById('pkt').append(overlay)
-        
+
         //creating ref
         // this.myRef= React.createRef();
         // this.myRef.current.value = overlay
@@ -149,6 +150,16 @@ export default class Visualizer extends Component {
         // this.current_index++
 
     }
+
+
+    //     exportAsPicture () {
+    //     //var data = document.getElementsByClassName('can-map')
+
+    //     htmlToImage.toPng(document.getElementsByClassName('can-map'))
+    //     .then(function (dataUrl) {
+    //     download(dataUrl, 'my-node.png');
+    //     });
+    // }
 
 
     render() {
@@ -236,7 +247,7 @@ export default class Visualizer extends Component {
                                         <th>Data</th>
                                     </tr>
                                 </thead>
-                                <tbody id = 'pkt'>
+                                <tbody id='pkt'>
 
                                 </tbody>
                                 {/* <OverlayTrigger
@@ -275,11 +286,19 @@ export default class Visualizer extends Component {
                                                 <ExportNodes></ExportNodes>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <ExportMap></ExportMap>
+                                                <Button className='button-color' onClick={() => {
+                                                    domtoimage.toJpeg(document.getElementById('cmap'), { quality: 1.00 })
+                                                    .then(function (dataUrl) {
+                                                        var link = document.createElement('a');
+                                                        link.download = 'cmap.jpeg';
+                                                        link.href = dataUrl;
+                                                        link.click();
+                                                    });
+                                                }}>
+                                                    Export CAN Bus Map
+                                                </Button>
                                             </NavDropdown.Item>
-                                            <NavDropdown.Divider />
                                         </NavDropdown>
                                         {/* Nodes */}
                                         <NavDropdown title="Nodes" id="basic-nav-dropdown">
@@ -290,7 +309,6 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Select All</NavDropdown.Item>
-                                            <NavDropdown.Divider />
                                         </NavDropdown>
                                     </Nav>
                                 </Navbar.Collapse>
@@ -298,9 +316,12 @@ export default class Visualizer extends Component {
                             </Container>
                         </Navbar>
                     </div>
-                    
-                    <div className='can-map'>
-                        <CustomNodeFlow />
+
+                    <div className='can-map' id='cmap'>
+
+                        <p>HELLO</p>
+
+                        {/* <CustomNodeFlow /> */}
                     </div>
                 </div>
             </div>
