@@ -46,13 +46,14 @@ var initialNodes = [
     {
         id: baseNode, //required
         position: { x: -(baseWidth / 2), y: 0 }, //required
-        data: null,
+        data: { label: null },
         type: 'output',
         style: { border: '1px solid black', width: baseWidth, height: baseHeight, backgroundColor: 'black' },
         dragging: false,
         // hidden: true,
         dragHandle: false,
         parentNode: '',
+        hidden: false,
     }
 ];
 
@@ -71,19 +72,19 @@ for (var i = 1; i <= maxNodes; i++) {
     } else {
         var y = 50
     }
-    
+
     var quad = (i / quarter)
     //decide to place nodes left or right of the map
     if (Math.floor(quad + 1) % 2 == 0)
-    //left of can bus node origin
+        //left of can bus node origin
         var x = -((1 + i % quarter) * scalar)
     else
-    //right of can bus node origin
-    //TODO: Fill in the Label - automated
+        //right of can bus node origin
+        //TODO: Fill in the Label - automated
         var x = ((i % quarter) * scalar)
-    var node = { id: 'node' + String(i), position: { x: x, y: y }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
+    var node = { id: 'node' + String(i), position: { x: x, y: y }, data: { label: 'undefined' }, expandParent: true, type: 'input', hidden: true }
     var edge = { id: 'edge' + String(i), source: 'node' + String(i), target: baseNode, type: 'smoothstep', style: { stroke: 'black' } }
-    initialNodes.push(node)   
+    initialNodes.push(node)
     initialEdges.push(edge)
 }
 
@@ -105,13 +106,12 @@ function Flow() {
     const [nodeBg, setNodeBg] = useState('#eee');
     const [nodeHidden, setNodeHidden] = useState(false);
 
-
     const onNodesChange = useCallback(
-        (changes) => setNodes((nds) => 
-            applyNodeChanges(changes, nds)), []
+        (changes) => setNodes((nds) =>  
+        applyNodeChanges(changes, nds)), [],
     );
 
-    const onEdgesChange = useCallback(            (changes) => setEdges((eds) => 
+    const onEdgesChange = useCallback((changes) => setEdges((eds) =>
         applyEdgeChanges(changes, eds)), []
     );
 
@@ -253,6 +253,8 @@ function Flow() {
             );
         }, [nodeHidden, setNodes, setEdges]);
 
+
+
     }
 
 
@@ -261,15 +263,15 @@ function Flow() {
             <ReactFlow
                 elements={elements}
                 nodes={nodes}
-                onNodesChange={onNodesChange}
+                onNodesChange={onNodesChange}// USED
                 edges={edges}
-                onEdgesChange={onEdgesChange}
+                onEdgesChange={onEdgesChange} // not used
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
                 fitView
                 onNodeContextMenu={onContextMenu}
-                onElementClick={onElementClick}
-                onUpdate={UpdateNode}
+                onElementClick={onElementClick} //not used
+                onUpdate={UpdateNode} //not used
             >
                 <div className="updatenode__controls">
                     <label>label:</label>
@@ -313,4 +315,4 @@ function Flow() {
 }
 
 export default Flow
-export {initialNodes}
+export { initialNodes, initialEdges }

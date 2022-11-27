@@ -31,15 +31,16 @@ export default class Visualizer extends Component {
 
     time = 2000
     // num_packets = 1
-    current_index = 0
+    current_index = 1
     pause_traffic = 1
     interval_callback = null
     // first_start = true
 
     AddNode(packet) {
-        console.log(initialNodes[this.current_index])
-    //	initialNodes[this.current_index].data.label = 'hello world'
+    	initialNodes[this.current_index].data.label = packet.decoded_comment
+        initialNodes[this.current_index].hidden = false
         this.current_index++;
+        
     }
 
     ToggleTraffic() {

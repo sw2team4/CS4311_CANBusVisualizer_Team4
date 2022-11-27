@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, Controls, MiniMap, Background} from 'reactflow';
+import ReactFlow, { useNodesState, useEdgesState, Controls, MiniMap, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { initialNodes, initialEdges } from 'Flow';
 
 import './updateNode.css';
 
-const initialNodes = [
-  { id: '1', data: { label: '-' }, position: { x: 100, y: 100 } },
-  { id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
-];
+// const initialNodes = [
+//   { id: '1', data: { label: '-' }, position: { x: 100, y: 100 } },
+//   { id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
+// ];
 
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+// const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 const UpdateNode = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -22,14 +23,12 @@ const UpdateNode = () => {
   useEffect(() => {
     setNodes((nds) =>
       nds.map((node) => {
-        if (node.id === '1') {
-          // it's important that you create a new object here
-          // in order to notify react flow about the change
-          node.data = {
-            ...node.data,
-            label: nodeName,
-          };
-        }
+        // it's important that you create a new object here
+        // in order to notify react flow about the change
+        node.data = {
+          ...node.data,
+          label: nodeName,
+        };
 
         return node;
       })
@@ -39,11 +38,9 @@ const UpdateNode = () => {
   useEffect(() => {
     setNodes((nds) =>
       nds.map((node) => {
-        if (node.id === '1') {
-          // it's important that you create a new object here
-          // in order to notify react flow about the change
-          node.style = { ...node.style, backgroundColor: nodeBg };
-        }
+        // it's important that you create a new object here
+        // in order to notify react flow about the change
+        node.style = { ...node.style, backgroundColor: nodeBg };
 
         return node;
       })
@@ -53,20 +50,14 @@ const UpdateNode = () => {
   useEffect(() => {
     setNodes((nds) =>
       nds.map((node) => {
-        if (node.id === '1') {
-          // when you update a simple type you can just update the value
-          node.hidden = nodeHidden;
-        }
+        node.hidden = nodeHidden;
 
         return node;
       })
     );
     setEdges((eds) =>
       eds.map((edge) => {
-        if (edge.id === 'e1-2') {
-          edge.hidden = nodeHidden;
-        }
-
+        edge.hidden = nodeHidden;
         return edge;
       })
     );
@@ -99,8 +90,8 @@ const UpdateNode = () => {
           />
         </div>
       </div>
-      <Background/>
-            <Controls/>
+      <Background />
+      <Controls />
     </ReactFlow>
   );
 };
