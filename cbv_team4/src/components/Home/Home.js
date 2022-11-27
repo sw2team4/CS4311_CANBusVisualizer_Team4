@@ -18,8 +18,7 @@ function Home() {
                 <li><button onClick={() => navigate("/create-project")} className='firstButton' type='button'></button></li>
                 <li>
                     <button className='secondButton' type='button'></button>
-                    <input className='test' type="file"></input> {/* This is hidden with css. */}
-                </li>
+                    <input className='test' type="file" webkitdirectory="" directory=""></input> {/* This is hidden with css. */}</li>
                 <li><button onClick={() => navigate("/sync")} className='thirdButton' type='button'></button></li>
                 <li><button className='fourthButton' type='button'></button></li>
                 <li><button className='fifthButton' type='button'></button></li>
