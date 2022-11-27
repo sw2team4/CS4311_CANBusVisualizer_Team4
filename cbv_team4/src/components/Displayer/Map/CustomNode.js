@@ -1,32 +1,30 @@
 import React, { memo } from 'react';
-import { Handle } from 'reactflow';
+import { Handle, Position } from 'reactflow';
 
-import EditPopup from '../Popups/EditPopup';
+import '../Visualizer/Visualizer.css'
+import EditPopup from '../Popups/Edit/EditPopup';
 
 export default memo(({ data, isConnectable }) => {
+    const handleStyle = { left: 10 };
+
+
+
   return (
     <>
     {/* Add dot to connect to */}
-    <Handle
-        type="target"
-        position="top"
-        isConnectable={isConnectable}
-    />
-    <Handle
-        type="source"
-        position="bottom"
-        id="2"//idk what this is yet
-        isConnectable={isConnectable}
-    />
+    <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} />
+    <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} />
+    <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} />
+ 
+    
 
     <div className='nodeContainer'>
-        <label>Wand Sensor</label>
-        <span>
-            {/* <EditPopup></EditPopup> */}
-        </span>
-        <footer>
-            <EditPopup></EditPopup>
-        </footer>
+        <div>
+            <label>Wand Sensor</label>
+        </div>
+        <div>
+            <img className='node-icon' alt='node-icon' src='Engine.png'></img>
+        </div>
     </div>
     </>
   );

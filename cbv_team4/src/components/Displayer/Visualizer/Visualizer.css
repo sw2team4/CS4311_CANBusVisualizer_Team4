@@ -1,0 +1,194 @@
+/* Start of Main Displayer */
+.visualizer-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+/* End of Main Displayer */
+/* ----------------------------------------------- */
+
+/* Start of titlebar */
+.titlebar{
+    background-color: white;
+    width: 100vw;
+    height: 5%;
+    border: 4px black solid;
+    justify-content: space-between;
+    margin: 0 auto;
+    display: flex;
+}
+
+
+.trafficButton{
+    margin-left: 15px;
+    font-size:small;
+}
+
+.mapButton{
+    margin-left: 15px;
+    font-size:small;
+}
+
+.closeButton{
+    margin-bottom: 30px;
+    height: 30px;
+    margin-right: 4px;
+}
+
+
+
+.displayerName{
+    margin-right: 8%;
+    margin-top: 3px;
+}
+
+.hihi{
+    margin-top: 3px;
+}
+
+
+
+/* End of titlebar */
+/* ----------------------------------------------- */
+.trafficDisplayer{
+    position: absolute;
+    width: 50vw;
+    height: 100vw;
+    background: white;
+    top: 38px;
+    left: 0;
+    font-family: sans-serif;
+    border: 2px solid;
+    border: 2px black solid;
+    resize: both;
+}
+
+.traffic-table-container{
+    overflow: auto;
+    height: 100%;
+}
+
+.pauseButton{
+    background: rgb(103, 103, 103);
+    margin-right: 20px;
+    border: none;
+}
+
+.color-nav{
+    background: rgb(103, 103, 103);
+}
+
+.color-item-nav{
+    color: red;
+}
+
+.itemTest{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background: orange;
+}
+
+.modal{
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.visualizer{
+    position: fixed;
+}
+
+/* Start of Can-bus-map */
+
+.mapDisplayer{
+    position: absolute;
+    width: 50vw;
+    height: 100vw;
+    background: white;
+    top: 38px;
+    left: 50%;
+    font-family: sans-serif;
+    border: 2px black solid;
+    background-color: darkgray;
+}
+
+.can-map{
+    width: 50vw;
+    height: 88vw;
+    left: 50%;
+    top: 94px;
+    position: absolute;
+    /* bottom: 10px; */
+}
+
+/* End of Can-bus-map */
+
+.react-flow__node-selectorNode {
+    font-size: 12px;
+    background: #eee;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: center;
+}  
+
+.nodeContainer .button-color{
+    background-color: white;
+    /* bottom: 50%; */
+    top: 50%;
+    left: 40%;
+    position: absolute;
+    /* float: right; */
+}
+
+.nodeContainer{
+    border: "1px solid black";
+    background-color: red;
+    /* background-image: url('Icons/Engine.png'); */
+    object-fit: cover;
+    /* background:  url('Icons/Engine.png'); */
+    border-radius: 4;
+    padding: 5;
+    position: "relative";
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.tooltip{
+    position: relative;
+    height: 60;
+    width: 250px;
+    background: lightgray;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    font-size: 18px;
+    margin: 0 auto;
+}
+
+.tooltip::after{
+    position: absolute;
+    z-index: 2;
+    display: none;
+    width: 200px;
+    padding: 10px;
+    font-size: 0.8em;
+    line-height: 1.4em;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    content: attr(title);
+}
+
+.tooltip:hover::before{
+    display: inline-block;
+}
+
+.node-icon{
+    position: relative;
+    width: 70%;
+    height: 70px;
+}
