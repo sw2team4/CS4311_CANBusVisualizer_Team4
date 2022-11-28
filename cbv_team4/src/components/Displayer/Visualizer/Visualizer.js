@@ -39,7 +39,7 @@ export default class Visualizer extends Component {
     downloadImage(dataUrl) {
         const a = document.createElement('a');
       
-        a.setAttribute('documents', 'reactflow.png');
+        a.setAttribute('download', 'reactflow.png');
         a.setAttribute('href', dataUrl);
         a.click();
       }
