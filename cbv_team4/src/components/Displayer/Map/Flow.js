@@ -1,14 +1,11 @@
 import ReactFlow, { Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, MiniMap, useNodesState, useEdgesState } from 'reactflow';
+import { useUpdateNodeInternals } from 'reactflow';
 import 'reactflow/dist/style.css'
 import { useState, useCallback, useEffect } from 'react';
 
 import CustomNode from './CustomNode';
 import { ContextMenu } from './contextMenu';
 import './updateNode.css';
-
-sessionStorage.setItem('packet', null)
-
-
 
 // import Engine from 'cbv_team4/src/images/Engine.png'
 
@@ -20,25 +17,20 @@ function random(min, max) {
     return min + Math.random() * (max - min);
 }
 
-// receive node data
-var index = 0
-function add_node() {
-    sessionStorage.getItem('packet').addEventListener('change', (event) => {
-        console.log('item changed')
-    })
-    // var packet = JSON.parse(sessionStorage.getItem('packet'))
-    // // var node = { id: 'node' + String(i), position: { x: x, y: y }, data: { label: 'undefined' }, expandParent: true, type: 'input' }
-    // initialNodes[index]['label'] = packet['comment']
-    // console.log(initialNodes[index++])
+export function updateMap(id) {
+    // const updateNodeInternals = useUpdateNodeInternals();
+    // updateNodeInternals(id)
 }
 
+// receive node data
+var index = 0
 
 const initBgColor = '#1A192B';
 
 // define constants
 const baseNode = 'CAN-BUS-MAP'
 const baseWidth = 1500
-const baseHeight = 1
+const baseHeight = 30
 const maxNodes = 20
 
 // automated initial nodes; baseNode is line
@@ -46,9 +38,9 @@ var initialNodes = [
     {
         id: baseNode, //required
         position: { x: -(baseWidth / 2), y: 0 }, //required
-        data: { label: null },
+        data: { label: "Click To Refresh" },
         type: 'output',
-        style: { border: '1px solid black', width: baseWidth, height: baseHeight, backgroundColor: 'black' },
+        style: { border: '1px solid black', width: baseWidth, height: baseHeight, backgroundColor: 'orange', },
         dragging: false,
         // hidden: true,
         dragHandle: false,
@@ -63,7 +55,6 @@ var initialEdges = [];
 const half = (maxNodes / 2)
 const quarter = (maxNodes / 4)
 const scalar = (baseWidth / maxNodes) * 2.5
-var n = 1
 
 //Setting a range where nodes and edges will be displayed in map
 for (var i = 1; i <= maxNodes; i++) {
@@ -107,8 +98,8 @@ function Flow() {
     const [nodeHidden, setNodeHidden] = useState(false);
 
     const onNodesChange = useCallback(
-        (changes) => setNodes((nds) =>  
-        applyNodeChanges(changes, nds)), [],
+        (changes) => setNodes((nds) =>
+            applyNodeChanges(changes, nds)), [],
     );
 
     const onEdgesChange = useCallback((changes) => setEdges((eds) =>
@@ -203,14 +194,12 @@ function Flow() {
         useEffect(() => {
             setNodes((nds) =>
                 nds.map((node) => {
-                    if (node.id === 'HVES1C1') {
-                        // it's important that you create a new object here
-                        // in order to notify react flow about the change
-                        node.data = {
-                            ...node.data,
-                            label: nodeName,
-                        };
-                    }
+                    // it's important that you create a new object here
+                    // in order to notify react flow about the change
+                    node.data = {
+                        ...node.data,
+                        label: nodeName,
+                    };
 
                     return node;
                 })
@@ -220,11 +209,9 @@ function Flow() {
         useEffect(() => {
             setNodes((nds) =>
                 nds.map((node) => {
-                    if (node.id === '1') {
-                        // it's important that you create a new object here
-                        // in order to notify react flow about the change
-                        node.style = { ...node.style, backgroundColor: nodeBg };
-                    }
+                    // it's important that you create a new object here
+                    // in order to notify react flow about the change
+                    node.style = { ...node.style, backgroundColor: nodeBg };
 
                     return node;
                 })
@@ -234,32 +221,26 @@ function Flow() {
         useEffect(() => {
             setNodes((nds) =>
                 nds.map((node) => {
-                    if (node.id === '1') {
-                        // when you update a simple type you can just update the value
-                        node.hidden = nodeHidden;
-                    }
+                    // when you update a simple type you can just update the value
+                    node.hidden = nodeHidden;
 
                     return node;
                 })
             );
             setEdges((eds) =>
                 eds.map((edge) => {
-                    if (edge.id === 'e1-2') {
-                        edge.hidden = nodeHidden;
-                    }
+                    edge.hidden = nodeHidden;
 
                     return edge;
                 })
             );
         }, [nodeHidden, setNodes, setEdges]);
 
-
-
     }
 
 
     return (
-        <div style={{ height: '45%', width: '98%', marginTop: '4%', marginLeft: '1%' }}>
+        <div style={{ height: '35%', width: '98%', marginTop: '4%', marginLeft: '1%' }}>
             <ReactFlow
                 elements={elements}
                 nodes={nodes}
@@ -268,7 +249,7 @@ function Flow() {
                 onEdgesChange={onEdgesChange} // not used
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
-                fitView
+                fitView={true}
                 onNodeContextMenu={onContextMenu}
                 onElementClick={onElementClick} //not used
                 onUpdate={UpdateNode} //not used

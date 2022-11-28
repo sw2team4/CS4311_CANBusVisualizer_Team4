@@ -10,6 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import InfiniteScroll from 'react-infinite-scroll-component';
 // Popups
 import EditPopup from '../Popups/Edit/EditPopup';
 import SavePopup from '../Popups/SaveProject/SavePopup';
@@ -30,7 +31,7 @@ import ExportLimit from '../Popups/Export/ExportLimit';
 export default class Visualizer extends Component {
 
     time = 2000
-    // num_packets = 1
+    num_packets = 1
     current_index = 1
     pause_traffic = 1
     interval_callback = null
@@ -40,7 +41,7 @@ export default class Visualizer extends Component {
     	initialNodes[this.current_index].data.label = packet.decoded_comment
         initialNodes[this.current_index].hidden = false
         this.current_index++;
-        
+        ///////////
     }
 
     ToggleTraffic() {
@@ -134,6 +135,7 @@ export default class Visualizer extends Component {
                 ${packet.decoded_name}\n
                 ${packet.decoded_comment}\n
         `
+        this.num_packets+=1
         
         // document.getElementById('pkt').append(overlay)
         
@@ -228,33 +230,45 @@ export default class Visualizer extends Component {
                             </Navbar>
                         </div>
                         <div className='traffic-table-container'>
-                            <Table responsive striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Timestamp</th>
-                                        <th>Type</th>
-                                        <th>ID</th>
-                                        <th>Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody id = 'pkt'>
+                            <InfiniteScroll
+                            pageStart={0}
+                            dataLength={-1}
+                            hasMore={true}
+                            useWindow={false}
+                            endMessage={
+                              <p style={{ textAlign: 'center' }}>
+                                <b>Yay! You have seen it all</b>
+                              </p>
+                            }
+                            >
+                                <Table responsive striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>Type</th>
+                                            <th>ID</th>
+                                            <th>Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id = 'pkt'>
 
-                                </tbody>
-                                {/* <OverlayTrigger
-                                    trigger='hover'
-                                    placement='right'
-                                    overlay={
-                                        <Popover id='popover-positioned-right'>
-                                            <Popover.Header as='h3'>Decoded Information</Popover.Header>
-                                            <Popover.Body>
-                                                <pre id='dc'></pre>
-                                            </Popover.Body>
-                                        </Popover>
-                                    }>
-                                    <tbody id='pkt'>
                                     </tbody>
-                                </OverlayTrigger> */}
-                            </Table>
+                                    {/* <OverlayTrigger
+                                        trigger='hover'
+                                        placement='right'
+                                        overlay={
+                                            <Popover id='popover-positioned-right'>
+                                                <Popover.Header as='h3'>Decoded Information</Popover.Header>
+                                                <Popover.Body>
+                                                    <pre id='dc'></pre>
+                                                </Popover.Body>
+                                            </Popover>
+                                        }>
+                                        <tbody id='pkt'>
+                                        </tbody>
+                                    </OverlayTrigger> */}
+                                </Table>
+                            </InfiniteScroll>
                         </div>
                     </div>
 
