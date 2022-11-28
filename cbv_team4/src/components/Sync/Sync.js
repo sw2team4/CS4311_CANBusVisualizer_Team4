@@ -162,9 +162,15 @@ return (
             </div>
           </div>
 
-        <div>
-        <input className="sync-button" type="submit" name="Submit" onChange={this.onSubmit}  value="Sync"/>
-        </div>
+          <div className="form-group">
+              <input className="sync-button" type="submit" value="Sync" />
+              <input
+                onClick={(event) => (window.location.href = "/")}
+                className="cancel-sync-button"
+                type="button"
+                value="Cancel"
+              />
+            </div>
       </form>
     </div>
 
@@ -173,9 +179,6 @@ return (
       <h1 className='sync-title'>Sync</h1>
       <img className='comp' src={Comp} height={300} width={300} alt=""/>
       <img className='comp1' src={Comp} height={300} width={300} alt=""/>
-      <form>
-      <input onClick={event => window.location.href='/'} className='cancel-sync-button' type="button" value="Cancel"/>
-      </form>
     </div>
   </div>
 );
