@@ -22,9 +22,8 @@ import ExportNodes from '../Popups/Export/ExportNodes';
 import ExportTraffic from '../Popups/Export/ExportTraffic';
 import ExportLimit from '../Popups/Export/ExportLimit';
 
-// import * as htmlToImage from 'html-to-image';
-// import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';/
-import domtoimage from 'dom-to-image';
+import { toPng } from 'html-to-image';
+
 
 //TODO: table on hover stops working after traffic starts
 //Found issue, overlay tags one element and not by iteration - Talk with tony for feedback
@@ -36,6 +35,15 @@ export default class Visualizer extends Component {
     pause_traffic = 1
     interval_callback = null
     // first_start = true
+
+    downloadImage(dataUrl) {
+        const a = document.createElement('a');
+      
+        a.setAttribute('documents', 'reactflow.png');
+        a.setAttribute('href', dataUrl);
+        a.click();
+      }
+    
 
     AddNode(packet) {
         console.log(initialNodes[this.current_index])
@@ -161,7 +169,6 @@ export default class Visualizer extends Component {
     //     });
     // }
 
-
     render() {
 
         return (
@@ -185,8 +192,8 @@ export default class Visualizer extends Component {
                                                     <SavePopup></SavePopup>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
-                                                <NavDropdown.Item href="/">Open Saved Project</NavDropdown.Item>
-                                                <NavDropdown.Divider />
+                                                
+                                                
                                                 <NavDropdown.Item>
                                                     <ExportTraffic></ExportTraffic>
                                                 </NavDropdown.Item>
@@ -287,15 +294,9 @@ export default class Visualizer extends Component {
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <Button className='button-color' onClick={() => {
-                                                    domtoimage.toJpeg(document.getElementById('cmap'), { quality: 1.00 })
-                                                    .then(function (dataUrl) {
-                                                        var link = document.createElement('a');
-                                                        link.download = 'cmap.jpeg';
-                                                        link.href = dataUrl;
-                                                        link.click();
-                                                    });
-                                                }}>
+                                            <Button className='button-color' onClick={() => {
+                                                    toPng(document.querySelector('.react-flow'))
+                                                    .then(this.downloadImage);}}>
                                                     Export CAN Bus Map
                                                 </Button>
                                             </NavDropdown.Item>
