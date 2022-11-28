@@ -32,6 +32,7 @@ echo " "
 # echo " "
 # sudo npm install --save react html2canvas
 # echo " "
+npm i html-to-image
 
 echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 
