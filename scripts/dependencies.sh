@@ -34,6 +34,7 @@ echo " "
 # echo " "
 # sudo npm install --save react html2canvas
 # echo " "
+npm i html-to-image
 
 echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 
@@ -49,7 +50,7 @@ echo " "
 pip install Flask-PyMongo
 echo " "
 
-echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>> Downloading Other Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 sudo apt-get install expect
 echo " "
 

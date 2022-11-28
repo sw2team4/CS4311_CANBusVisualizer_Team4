@@ -29,25 +29,24 @@ body, html {
 .cancel-sync-button{
     background-color: skyblue;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 0px;
     border: 2px solid black;
     border-radius: 4px;
     border-color: black;
-    position: fixed;
-    top: 55%;
-    left: 43%;
+    cursor: pointer;
+    float: left;
+    width: 20%;
 }
-
 .sync-button{
     background-color: skyblue;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 0px;
     border: 2px solid black;
     border-radius: 4px;
     border-color: black;
-    position: fixed;
-    top:87%;
-    left: 47%;
+    cursor: pointer;
+    float: right;
+    width: 20%;
 }
 
 .Sync{
@@ -94,8 +93,8 @@ body, html {
 
 .sync-project-container {
     margin: 0;
-    position: fixed;
-    top: 35%;
+    position: absolute;
+    top: 35.5%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -108,7 +107,6 @@ body, html {
     justify-self: center;
     padding: 10px 10px;
     width: 35%;
-    height: 55%;
 }
 
 .ip{

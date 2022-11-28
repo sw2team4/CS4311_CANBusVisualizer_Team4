@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Visualizer.css'
-import CustomNodeFlow, {initialNodes} from '../Map/Flow';
+import CustomNodeFlow, { initialNodes } from '../Map/Flow';
 
 // React stuff
 import Container from 'react-bootstrap/Container';
@@ -19,15 +19,15 @@ import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 //TODO: table on hover stops working after traffic starts
-import DummyData from './DummyData';
 import ExportNodes from '../Popups/Export/ExportNodes';
-import ExportMap from '../Popups/Export/ExportMap';
 import ExportTraffic from '../Popups/Export/ExportTraffic';
 import ExportLimit from '../Popups/Export/ExportLimit';
 
+import { toPng } from 'html-to-image';
+
+
 //TODO: table on hover stops working after traffic starts
 //Found issue, overlay tags one element and not by iteration - Talk with tony for feedback
-
 export default class Visualizer extends Component {
 
     time = 2000
@@ -36,6 +36,15 @@ export default class Visualizer extends Component {
     pause_traffic = 1
     interval_callback = null
     // first_start = true
+
+    downloadImage(dataUrl) {
+        const a = document.createElement('a');
+      
+        a.setAttribute('download', 'reactflow.png');
+        a.setAttribute('href', dataUrl);
+        a.click();
+      }
+    
 
     AddNode(packet) {
     	initialNodes[this.current_index].data.label = packet.decoded_comment
@@ -114,7 +123,7 @@ export default class Visualizer extends Component {
 
         var overlay = (
             <OverlayTrigger trigger="hover" placment="right" overlay={popover}>
-                <tr overlay = {popover}>
+                <tr overlay={popover}>
                     <td>{packetTimestamp}</td>
                     <td>{packetType}</td>
                     <td>{packetID}</td>
@@ -138,7 +147,7 @@ export default class Visualizer extends Component {
         this.num_packets+=1
         
         // document.getElementById('pkt').append(overlay)
-        
+
         //creating ref
         // this.myRef= React.createRef();
         // this.myRef.current.value = overlay
@@ -153,6 +162,15 @@ export default class Visualizer extends Component {
 
     }
 
+
+    //     exportAsPicture () {
+    //     //var data = document.getElementsByClassName('can-map')
+
+    //     htmlToImage.toPng(document.getElementsByClassName('can-map'))
+    //     .then(function (dataUrl) {
+    //     download(dataUrl, 'my-node.png');
+    //     });
+    // }
 
     render() {
 
@@ -177,8 +195,8 @@ export default class Visualizer extends Component {
                                                     <SavePopup></SavePopup>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
-                                                <NavDropdown.Item href="/">Open Saved Project</NavDropdown.Item>
-                                                <NavDropdown.Divider />
+                                                
+                                                
                                                 <NavDropdown.Item>
                                                     <ExportTraffic></ExportTraffic>
                                                 </NavDropdown.Item>
@@ -290,11 +308,13 @@ export default class Visualizer extends Component {
                                                 <ExportNodes></ExportNodes>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                <ExportMap></ExportMap>
+                                            <Button className='button-color' onClick={() => {
+                                                    toPng(document.querySelector('.react-flow'))
+                                                    .then(this.downloadImage);}}>
+                                                    Export CAN Bus Map
+                                                </Button>
                                             </NavDropdown.Item>
-                                            <NavDropdown.Divider />
                                         </NavDropdown>
                                         {/* Nodes */}
                                         <NavDropdown title="Nodes" id="basic-nav-dropdown">
@@ -305,7 +325,6 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Select All</NavDropdown.Item>
-                                            <NavDropdown.Divider />
                                         </NavDropdown>
                                     </Nav>
                                 </Navbar.Collapse>
@@ -313,8 +332,8 @@ export default class Visualizer extends Component {
                             </Container>
                         </Navbar>
                     </div>
-                    
-                    <div className='can-map'>
+
+                    <div className='can-map' id='cmap'>
                         <CustomNodeFlow />
                     </div>
                 </div>
