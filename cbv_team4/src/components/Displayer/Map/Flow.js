@@ -240,7 +240,7 @@ function Flow() {
 
 
     return (
-        <div style={{ height: '45%', width: '98%', marginTop: '4%', marginLeft: '1%' }}>
+        <div style={{ height: '35%', width: '98%', marginTop: '4%', marginLeft: '1%' }}>
             <ReactFlow
                 elements={elements}
                 nodes={nodes}
@@ -249,7 +249,7 @@ function Flow() {
                 onEdgesChange={onEdgesChange} // not used
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
-                fitView
+                fitView={true}
                 onNodeContextMenu={onContextMenu}
                 onElementClick={onElementClick} //not used
                 onUpdate={UpdateNode} //not used
