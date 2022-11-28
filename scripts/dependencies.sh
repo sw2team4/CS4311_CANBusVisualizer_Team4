@@ -28,6 +28,8 @@ sudo npm install reactflow
 echo " "
 sudo npm install react-bootstrap bootstrap
 echo " "
+sudo npm install --save react-infinite-scroll-component
+echo " "
 # npm i use-react-screenshot --legacy-peer-deps
 # echo " "
 # sudo npm install --save react html2canvas
@@ -48,7 +50,7 @@ echo " "
 pip install Flask-PyMongo
 echo " "
 
-echo ">>>>>>>>>>>>>>>>>> Downloading Flask Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>> Downloading Other Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 sudo apt-get install expect
 echo " "
 

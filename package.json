@@ -33,6 +33,7 @@
     "mongoose": "^6.6.3",
     "react-bootstrap": "^2.6.0",
     "react-datepicker": "^4.8.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "reactflow": "^11.3.1",
