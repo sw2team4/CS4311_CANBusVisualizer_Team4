@@ -18,7 +18,7 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Archieve Project
+          Archive Project
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='popup-container'>

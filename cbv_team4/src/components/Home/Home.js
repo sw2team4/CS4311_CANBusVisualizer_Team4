@@ -3,6 +3,7 @@ import React from 'react';
 import '../Home/Home.css';
 import Devcom from './images/DevcomLogo.png'
 import {useNavigate} from "react-router-dom";
+import ArchievePopup from '../Displayer/Popups/Archieve/ArchievePopup';
 
 var project_file = null
 function onChange(e) {
@@ -27,7 +28,7 @@ function Home() {
                     </form>
                 </li>
                 <li><button onClick={() => navigate("/sync")} className='thirdButton' type='button'></button></li>
-                <li><button className='fourthButton' type='button'></button></li>
+                <li><ArchievePopup></ArchievePopup></li>
                 <li><button className='fifthButton' type='button'></button></li>
             </ul>
         </div>
