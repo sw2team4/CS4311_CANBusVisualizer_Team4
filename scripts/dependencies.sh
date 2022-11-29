@@ -50,7 +50,8 @@ echo " "
 pip install Flask-PyMongo
 echo " "
 pip install cantools
-
+echo " "
+pip install Flask-Session
 echo ">>>>>>>>>>>>>>>>>> Downloading Other Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 sudo apt-get install expect
 echo " "

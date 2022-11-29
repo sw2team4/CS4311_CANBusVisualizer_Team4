@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_session import Session
 from flask_cors import CORS
 
 # Other python files which contain other routes that are needed
@@ -21,6 +22,7 @@ app.register_blueprint(node_manager)
 app.register_blueprint(project_manager)
 app.register_blueprint(off_limits_list_manager)
 CORS(app)
+Session(app)
 #TODO: make sure backend is killed with scripts
 '''
 Description: At localhost:5000/ 

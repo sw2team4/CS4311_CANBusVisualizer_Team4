@@ -5,6 +5,8 @@ from flask import request, redirect, Blueprint
 import uuid
 from global_variables import dbc, oll
 import packet_receiver
+import node_manager
+import exporter
 from project import Project
 
 
@@ -23,7 +25,6 @@ Description: Add project to database collection: projects
 @return: redirect: redirect page to can bus map and node map (Visualizer.js)
 '''
 # Add Project to Database and redirects page to can bus visualizer
-
 
 @project_configuration.route("/add_project", methods=["POST"])
 def add_project():
@@ -47,7 +48,6 @@ def add_project():
     # Creates project file
     project.create()
 
-    
     fname = f'{pid}'
     # Place inserted DBC file to local directory for use later
     if request.method == 'POST':
@@ -86,6 +86,11 @@ def add_project():
 
     # Automatically start traffic upon project creation
     packet_receiver.init_traffic()
+
+    # update collections based on pid
+    node_manager.update_node_collection(pid)
+    packet_receiver.update_packet_collection(pid)
+    exporter.update_collections(pid)
 
     # return the projectthat we just uploaded
     return redirect('http://localhost:3000/can-bus-visualizer')

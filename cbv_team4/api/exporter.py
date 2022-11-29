@@ -19,17 +19,21 @@ import pandas as pd
 # from selenium import webdriver
 import subprocess
 
-
 exporter = Blueprint('exporter', __name__)
 CORS(exporter)
 
 client = MongoClient('mongodb+srv://sw2_fall22:password*123@cluster0.mp0jclc.mongodb.net/test', 5000)
 db = client['test']
 
-#Collections gatered from 'test' databases
+#Collections gatered from 'test' database
 projects = db.projects
 nodes = db.nodes
 packets = db.packets
+
+def update_collections(pid):
+    global packets, nodes
+    packets= db[f'packets.{pid}']
+    nodes = db[f'nodes.{pid}']
 
 
 @exporter.route('/export/oll', methods=["POST", "GET"])
