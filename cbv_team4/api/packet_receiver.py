@@ -6,7 +6,7 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, pid, oll
+from global_variables import dbc, packets, oll
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
 
@@ -38,10 +38,8 @@ def get_packet():
     assert current_packet is not None, 'Packet is not defined.'
     
     # last_packet = db_packets.find_one({'packet_id': current_packet['packet_id'] },sort=[( '_id', DESCENDING )])
-    
-    if current_packet is None:
-        return { "timestamp" : 0, "type" : 0, 'id': 0, 'data': 0 }
-    return { "timestamp" : current_packet['packet_timestamp'], "type" : current_packet['packet_type'], 'id': current_packet['packet_id'], 'data': current_packet['packet_data'] }
+
+    return current_packet
 
 
 '''
@@ -93,7 +91,7 @@ def simulate_textfile_traffic():
                 # def __init__(self, timestamp, type, id, data, decoded=-1):
                 packet = Packet(timestamp, int(type), int(id, 16), data.split('\n')[0])
                 packet.decoded = dbc.decode(packet.id)
-                packet.ignore = oll.find(id)
+                packet.ignore = oll.find(packet.id)
                 current_packet = packet.to_json()
 
                 # Add packet to database
@@ -147,7 +145,6 @@ def filter():
 
     return 'filtered'
 
-#TODO: Write a bubble sort function and test
 @packet_receiver.route('/sort')
 def sort():
     id_a = packets.sort_session(0)

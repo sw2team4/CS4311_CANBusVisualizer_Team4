@@ -27,23 +27,23 @@ class Packet(object):
     '''
     def to_json(self):
         p = {
-            "packet_timestamp" : self.timestamp,
-            "packet_type" : self.type,
-            "packet_id" : hex(self.id),
-            "packet_data" : self.data,
+            "timestamp" : self.timestamp,
+            "type" : self.type,
+            "id" : hex(self.id),
+            "data" : self.data,
             "decoded_id": 'undefined',
             "decoded_name": 'undefined',
             "decoded_comment" : 'undefined',
-            "ignore": self.ignore
+            "ignore": self.ignore,
         }
         if self.decoded is not None:
             p["decoded_id"] = self.decoded.frame_id
             p["decoded_name"] = self.decoded.name
             p["decoded_comment"] = self.decoded.comment
         return p
-'''
-Description: Give packet as string format
-@return: str: Return timestamp, type, id, and data of a packet object
-'''
-def __str__(self):
-    return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'
+    '''
+    Description: Give packet as string format
+    @return: str: Return timestamp, type, id, and data of a packet object
+    '''
+    def __str__(self):
+        return f'\nTimestamp: {hex(self.timestamp)} Type: {self.type} ID: {hex(self.id)} Data: {hex(self.data)} \nDecoded: {self.decoded} \nPrevious Versions: {self.prev}'

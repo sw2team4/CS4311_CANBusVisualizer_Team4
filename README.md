@@ -6,7 +6,7 @@ This repository contains the final implementation of the CAN Bus Visualizer Syst
 * This is built for Kali Linux 
 * VS Code is installed on Kali Linux
 * You cloned this repo on Kali Linux
-* You have been "whitelisted" on the MongoDB Compass Cluster
+* You have been "whitelisted" on the MongoDB Compass Cluster (Local Database Coming soon)
 
 ## How to start application
 1. Open Kali Linux
@@ -27,7 +27,6 @@ The below commands are not needed however can be used if you are receiving depen
 ```
 sudo npm install react-scripts --save
 sudo npm install react-router-dom@6
-
 
 ``` 
 
@@ -52,4 +51,7 @@ If you are getting a "System limit for number of file watchers reached" then run
 ```
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
-THIS IS THE TESTING BRANCH
+
+## Note
+This README is currently a work in progress
+

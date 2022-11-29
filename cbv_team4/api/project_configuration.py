@@ -3,8 +3,9 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, pid, oll
+from global_variables import dbc, oll
 import packet_receiver
+from project import Project
 
 
 can_id = 'vcan0' # This is the CAN channel - this is updated on line 27
@@ -31,12 +32,18 @@ def add_project():
     can_id = request.form.get("can-id")
     vehicle_id = request.form.get("vehicle-id")
     baud_rate = request.form.get("baud-rate")
-    # oll_file = request.form.get("off-list-file") # Off-limits list file
+    #dbc_file_name = request.form.get("import-dbc-file") dbc file name
+    # oll_file = request.form.get("off-list-file") # Off-limits list file name
     
+
     # Define unique project id
-    # TODO: use pid from project manager class
-    global pid
     pid = uuid.uuid1()
+
+    project = Project(pid, proj_name, stored_location, user_initials, event_name, event_date, can_id, vehicle_id)
+    
+    # Creates project file
+    project.create()
+
 
     # Place inserted DBC file to local directory for use later
     if request.method  ==  'POST':
@@ -58,14 +65,14 @@ def add_project():
     # This is the project schema
     project = {
         "_id": str(pid),
-        "Name" : proj_name ,
-        "Location" : stored_location ,
-        "User Initials" : user_initials ,
-        "Event Name" : event_name ,
-        "Event Date" : event_date,
-        "CAN ID" : can_id,
-        "Vehicle ID" : vehicle_id,
-        "Baud Rate" : baud_rate,
+        "Name" : str(proj_name),
+        "Location" : str(stored_location),
+        "User Initials" : str(user_initials) ,
+        "Event Name" : str(event_name),
+        "Event Date" : str(event_date),
+        "CAN ID" : str(can_id),
+        "Vehicle ID" : str(vehicle_id),
+        "Baud Rate" : str(baud_rate),
     }
     
     # Ensure uniqueness for each project information in the database
