@@ -47,15 +47,14 @@ def save_project():
 Description:
 @return:
 '''
-@project_manager.route('/open_project', methods=["GET"])
+@project_manager.route('/open_project', methods=["GET","POST"])
 def open_project():
     print('HERE')
-    if request.method == 'POST':
-      fname = request.files['import-project']
-      ext = fname.split('.')[1]
-      assert ext == 'cbp', 'Invalid project file type.'
+    #if request.method == 'POST':
+    fname = request.files['import-project']
+    ext = fname.split('.')[1]
       
-    return 'Project Opened'
+    return fname
 
 
 

@@ -49,6 +49,7 @@ pip install flask python-dotenv
 echo " "
 pip install Flask-PyMongo
 echo " "
+pip install cantools
 
 echo ">>>>>>>>>>>>>>>>>> Downloading Other Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 sudo apt-get install expect
