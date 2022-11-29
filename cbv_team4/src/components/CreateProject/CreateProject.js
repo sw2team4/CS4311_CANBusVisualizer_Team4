@@ -23,8 +23,8 @@ export default class CreateProject extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: 'AARON',
-      analyst_initials: 'AZ',
+      name: 'DEMOPURPOSE',
+      analyst_initials: 'DP',
       event_name: 'EV1',
       event_date: new Date(),
       can_id: 1250,
