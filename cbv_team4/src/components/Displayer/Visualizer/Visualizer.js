@@ -14,6 +14,7 @@ import Table from 'react-bootstrap/Table';
 import EditPopup from '../Popups/Edit/EditPopup';
 import SavePopup from '../Popups/SaveProject/SavePopup';
 import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
+import OffLimits from '../Popups/Off-limits/OffLimits';
 // import {getPackets} from './SocketCAN.js'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -216,7 +217,7 @@ export default class Visualizer extends Component {
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item>
-                                                Annotate Packets
+                                                <OffLimits/>
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                         </NavDropdown>
@@ -287,12 +288,6 @@ export default class Visualizer extends Component {
                                     {/* Nodes */}
                                     <NavDropdown title="Nodes" id="basic-nav-dropdown">
                                         <EditPopup></EditPopup>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/">Select All</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                 </Nav>

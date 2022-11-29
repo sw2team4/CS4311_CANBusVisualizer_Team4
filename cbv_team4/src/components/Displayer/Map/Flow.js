@@ -5,6 +5,8 @@ import {useState, useCallback, useEffect} from 'react';
 import CustomNode from './CustomNode';
 import { ContextMenu } from './contextMenu';
 import './updateNode.css';
+import EditPopup from '../Popups/Edit/EditPopup';
+
 
 
 
@@ -100,7 +102,7 @@ const initialNodes = [
     {
         id: 'TC1', //required tree
         position: {x: -1500, y: -600}, //required
-        data: {label: 'Transmission Control 1'},
+        data: {label: 'Transmission Control 1', },
         expandParent: true,
         type: 'default',
     },
@@ -205,8 +207,8 @@ const initialEdges = [
 
 
 function Flow() {
-    // const [nodes, setNodes] = useState(initialNodes);
-    // const [edges, setEdges] = useState(initialEdges);
+    const [nodes, setNodes] = useState(initialNodes);
+    const [edges, setEdges] = useState(initialEdges);
     const [open,setOpen] = useState(false);
     const [isOpen,setIsOpen] = useState(false);
     const [position,setPosition] = useState({});
@@ -214,38 +216,34 @@ function Flow() {
     const [nodeData, setnodeData] = useState(null);
     const [bgColor, setBgColor] = useState(initBgColor);
     const [inputChange, setinputChange] = useState("");
-
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
     const [nodeName, setNodeName] = useState('Node 1');
     const [nodeBg, setNodeBg] = useState('#eee');
     const [nodeHidden, setNodeHidden] = useState(false);
 
+    let [EditPopup, setEditPopup] = useState(false);
+    const showNodeModal = () => setEditPopup(true)
+    const hideNodeModal = () => setEditPopup(false)
 
 
+    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
 
+    // -----------------
+    const onNodesChange = useCallback(
+        (changes) => setNodes((nds) => 
+            applyNodeChanges(changes, nds)), []
+    );
 
-    // const onNodesChange = useCallback(
-    //     (changes) => setNodes((nds) => 
-    //         applyNodeChanges(changes, nds)), []
-    // );
-
-    // const onEdgesChange = useCallback(
-    //     (changes) => setEdges((eds) => 
-    //     applyEdgeChanges(changes, eds)), []
-    // );
+    const onEdgesChange = useCallback(
+        (changes) => setEdges((eds) => 
+        applyEdgeChanges(changes, eds)), []
+    );
 
     const onConnect = useCallback(
         (params) => setEdges((eds) => 
             addEdge(params, eds)), []
     );
-
-    const minimapStyle = {
-        height: 120,
-        width: 150,
-    };
 
     const deleteNode = () => {
         setElements((elements) => elements.filter((element) => element.id == nodeData.id));
@@ -283,38 +281,11 @@ function Flow() {
         console.log(e.target);
         e.preventDefault();
         setIsOpen(true);
-        setPosition(false);
+        // setPosition({x: e.clientX, y: e.clientX});
         return e
     }
 
-    const createNew = () => {
-        const newNode = {
-          id: getId(),
-          type: 'customnode',
-          data: { label: 'An input node', type:"node" },
-          position: { x: 20, y: 20 },
-          sourcePosition: 'right',
-        }
-        setElements((es) => es.concat(newNode));
-    }
-      
-        useEffect(() => {
-        if(nodeData){
-            setElements((els) =>
-            els.map((el) => {
-                if (el.id === nodeData.id) {
-                // it's important that you create a new object here
-                // in order to notify react flow about the change
-                el.data = {
-                    ...el.data,
-                    label: inputChange,
-                };
-                }
-                return el;
-            })
-            );
-        }
-        }, [inputChange]);
+    
 
     const handleHidden = (event) => {
         const hiddenStatus = event.target.hidden;
@@ -376,6 +347,12 @@ function Flow() {
           }, [nodeHidden, setNodes, setEdges]);
       
     }
+
+    // ----------Minimap------------------------------------
+    const minimapStyle = {
+        height: 120,
+        width: 150,
+    };
       
 
   return (
@@ -383,37 +360,41 @@ function Flow() {
         <ReactFlow
             elements={elements}
             nodes={nodes} 
-            onNodesChange={onNodesChange}
             edges={edges}
+            onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
+            onNodeContextMenu={onContextMenu}
             nodeTypes={nodeTypes}
             fitView
-            onNodeContextMenu={onContextMenu}
+            //remove this maybe
             onElementClick={onElementClick}
             onUpdate={UpdateNode}
         >
             <div className="updatenode__controls">
-        <label>label:</label>
-        <input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
+                <label>label:</label>
+                <input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
 
-        <label className="updatenode__bglabel">background:</label>
-        <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
+                <label className="updatenode__bglabel">background:</label>
+                <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
 
-        <div className="updatenode__checkboxwrapper">
-          <label>hidden:</label>
-          <input
-            type="checkbox"
-            checked={nodeHidden}
-            onChange={(evt) => setNodeHidden(evt.target.checked)}
-          />
-        </div>
-      </div>
+                    <div className="updatenode__checkboxwrapper">
+                        <label>hidden:</label>
+                        <input
+                            type="checkbox"
+                            checked={nodeHidden}
+                            onChange={(evt) => setNodeHidden(evt.target.checked)}
+                        />
+                    </div>
+            </div>
             <ContextMenu
                 isOpen={isOpen}
                 position={position}
-                // onMouseLeave={()=>setIsOpen(false)}
-                actions={[{label:'Delete', effect:deleteNode}, {label:'Hidden', effect:handleHidden}, {label:'Add Off-Limits', effect:handleHidden}, {label:'Rename', effect:handleHidden}]}
+                onMouseLeave={()=>setIsOpen(false)}
+                actions={[{label:'Delete', effect:deleteNode}, 
+                {label:'Hidden', effect:handleHidden}, 
+                {label:'Add Off-Limits', effect:handleHidden}, 
+                {label:'Rename', effect:handleHidden}]}
 
             />
             <Background/>
