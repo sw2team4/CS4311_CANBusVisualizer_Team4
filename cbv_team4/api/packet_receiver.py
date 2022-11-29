@@ -6,10 +6,10 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, oll
+from global_variables import dbc, packets, oll, project
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
-
+from node_manager import add_node
 import threading
 from threading import Event
 
@@ -26,6 +26,10 @@ can_bus = can.interface.Bus('vcan0', bustype = 'socketcan')
 current_packet = None
 running = Event()
 running.clear() # at the start of the program it is running
+
+def update_packet_collection(pid):
+    global db_packets
+    db_packets = db[f'packets.{pid}']
 
 '''
 Description: Returns the last received packet from CAN Bus
@@ -96,6 +100,9 @@ def simulate_textfile_traffic():
 
                 # Add packet to database
                 add_packet(packet)
+
+                #Add Node to database
+                add_node(packet)
 
                 # Add packet to session packets
                 packets.add_session(packet)

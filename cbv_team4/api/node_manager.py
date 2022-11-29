@@ -11,19 +11,20 @@ client = MongoClient('mongodb+srv://sw2_fall22:password*123@cluster0.mp0jclc.mon
 db=client['test']
 nodes = db.nodes # <-- This is the collection within the  'test' db
 
-'''
-THIS IS THE POST METHOD - IT USES 'insert_one' rather than 'post'
-'''
-@node_manager.route("/addnode")
-def add_node():
+def update_node_collection(pid):
+    global nodes
+    nodes = db[f'nodes.{pid}']
+
+
+def add_node(packet):
     # This is the node schema
     node = {
-        "Node Name" : "test",
-        "Node ID" : "ID",
+        "Node Name" : packet.decoded.name,
+        "Node ID" : packet.id,
         "Node Icon" : "test" ,#jpg image or something...
-        "Node Comment" : "comment",
+        "Node Comment" : packet.decoded.comment,
         "Node Annotation" : "annotation",
-        "Node Relationship" : "relationship" "Node ID"
+        "Node Relationship" : "relationship",
     }
 
     # Insert project into database at "flasktest collection" within "test" db > Look at above lines 10,11,12
