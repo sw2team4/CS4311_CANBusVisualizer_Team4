@@ -120,6 +120,11 @@ function Flow() {
             addEdge(params, eds)), []
     );
 
+    const minimapStyle = {
+        height: 120,
+        width: 150,
+    };
+
     const deleteNode = () => {
         setElements((elements) => elements.filter((element) => element.id == nodeData.id));
         setIsOpen(false);

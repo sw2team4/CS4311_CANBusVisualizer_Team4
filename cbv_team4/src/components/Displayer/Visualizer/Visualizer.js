@@ -19,14 +19,10 @@ import OffLimits from '../Popups/Off-limits/OffLimits';
 // import {getPackets} from './SocketCAN.js'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-<<<<<<< HEAD
-// new
-=======
 //TODO: table on hover stops working after traffic starts
 import ExportNodes from '../Popups/Export/ExportNodes';
 import ExportTraffic from '../Popups/Export/ExportTraffic';
 import ExportLimit from '../Popups/Export/ExportLimit';
->>>>>>> project-test
 
 import { toPng } from 'html-to-image';
 
@@ -237,7 +233,7 @@ export default class Visualizer extends Component {
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                                 <NavDropdown.Item>
-                                                    Annotate Packets
+                                                    <OffLimits/>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </NavDropdown>
@@ -327,28 +323,7 @@ export default class Visualizer extends Component {
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Drag Nodes</NavDropdown.Item>
                                             <NavDropdown.Divider />
-<<<<<<< HEAD
-                                        </NavDropdown>
-                                        {/* Packet */}
-                                        <NavDropdown title="Packet" id="basic-nav-dropdown">
-                                            <NavDropdown.Item>
-                                                Edit Packet
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item>
-                                                Replay Packet
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item>
-                                                <SavePacketPopup></SavePacketPopup>
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                            <NavDropdown.Item>
-                                                <OffLimits/>
-                                            </NavDropdown.Item>
-=======
                                             <NavDropdown.Item href="/">Search Nodes</NavDropdown.Item>
->>>>>>> project-test
                                             <NavDropdown.Divider />
                                             <NavDropdown.Item href="/">Select All</NavDropdown.Item>
                                         </NavDropdown>
@@ -363,36 +338,6 @@ export default class Visualizer extends Component {
                         <CustomNodeFlow />
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div className='mapDisplayer'>
-                    <Navbar expand="lg" variant='dark' className='color-nav'>
-                        <Container>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    {/* File */}
-                                    <NavDropdown title="File" id="basic-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <SavePopup></SavePopup>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
-                                    {/* Nodes */}
-                                    <NavDropdown title="Nodes" id="basic-nav-dropdown">
-                                        <EditPopup></EditPopup>
-                                        <NavDropdown.Divider />
-                                    </NavDropdown>
-                                </Nav>
-                            </Navbar.Collapse>
-                            <label className=''>Map</label>
-                        </Container>
-                    </Navbar>
-                </div>
-                <div className='can-map'>
-                    <CustomNodeFlow />
-                </div>
-=======
->>>>>>> project-test
             </div>
         )
     }
