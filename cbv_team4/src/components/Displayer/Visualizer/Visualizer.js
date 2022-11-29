@@ -15,6 +15,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import EditPopup from '../Popups/Edit/EditPopup';
 import SavePopup from '../Popups/SaveProject/SavePopup';
 import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
+import OffLimits from '../Popups/Off-limits/OffLimits';
 // import {getPackets} from './SocketCAN.js'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -232,7 +233,7 @@ export default class Visualizer extends Component {
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                                 <NavDropdown.Item>
-                                                    Annotate Packets
+                                                    <OffLimits/>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </NavDropdown>
