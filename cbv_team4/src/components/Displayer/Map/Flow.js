@@ -6,6 +6,8 @@ import { useState, useCallback, useEffect } from 'react';
 import CustomNode from './CustomNode';
 import { ContextMenu } from './contextMenu';
 import './updateNode.css';
+import EditPopup from '../Popups/Edit/EditPopup';
+
 
 // import Engine from 'cbv_team4/src/images/Engine.png'
 
@@ -82,27 +84,34 @@ for (var i = 1; i <= maxNodes; i++) {
 function Flow() {
     const [nodes, setNodes] = useState(initialNodes);
     const [edges, setEdges] = useState(initialEdges);
-    const [open, setOpen] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [position, setPosition] = useState({});
+    const [open,setOpen] = useState(false);
+    const [isOpen,setIsOpen] = useState(false);
+    const [position,setPosition] = useState({});
     const [elements, setElements] = useState([]);  // main data elements for save
     const [nodeData, setnodeData] = useState(null);
     const [bgColor, setBgColor] = useState(initBgColor);
     const [inputChange, setinputChange] = useState("");
-
-    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
     const [nodeName, setNodeName] = useState('Node 1');
     const [nodeBg, setNodeBg] = useState('#eee');
     const [nodeHidden, setNodeHidden] = useState(false);
 
+    let [EditPopup, setEditPopup] = useState(false);
+    const showNodeModal = () => setEditPopup(true)
+    const hideNodeModal = () => setEditPopup(false)
+
+
+    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+
+    // -----------------
     const onNodesChange = useCallback(
-        (changes) => setNodes((nds) =>
-            applyNodeChanges(changes, nds)), [],
+        (changes) => setNodes((nds) => 
+            applyNodeChanges(changes, nds)), []
     );
 
-    const onEdgesChange = useCallback((changes) => setEdges((eds) =>
+    const onEdgesChange = useCallback(
+        (changes) => setEdges((eds) => 
         applyEdgeChanges(changes, eds)), []
     );
 
@@ -152,7 +161,7 @@ function Flow() {
         console.log(e.target);
         e.preventDefault();
         setIsOpen(true);
-        setPosition(false);
+        // setPosition({x: e.clientX, y: e.clientX});
         return e
     }
 
