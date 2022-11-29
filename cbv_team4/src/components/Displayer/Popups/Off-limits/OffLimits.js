@@ -135,12 +135,7 @@ function OffLimits(props) {
             <td>200</td>
             <td>Air Conditioning</td>
             <td>Desc</td>
-        </tr>  
-        <tr>
-            <td>200</td>
-            <td>Air Conditioning</td>
-            <td>Desc</td>
-        </tr>  
+        </tr>
        </Table>
        <Button id="add-entry" className="">
         Add
