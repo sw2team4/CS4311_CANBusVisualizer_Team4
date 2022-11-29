@@ -28,7 +28,7 @@ class DBC(object):
     @return: can.Message: Returns corresponding message.
     '''
     def decode(self, param):
-        assert(param is not None, 'Field must not be left empty')
+        assert param is not None, 'Field must not be left empty'
         if type(param) == int:
             return self.db.get_message_by_frame_id(param)
         return self.db.get_message_by_name(param)

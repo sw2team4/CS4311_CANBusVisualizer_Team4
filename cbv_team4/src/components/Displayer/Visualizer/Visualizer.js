@@ -36,6 +36,7 @@ export default class Visualizer extends Component {
     current_index = 1
     pause_traffic = 1
     interval_callback = null
+    pid = null
     // first_start = true
 
     downloadImage(dataUrl) {
@@ -112,26 +113,6 @@ export default class Visualizer extends Component {
         sessionStorage.setItem("packet", packet)
 
         this.AddNode(packet)
-
-        var popover = (
-            <Popover id="popover-basic">
-                <Popover.Header as="h3">Decoded Information</Popover.Header>
-                <Popover.Body>
-                    node information
-                </Popover.Body>
-            </Popover>
-        );
-
-        var overlay = (
-            <OverlayTrigger trigger="hover" placment="right" overlay={popover}>
-                <tr overlay={popover}>
-                    <td>{packetTimestamp}</td>
-                    <td>{packetType}</td>
-                    <td>{packetID}</td>
-                    <td>{packetData}</td>
-                </tr>
-            </OverlayTrigger>
-        );
         document.getElementById('pkt').innerHTML += `
                 <tr>
                 <td>${packetTimestamp}</td>
@@ -146,32 +127,13 @@ export default class Visualizer extends Component {
                 ${packet.decoded_comment}\n
         `
         this.num_packets+=1
-        
-        // document.getElementById('pkt').append(overlay)
-
-        //creating ref
-        // this.myRef= React.createRef();
-        // this.myRef.current.value = overlay
-
-        //document.getElementById(packetID).insertAdjacentHTML("afterend", "<OverlayTrigger trigger='hover' placement='right' overlay={ <Popover id='popover-positioned-right'> <Popover.Header as='h3'>Decoded Information</Popover.Header> <Popover.Body> <pre id='dc'></pre> </Popover.Body> </Popover> }> <tbody id='pkt'> </tbody> </OverlayTrigger>")
-        // document.getElementById('dc').innerHTML += `   
-        //         ${packet.decoded_id}\n
-        //         ${packet.decoded_name}\n
-        //         ${packet.decoded_comment}\n
-        // `
-        // this.current_index++
 
     }
 
-
-    //     exportAsPicture () {
-    //     //var data = document.getElementsByClassName('can-map')
-
-    //     htmlToImage.toPng(document.getElementsByClassName('can-map'))
-    //     .then(function (dataUrl) {
-    //     download(dataUrl, 'my-node.png');
-    //     });
-    // }
+    onComponentDidMount() {
+        this.pid = '<%= Session["pid"] %>'
+        console.log(this.pid)
+    }
 
     render() {
 
@@ -270,22 +232,8 @@ export default class Visualizer extends Component {
                                         </tr>
                                     </thead>
                                     <tbody id = 'pkt'>
-
+                                        
                                     </tbody>
-                                    {/* <OverlayTrigger
-                                        trigger='hover'
-                                        placement='right'
-                                        overlay={
-                                            <Popover id='popover-positioned-right'>
-                                                <Popover.Header as='h3'>Decoded Information</Popover.Header>
-                                                <Popover.Body>
-                                                    <pre id='dc'></pre>
-                                                </Popover.Body>
-                                            </Popover>
-                                        }>
-                                        <tbody id='pkt'>
-                                        </tbody>
-                                    </OverlayTrigger> */}
                                 </Table>
                             </InfiniteScroll>
                         </div>
