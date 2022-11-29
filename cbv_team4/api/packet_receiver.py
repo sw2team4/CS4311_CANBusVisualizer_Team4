@@ -6,7 +6,7 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, oll
+from global_variables import dbc, packets, oll, project
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
 
@@ -20,7 +20,7 @@ CORS(packet_receiver)
 #db info
 client = MongoClient('mongodb+srv://sw2_fall22:password*123@cluster0.mp0jclc.mongodb.net/test', 5000)
 db = client['test']
-db_packets = db.packets # <-- This is the collection within the  'test' db
+db_packets = db[f'{project.pid}_packets'] # <-- This is the collection within the  'test' db
 can_bus = can.interface.Bus('vcan0', bustype = 'socketcan')
 
 current_packet = None

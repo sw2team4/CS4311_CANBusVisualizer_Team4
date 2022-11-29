@@ -2,6 +2,7 @@ from project import Project
 #TODO: PROJECT MANAGER WILL BE ROUTES
 from flask import Blueprint, request
 from flask_cors import CORS
+import yaml
 
 #Must put this blueprint in api.py so that these routes can be called
 project_manager = Blueprint('project_manager', __name__)
@@ -49,12 +50,11 @@ Description:
 '''
 @project_manager.route('/open_project', methods=["GET","POST"])
 def open_project():
-    print('HERE')
-    #if request.method == 'POST':
-    fname = request.files['import-project']
-    ext = fname.split('.')[1]
+    if request.method == 'POST':
+        f = request.files['import-project']
+        f.save('./tmp.yaml')
       
-    return fname
+    return "working"
 
 
 
