@@ -133,14 +133,14 @@ export default class Visualizer extends Component {
                 response.json()
             )
             .then(data => {
-
+                //for (i -> lengt) this.displayPackets()
+                console.log(data)
             })
             .catch(
                 (e) => {
                     console.log(e)
                 }
             )
-        
     }
 
     render() {

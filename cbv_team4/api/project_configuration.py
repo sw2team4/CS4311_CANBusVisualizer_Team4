@@ -3,11 +3,13 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, oll, project
+from global_variables import dbc, oll, project, packets
 import packet_receiver
 import node_manager
 import exporter
 from project import Project
+from packet import Packet
+import pandas as pd
 
 
 can_id = 'vcan0'  # This is the CAN channel - this is updated on line 27
@@ -95,20 +97,11 @@ def add_project():
 
     # return the projectthat we just uploaded
     return redirect('http://localhost:3000/can-bus-visualizer')
-'''
-Description: Returns PID of a project
-@return: String: Project ID
-'''
-@project_configuration.route('/get_pid', methods=["GET","POST"])
-def get_pid():
-    return str(project.id)
 
 '''
 Description: Retrieve all projects from Database collection: projects
 @return: str: return list of all projects in string format.
 '''
-
-
 @project_configuration.route("/getall_projects")
 def getall_projects():
     things = []
@@ -140,3 +133,24 @@ Description: Deletes all project in collection: projects
 def deleteall_project():
     projects.delete_many({})
     return "deleted all!"
+
+
+'''
+Description: Returns PID of a project
+@return: String: Project ID
+'''
+@project_configuration.route('/get_pid', methods=["GET","POST"])
+def get_pid():
+    pid = project.id
+    packets_collection, _ = exporter.update_collections(pid)
+    curs = packets_collection.find()
+
+    packets.clear()
+    for c in curs:
+        packet = Packet(c['timestamp'], c['type'], int(c['id'],16), c['data'])
+        packet.decoded = dbc.decode(packet.id)
+        packets.add_session(packet)
+
+    print(packets)
+
+    return packets.session_to_json()

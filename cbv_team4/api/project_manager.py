@@ -57,7 +57,7 @@ def open_project():
         
         #TODO Load up DBC File and Off Limits List
         #TODO Populate Table and Nodes
-        #project = Project(data['id'], data['name'], data['directory'], data['user_initials'], data['event_name'], data['event_date'], data['can_id'], data['vehicle_id'])
+        # project = Project(data['id'], data['name'], data['directory'], data['user_initials'], data['event_name'], data['event_date'], data['can_id'], data['vehicle_id'])
     
 
 
