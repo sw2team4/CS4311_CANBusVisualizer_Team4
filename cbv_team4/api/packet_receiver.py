@@ -6,7 +6,7 @@ from packet import Packet
 import can
 import time
 from project_configuration import can_id
-from global_variables import dbc, packets, oll, project
+from global_variables import dbc, packets, oll
 #TODO: Table needs to be scrollable or followed
 #TODO: Popups are not right on Kali
 from node_manager import add_node

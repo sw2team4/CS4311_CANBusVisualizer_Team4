@@ -1,7 +1,6 @@
 from project import Project
 #TODO: PROJECT MANAGER WILL BE ROUTES
 from flask import Blueprint, request, redirect, session
-from global_variables import project
 from flask_cors import CORS
 import ruamel.yaml
 
@@ -51,14 +50,18 @@ Description:
 '''
 @project_manager.route('/open_project', methods=["GET","POST"])
 def open_project():
+    global project
     if request.method == 'POST':
         f = request.files['import-project']
         data = ruamel.yaml.load(f, Loader=ruamel.yaml.Loader)
         
         #TODO Load up DBC File and Off Limits List
         #TODO Populate Table and Nodes
-        # project = Project(data['id'], data['name'], data['directory'], data['user_initials'], data['event_name'], data['event_date'], data['can_id'], data['vehicle_id'])
+        #project = Project(data['id'], data['name'], data['directory'], data['user_initials'], data['event_name'], data['event_date'], data['can_id'], data['vehicle_id'])
     
-        # session['pid'] = project.id
+
 
     return redirect('http:localhost:3000/can-bus-visualizer')
+
+
+

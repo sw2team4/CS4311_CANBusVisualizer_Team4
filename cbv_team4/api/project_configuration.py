@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, oll
+from global_variables import dbc, oll, project
 import packet_receiver
 import node_manager
 import exporter
@@ -42,9 +42,10 @@ def add_project():
     # Define unique project id
     pid = uuid.uuid1()
 
+    global project
     project = Project(pid, proj_name, stored_location,
                       user_initials, event_name, event_date, can_id, vehicle_id)
-
+    
     # Creates project file
     project.create()
 
@@ -66,7 +67,7 @@ def add_project():
         oll.add_file(f'./off-limits-list-files/{fname}.csv')
 
     # This is the project schema
-    project = {
+    project_schema = {
         "_id": str(pid),
         "Name": str(proj_name),
         "Location": str(stored_location),
@@ -82,7 +83,7 @@ def add_project():
     projects.create_index([('user_id', TEXT)], unique=True)
 
     # Insert project to database
-    projects.insert_one(project)
+    projects.insert_one(project_schema)
 
     # Automatically start traffic upon project creation
     packet_receiver.init_traffic()
@@ -94,7 +95,13 @@ def add_project():
 
     # return the projectthat we just uploaded
     return redirect('http://localhost:3000/can-bus-visualizer')
-
+'''
+Description: Returns PID of a project
+@return: String: Project ID
+'''
+@project_configuration.route('/get_pid', methods=["GET","POST"])
+def get_pid():
+    return str(project.id)
 
 '''
 Description: Retrieve all projects from Database collection: projects

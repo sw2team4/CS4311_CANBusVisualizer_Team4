@@ -8,4 +8,4 @@ nodes = Node_Container()
 packets = Packet_Container()
 dbc = DBC()
 oll = Off_Limits()
-project = None
+project = Project(-1, -1, -1, -1, -1, -1, -1, -1)
