@@ -119,12 +119,9 @@ export default class Visualizer extends Component {
                 <td>${packetType}</td>
                 <td>${packetID}</td>
                 <td>${packetData}</td>
+                <td>${packet.decoded_name}</td>
+                <td>${packet.decoded_comment}</td>
                 </tr>
-        `
-        document.getElementById('dc').innerHTML += `   
-                ${packet.decoded_id}\n
-                ${packet.decoded_name}\n
-                ${packet.decoded_comment}\n
         `
         this.num_packets+=1
 
@@ -229,6 +226,8 @@ export default class Visualizer extends Component {
                                             <th>Type</th>
                                             <th>ID</th>
                                             <th>Data</th>
+                                            <th>Name</th>
+                                            <th>Comment</th>
                                         </tr>
                                     </thead>
                                     <tbody id = 'pkt'>
