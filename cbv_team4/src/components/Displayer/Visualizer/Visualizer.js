@@ -47,6 +47,9 @@ export default class Visualizer extends Component {
     
 
     AddNode(packet) {
+        if (this.current_index > 20){
+            return
+        }
     	initialNodes[this.current_index].data.label = packet.decoded_comment
         initialNodes[this.current_index].hidden = false
         this.current_index++;
