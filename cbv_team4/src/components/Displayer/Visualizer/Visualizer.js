@@ -134,7 +134,11 @@ export default class Visualizer extends Component {
             )
             .then(data => {
                 //for (i -> lengt) this.displayPackets()
-                console.log(data)
+                console.log(data.packets)
+                for (var i = 0; i < data.packets.length; i++) {
+                    //console.log(data.packets[i])
+                    this.displayPackets(data.packets[i])
+                }
             })
             .catch(
                 (e) => {

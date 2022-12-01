@@ -82,7 +82,6 @@ Description: Simulates live traffic from text file. For testing until live traff
 def simulate_textfile_traffic():
     global running
     global current_packet
-
     try:
         f = open('packets.txt', 'r')
         while True:
@@ -101,7 +100,7 @@ def simulate_textfile_traffic():
                 # Add packet to database
                 add_packet(packet)
 
-                #Add Node to database
+                # Add Node to database
                 add_node(packet)
 
                 # Add packet to session packets
@@ -137,7 +136,10 @@ def pause_traffic():
 Description: Starts background thread to run traffic.
 '''
 def init_traffic():
-    t.start()
+    global running
+
+    if not running.is_set():
+        t.start()
 
 @packet_receiver.route('/filter')
 def filter():

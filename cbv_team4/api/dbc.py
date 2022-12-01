@@ -29,6 +29,8 @@ class DBC(object):
     '''
     def decode(self, param):
         assert param is not None, 'Field must not be left empty'
+        if self.db is None:
+            return None
         if type(param) == int:
             return self.db.get_message_by_frame_id(param)
         return self.db.get_message_by_name(param)

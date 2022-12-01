@@ -4,6 +4,7 @@ from node_container import Node_Container
 from off_limits import Off_Limits
 from project  import Project
 
+numMount = 0
 nodes = Node_Container()
 packets = Packet_Container()
 dbc = DBC()
