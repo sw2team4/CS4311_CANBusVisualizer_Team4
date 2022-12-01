@@ -51,6 +51,17 @@ If you are getting a "System limit for number of file watchers reached" then run
 ```
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
+## Link to Youtube Live Demo
+https://www.youtube.com/watch?v=Fu9nltO8unE&ab_channel=UTEPCSFall2022SW2Team4
+
+## Requirements In Development
+SRS : [22-33, 34, 38-40,68b, 71b,76b,77a, 81-88, 89-92b, 97, 98, 105a, 105b, 108,
+       120, 121, 138, 139, 162-168, 172-174, 178-182, 186-189, 193-195, 199-203, 
+       206,207, 210-212, 216-220, 225, 226, 229a, 229b, 238-242, 261a, 262, 263-270, 271-282,
+       285, 323, 326-328, 329, 332, 335, 339, 341, 342] 
+
+Standard functionality for windows requirements (Before Section 3.2.3.2 State Tranistions)
+SRS numbers out of order in SRS document
 
 ## Note
 This README is currently a work in progress
