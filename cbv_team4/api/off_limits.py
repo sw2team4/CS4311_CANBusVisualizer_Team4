@@ -17,7 +17,7 @@ class Off_Limits(object):
             #TODO: Make sure CSV File is compatible format (checks)
             with open(filename, 'r') as f:
                 for id in f.readlines()[1:]:
-                    self.add(id)
+                    self.add(id.replace('\n', ''))
         except Exception as e:
             print(e)
         print(self.db)
@@ -43,7 +43,7 @@ class Off_Limits(object):
     @return: str: 
     '''
     def get_all(self):
-        pass
+        return self.db
 
     '''
     Description: Adds ID to off-limits list.
