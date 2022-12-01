@@ -54,6 +54,9 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 ## Link to Youtube Live Demo
 https://www.youtube.com/watch?v=Fu9nltO8unE&ab_channel=UTEPCSFall2022SW2Team4
 
+## Powerpoint Presentation
+[embed]https://docs.google.com/presentation/d/1l1qQiOBGPqoWv55hSPkep9h9e7hS178N/edit?usp=sharing&ouid=114878754077667860406&rtpof=true&sd=true[/embed]
+
 ## Requirements In Development
 SRS : [22-33, 34, 38-40,68b, 71b,76b,77a, 81-88, 89-92b, 97, 98, 105a, 105b, 108,
        120, 121, 138, 139, 162-168, 172-174, 178-182, 186-189, 193-195, 199-203, 
