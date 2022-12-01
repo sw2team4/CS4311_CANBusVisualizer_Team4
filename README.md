@@ -7,6 +7,7 @@ This repository contains the final implementation of the CAN Bus Visualizer Syst
 * VS Code is installed on Kali Linux
 * You cloned this repo on Kali Linux
 * You have been "whitelisted" on the MongoDB Compass Cluster (Local Database Coming soon)
+* In order to use sync functionality the sender and reciever computer must have been previously conected and chose the "yes" option during the fingerprint process
 
 ## How to start application
 1. Open Kali Linux
