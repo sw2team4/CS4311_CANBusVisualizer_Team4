@@ -23,6 +23,7 @@ db = client['test']
 db_packets = db.packets # <-- This is the collection within the  'test' db
 can_bus = can.interface.Bus('vcan0', bustype = 'socketcan')
 
+initialized = False
 current_packet = None
 running = Event()
 running.clear() # at the start of the program it is running
@@ -136,10 +137,11 @@ def pause_traffic():
 Description: Starts background thread to run traffic.
 '''
 def init_traffic():
-    global running
+    global initialized
 
-    if not running.is_set():
+    if not initialized:
         t.start()
+        initialized = True
 
 @packet_receiver.route('/filter')
 def filter():
