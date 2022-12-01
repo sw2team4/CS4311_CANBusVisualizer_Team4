@@ -40,7 +40,7 @@ function OffLimits(props) {
 
     return (
         <>
-            <NavDropdown.Item onClick={handleShow}>Modify Off-Limtis</NavDropdown.Item>
+            <NavDropdown.Item onClick={handleShow}>Modify Off-Limits</NavDropdown.Item>
             <Modal
                 {...props}
                 size="lg"
