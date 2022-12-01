@@ -17,8 +17,6 @@ import SavePopup from '../Popups/SaveProject/SavePopup';
 import SavePacketPopup from '../Popups/SavePacket/SavePacketPopup';
 import OffLimits from '../Popups/Off-limits/OffLimits';
 // import {getPackets} from './SocketCAN.js'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 //TODO: table on hover stops working after traffic starts
 import ExportNodes from '../Popups/Export/ExportNodes';
 import ExportTraffic from '../Popups/Export/ExportTraffic';
@@ -109,6 +107,8 @@ export default class Visualizer extends Component {
         var packetType = packet.type
         var packetID = packet.id
         var packetData = packet.data
+        var packetName = packet.decoded_name
+        var packetComment = packet.decoded_comment
 
         sessionStorage.setItem("packet", packet)
 
@@ -119,17 +119,32 @@ export default class Visualizer extends Component {
                 <td>${packetType}</td>
                 <td>${packetID}</td>
                 <td>${packetData}</td>
-                <td>${packet.decoded_name}</td>
-                <td>${packet.decoded_comment}</td>
+                <td>${packetName}</td>
+                <td>${packetComment}</td>
                 </tr>
         `
         this.num_packets+=1
 
     }
 
-    onComponentDidMount() {
-        this.pid = '<%= Session["pid"] %>'
-        console.log(this.pid)
+    componentDidMount() {
+        fetch('http://localhost:5000/get_pid')
+            .then(response =>
+                response.json()
+            )
+            .then(data => {
+                //for (i -> lengt) this.displayPackets()
+                console.log(data.packets)
+                for (var i = 0; i < data.packets.length; i++) {
+                    //console.log(data.packets[i])
+                    this.displayPackets(data.packets[i])
+                }
+            })
+            .catch(
+                (e) => {
+                    console.log(e)
+                }
+            )
     }
 
     render() {

@@ -55,7 +55,8 @@ pip install Flask-Session
 echo ">>>>>>>>>>>>>>>>>> Downloading Other Dependencies Now <<<<<<<<<<<<<<<<<<<<<<<<"
 sudo apt-get install expect
 echo " "
-
+sudo apt-get -y install rsync
+echo " "
 #Remove lines below if causing problems then run ./dependencies.sh again
 #sudo npm audit fix --force #take out this line if can't render
 #sudo npm audit fix --force #take out this line if can't render

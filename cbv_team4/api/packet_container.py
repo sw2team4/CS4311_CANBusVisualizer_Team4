@@ -8,6 +8,10 @@ class Packet_Container(object):
         self.session = {}
         self.saved = {}
 
+    def clear(self):
+        self.session = {}
+        self.saved = {}
+
     '''
     Description: View Session Packets and Saved Packets when printing Packet_Container class when referred to as string
     @return: str: String that prints all session packets and save packets of current project.
@@ -110,4 +114,14 @@ class Packet_Container(object):
                     f.append(self.session[key])
         return f
 
-        
+    def saved_to_json(self):
+        pass
+
+    def session_to_json(self):
+        json = []
+        for key in self.session:
+            json.append(self.session[key].to_json())
+
+        #[{}, {}, {}, {}]
+
+        return {'packets': json}

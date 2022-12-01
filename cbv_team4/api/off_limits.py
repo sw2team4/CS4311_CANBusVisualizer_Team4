@@ -21,7 +21,7 @@ class Off_Limits(object):
         except Exception as e:
             print(e)
         print(self.db)
-    
+
     '''
     Description: Adds ID to off-limits list.
     @param: int: id: ID of node that should remain untouched.

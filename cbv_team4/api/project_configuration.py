@@ -3,12 +3,15 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient, TEXT
 from flask import request, redirect, Blueprint
 import uuid
-from global_variables import dbc, oll
+from project import Project
+from packet import Packet
+from global_variables import dbc, oll, project, packets
 import packet_receiver
 import node_manager
 import exporter
-from project import Project
+import ruamel.yaml
 
+mount = 0
 
 can_id = 'vcan0'  # This is the CAN channel - this is updated on line 27
 
@@ -42,9 +45,10 @@ def add_project():
     # Define unique project id
     pid = uuid.uuid1()
 
+    global project
     project = Project(pid, proj_name, stored_location,
                       user_initials, event_name, event_date, can_id, vehicle_id)
-
+    
     # Creates project file
     project.create()
 
@@ -66,7 +70,7 @@ def add_project():
         oll.add_file(f'./off-limits-list-files/{fname}.csv')
 
     # This is the project schema
-    project = {
+    project_schema = {
         "_id": str(pid),
         "Name": str(proj_name),
         "Location": str(stored_location),
@@ -82,7 +86,7 @@ def add_project():
     projects.create_index([('user_id', TEXT)], unique=True)
 
     # Insert project to database
-    projects.insert_one(project)
+    projects.insert_one(project_schema)
 
     # Automatically start traffic upon project creation
     packet_receiver.init_traffic()
@@ -92,16 +96,13 @@ def add_project():
     packet_receiver.update_packet_collection(pid)
     exporter.update_collections(pid)
 
-    # return the projectthat we just uploaded
-    return redirect('http://localhost:3000/can-bus-visualizer')
-
+    # return the project that we just uploaded
+    return redirect(f'http://localhost:3000/can-bus-visualizer?pid={pid}')
 
 '''
 Description: Retrieve all projects from Database collection: projects
 @return: str: return list of all projects in string format.
 '''
-
-
 @project_configuration.route("/getall_projects")
 def getall_projects():
     things = []
@@ -127,9 +128,70 @@ def get_project(x=5):
 Description: Deletes all project in collection: projects
 @return: str: confirmed response of all projects deleted
 '''
-
-
 @project_configuration.route("/deleteall_project")
 def deleteall_project():
     projects.delete_many({})
     return "deleted all!"
+
+
+'''
+Description: Returns PID of a project
+@return: String: Project ID
+'''
+@project_configuration.route('/get_pid', methods=["GET","POST"])
+def get_pid():
+    #in development mode, this solves the defect of showing duplicate packets, however in production mode, this is not needed
+    global mount
+    global packets
+    global project
+
+    mount += 1
+    if mount % 2 != 0:
+        return {'packets': []}
+        
+    pid = project.id
+    packets_collection, _ = exporter.update_collections(pid)
+    curs = packets_collection.find()
+
+    print(project.id)
+
+    packets.clear()
+    for c in curs:
+        packet = Packet(c['timestamp'], c['type'], int(c['id'],16), c['data'])
+        packet.decoded = dbc.decode(packet.id)
+        packets.add_session(packet)
+
+    print(packets)
+
+    return packets.session_to_json()
+
+'''
+Description: Open Project that has been created before.
+@return: None
+'''
+@project_configuration.route('/open_project', methods=["GET","POST"])
+def open_project():
+    global project
+    if request.method == 'POST':
+        f = request.files['import-project']
+        data = ruamel.yaml.load(f, Loader=ruamel.yaml.Loader)
+
+        pid = data['id']
+        
+        #TODO Load up DBC File and Off Limits List
+        dbc.add_file(f'./dbc_files/{pid}.dbc')
+
+        oll.add_file(f'./off-limits-list-files/{pid}.csv')
+
+        #TODO Populate Table and Nodes
+        project = Project(data['id'], data['name'], data['directory'], data['user_initials'], data['event_name'], data['event_date'], data['can_id'], data['vehicle_id'])
+    
+        # Automatically start traffic upon project creation
+        packet_receiver.init_traffic()
+
+        # update collections based on pid
+        node_manager.update_node_collection(pid)
+        packet_receiver.update_packet_collection(pid)
+        exporter.update_collections(pid)
+
+    return redirect(f'http://localhost:3000/can-bus-visualizer?pid={pid}')

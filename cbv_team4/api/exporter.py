@@ -32,9 +32,9 @@ packets = db.packets
 
 def update_collections(pid):
     global packets, nodes
-    packets= db[f'packets.{pid}']
+    packets = db[f'packets.{pid}']
     nodes = db[f'nodes.{pid}']
-
+    return packets, nodes
 
 @exporter.route('/export/oll', methods=["POST", "GET"])
 def oll():
